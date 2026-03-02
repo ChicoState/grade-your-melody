@@ -11,8 +11,8 @@
 # =============================================================================
 
 # =============================================================================
-# Project: Project
-# Configurations: 
+# Project: GradeYourMelody
+# Configurations: Release
 # =============================================================================
 
 #############################################
@@ -20,6 +20,11 @@
 
 ninja_required_version = 1.5
 
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Release
 # =============================================================================
 # Include auxiliary files.
 
@@ -59,7 +64,303 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /work/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target core
+
+
+#############################################
+# Order-only phony target for core
+
+build cmake_object_order_depends_target_core: phony || core/CMakeFiles/core.dir
+
+build core/CMakeFiles/core.dir/staffLineGrid.cpp.o: CXX_COMPILER__core_Release /work/core/staffLineGrid.cpp || cmake_object_order_depends_target_core
+  DEP_FILE = core/CMakeFiles/core.dir/staffLineGrid.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I/work/core
+  OBJECT_DIR = core/CMakeFiles/core.dir
+  OBJECT_FILE_DIR = core/CMakeFiles/core.dir
+
+build core/CMakeFiles/core.dir/presenter.cpp.o: CXX_COMPILER__core_Release /work/core/presenter.cpp || cmake_object_order_depends_target_core
+  DEP_FILE = core/CMakeFiles/core.dir/presenter.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I/work/core
+  OBJECT_DIR = core/CMakeFiles/core.dir
+  OBJECT_FILE_DIR = core/CMakeFiles/core.dir
+
+build core/CMakeFiles/core.dir/questionBank.cpp.o: CXX_COMPILER__core_Release /work/core/questionBank.cpp || cmake_object_order_depends_target_core
+  DEP_FILE = core/CMakeFiles/core.dir/questionBank.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I/work/core
+  OBJECT_DIR = core/CMakeFiles/core.dir
+  OBJECT_FILE_DIR = core/CMakeFiles/core.dir
+
+build core/CMakeFiles/core.dir/quizSession.cpp.o: CXX_COMPILER__core_Release /work/core/quizSession.cpp || cmake_object_order_depends_target_core
+  DEP_FILE = core/CMakeFiles/core.dir/quizSession.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  INCLUDES = -I/work/core
+  OBJECT_DIR = core/CMakeFiles/core.dir
+  OBJECT_FILE_DIR = core/CMakeFiles/core.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target core
+
+
+#############################################
+# Link the static library core/libcore.a
+
+build core/libcore.a: CXX_STATIC_LIBRARY_LINKER__core_Release core/CMakeFiles/core.dir/staffLineGrid.cpp.o core/CMakeFiles/core.dir/presenter.cpp.o core/CMakeFiles/core.dir/questionBank.cpp.o core/CMakeFiles/core.dir/quizSession.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
+  OBJECT_DIR = core/CMakeFiles/core.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = core/libcore.a
+  TARGET_PDB = core.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build core/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /work/build/core && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build core/edit_cache: phony core/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build core/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /work/build/core && /usr/bin/cmake --regenerate-during-build -S/work -B/work/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build core/rebuild_cache: phony core/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /work/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target gym_app
+
+
+#############################################
+# Order-only phony target for gym_app
+
+build cmake_object_order_depends_target_gym_app: phony || app/gym_app_autogen app/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp app/gym_app_autogen/mocs_compilation.cpp app/gym_app_autogen/timestamp app/gym_app_autogen_timestamp_deps cmake_object_order_depends_target_core
+
+build app/CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o: CXX_COMPILER__gym_app_Release /work/build/app/gym_app_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir/gym_app_autogen
+
+build app/CMakeFiles/gym_app.dir/main.cpp.o: CXX_COMPILER__gym_app_Release /work/app/main.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/main.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/MainWindow.cpp.o: CXX_COMPILER__gym_app_Release /work/app/MainWindow.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/MainWindow.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/AspectRatioWidget.cpp.o: CXX_COMPILER__gym_app_Release /work/app/AspectRatioWidget.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/AspectRatioWidget.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/StaffAreaWidget.cpp.o: CXX_COMPILER__gym_app_Release /work/app/StaffAreaWidget.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/StaffAreaWidget.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/StaffWidget.cpp.o: CXX_COMPILER__gym_app_Release /work/app/StaffWidget.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/StaffWidget.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/QuizWidget.cpp.o: CXX_COMPILER__gym_app_Release /work/app/QuizWidget.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/QuizWidget.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/QuizSelectionWidget.cpp.o: CXX_COMPILER__gym_app_Release /work/app/QuizSelectionWidget.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/QuizSelectionWidget.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/ClefWidget.cpp.o: CXX_COMPILER__gym_app_Release /work/app/ClefWidget.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/ClefWidget.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir
+
+build app/CMakeFiles/gym_app.dir/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp.o: CXX_COMPILER__gym_app_Release /work/build/app/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp || cmake_object_order_depends_target_gym_app
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = app/CMakeFiles/gym_app.dir/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -fPIC -std=gnu++17
+  INCLUDES = -I/work/build/app/gym_app_autogen/include -I/work/core -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/aarch64-linux-gnu/qt5/QtSvg
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  OBJECT_FILE_DIR = app/CMakeFiles/gym_app.dir/gym_app_autogen/EWIEGA46WW
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target gym_app
+
+
+#############################################
+# Link the executable app/gym_app
+
+build app/gym_app: CXX_EXECUTABLE_LINKER__gym_app_Release app/CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o app/CMakeFiles/gym_app.dir/main.cpp.o app/CMakeFiles/gym_app.dir/MainWindow.cpp.o app/CMakeFiles/gym_app.dir/AspectRatioWidget.cpp.o app/CMakeFiles/gym_app.dir/StaffAreaWidget.cpp.o app/CMakeFiles/gym_app.dir/StaffWidget.cpp.o app/CMakeFiles/gym_app.dir/QuizWidget.cpp.o app/CMakeFiles/gym_app.dir/QuizSelectionWidget.cpp.o app/CMakeFiles/gym_app.dir/ClefWidget.cpp.o app/CMakeFiles/gym_app.dir/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp.o | core/libcore.a /usr/lib/aarch64-linux-gnu/libQt5Svg.so.5.15.3 /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/aarch64-linux-gnu/libQt5Gui.so.5.15.3 /usr/lib/aarch64-linux-gnu/libQt5Core.so.5.15.3 || app/gym_app_autogen app/gym_app_autogen_timestamp_deps core/libcore.a
+  FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = core/libcore.a  /usr/lib/aarch64-linux-gnu/libQt5Svg.so.5.15.3  /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.3  /usr/lib/aarch64-linux-gnu/libQt5Gui.so.5.15.3  /usr/lib/aarch64-linux-gnu/libQt5Core.so.5.15.3
+  OBJECT_DIR = app/CMakeFiles/gym_app.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = app/gym_app
+  TARGET_PDB = gym_app.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build app/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /work/build/app && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build app/edit_cache: phony app/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build app/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /work/build/app && /usr/bin/cmake --regenerate-during-build -S/work -B/work/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build app/rebuild_cache: phony app/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for gym_app_autogen_timestamp_deps
+
+build app/gym_app_autogen_timestamp_deps: phony app/CMakeFiles/gym_app_autogen_timestamp_deps core/libcore.a
+
+
+#############################################
+# Utility command for gym_app_autogen
+
+build app/gym_app_autogen: phony app/CMakeFiles/gym_app_autogen app/gym_app_autogen/timestamp app/gym_app_autogen/mocs_compilation.cpp app/gym_app_autogen_timestamp_deps
+
+
+#############################################
+# Custom command for app/gym_app_autogen/timestamp
+
+build app/gym_app_autogen/timestamp app/gym_app_autogen/mocs_compilation.cpp | ${cmake_ninja_workdir}app/gym_app_autogen/timestamp ${cmake_ninja_workdir}app/gym_app_autogen/mocs_compilation.cpp: CUSTOM_COMMAND /usr/lib/qt5/bin/moc || app/gym_app_autogen_timestamp_deps core/libcore.a
+  COMMAND = cd /work/build/app && /usr/bin/cmake -E cmake_autogen /work/build/app/CMakeFiles/gym_app_autogen.dir/AutogenInfo.json Release && /usr/bin/cmake -E touch /work/build/app/gym_app_autogen/timestamp && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /work /work/app /work/build /work/build/app /work/build/app/gym_app_autogen/deps /work/build/CMakeFiles/d/d9c712e8195304aa3339c39425be334949b523662da0c10d71522f13bc98a5db.d
+  DESC = Automatic MOC for target gym_app
+  depfile = /work/build/CMakeFiles/d/d9c712e8195304aa3339c39425be334949b523662da0c10d71522f13bc98a5db.d
+  restat = 1
+
+
+#############################################
+# Custom command for app/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp
+
+build app/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp | ${cmake_ninja_workdir}app/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp: CUSTOM_COMMAND ../app/resources.qrc app/CMakeFiles/gym_app_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json ../app/treble_clef.svg /usr/lib/qt5/bin/rcc || app/gym_app_autogen app/gym_app_autogen_timestamp_deps core/libcore.a
+  COMMAND = cd /work/build/app && /usr/bin/cmake -E cmake_autorcc /work/build/app/CMakeFiles/gym_app_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json Release
+  DESC = Automatic RCC for resources.qrc
+  restat = 1
+
+
+#############################################
+# Phony custom command for app/CMakeFiles/gym_app_autogen_timestamp_deps
+
+build app/CMakeFiles/gym_app_autogen_timestamp_deps | ${cmake_ninja_workdir}app/CMakeFiles/gym_app_autogen_timestamp_deps: phony core/libcore.a /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/aarch64-linux-gnu/libQt5Svg.so.5.15.3 /usr/lib/qt5/bin/moc || core/libcore.a
+
+
+#############################################
+# Phony custom command for app/CMakeFiles/gym_app_autogen
+
+build app/CMakeFiles/gym_app_autogen | ${cmake_ninja_workdir}app/CMakeFiles/gym_app_autogen: phony app/gym_app_autogen/timestamp || app/gym_app_autogen_timestamp_deps core/libcore.a
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /work/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for edit_cache
+
+build tests/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /work/build/tests && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build tests/edit_cache: phony tests/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build tests/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /work/build/tests && /usr/bin/cmake --regenerate-during-build -S/work -B/work/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build tests/rebuild_cache: phony tests/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
+
+build core: phony core/libcore.a
+
+build gym_app: phony app/gym_app
+
+build gym_app_autogen: phony app/gym_app_autogen
+
+build gym_app_autogen_timestamp_deps: phony app/gym_app_autogen_timestamp_deps
+
+build libcore.a: phony core/libcore.a
 
 # =============================================================================
 # Folder targets.
@@ -69,12 +370,28 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /work/build
 
-build all: phony
+build all: phony core/all app/all tests/all
 
 # =============================================================================
-# Unknown Build Time Dependencies.
-# Tell Ninja that they may appear as side effects of build rules
-# otherwise ordered by order-only dependencies.
+
+#############################################
+# Folder: /work/build/app
+
+build app/all: phony app/gym_app
+
+# =============================================================================
+
+#############################################
+# Folder: /work/build/core
+
+build core/all: phony core/libcore.a
+
+# =============================================================================
+
+#############################################
+# Folder: /work/build/tests
+
+build tests/all: phony
 
 # =============================================================================
 # Built-in targets
@@ -83,20 +400,27 @@ build all: phony
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /usr/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in /usr/share/cmake-3.22/Modules/CMakeCCompilerABI.c /usr/share/cmake-3.22/Modules/CMakeCInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake-3.22/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompileFeatures.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake /usr/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake-3.22/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake-3.22/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake-3.22/Modules/CMakeSystem.cmake.in /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake-3.22/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake-3.22/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/share/cmake-3.22/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake-3.22/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Internal/FeatureTesting.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCCompiler.cmake CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../app/CMakeLists.txt ../app/resources.qrc ../core/CMakeLists.txt ../tests/CMakeLists.txt /usr/lib/aarch64-linux-gnu/cmake/Qt5/Qt5Config.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5/Qt5ModuleLocation.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Svg/Qt5SvgConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Svg/Qt5SvgConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakeParseArguments.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt /usr/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in /usr/share/cmake-3.22/Modules/CMakeCCompilerABI.c /usr/share/cmake-3.22/Modules/CMakeCInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in /usr/share/cmake-3.22/Modules/CMakeCXXCompilerABI.cpp /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeCompilerIdDetection.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompileFeatures.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompilerABI.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineCompilerId.cmake /usr/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake /usr/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakeNinjaFindMake.cmake /usr/share/cmake-3.22/Modules/CMakeParseImplicitIncludeInfo.cmake /usr/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake /usr/share/cmake-3.22/Modules/CMakeParseLibraryArchitecture.cmake /usr/share/cmake-3.22/Modules/CMakeSystem.cmake.in /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake /usr/share/cmake-3.22/Modules/CMakeTestCompilerCommon.cmake /usr/share/cmake-3.22/Modules/Compiler/ADSP-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/ARMCC-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/ARMClang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/AppleClang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Borland-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /usr/share/cmake-3.22/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Cray-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GHS-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-FindBinUtils.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/Compiler/HP-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/IAR-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /usr/share/cmake-3.22/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /usr/share/cmake-3.22/Modules/Compiler/Intel-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/MSVC-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/NVHPC-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/PGI-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/PathScale-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SCO-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/TI-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/Watcom-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XL-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/zOS-C-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /usr/share/cmake-3.22/Modules/Internal/FeatureTesting.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-Determine-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCCompiler.cmake CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../app/CMakeLists.txt ../app/resources.qrc ../core/CMakeLists.txt ../tests/CMakeLists.txt /usr/lib/aarch64-linux-gnu/cmake/Qt5/Qt5Config.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5/Qt5ModuleLocation.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Svg/Qt5SvgConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Svg/Qt5SvgConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake /usr/lib/aarch64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakeParseArguments.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake: phony
+
+
+#############################################
+# Clean additional files.
+
+build CMakeFiles/clean.additional: CLEAN_ADDITIONAL
+  CONFIG = Release
 
 
 #############################################
 # Clean all the built files.
 
-build clean: CLEAN
+build clean: CLEAN CMakeFiles/clean.additional
 
 
 #############################################

@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
   qtbase5-dev-tools \
   qtchooser \
   qt5-qmake \
+  libqt5svg5-dev \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /work

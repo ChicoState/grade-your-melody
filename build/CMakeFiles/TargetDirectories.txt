@@ -1,2 +1,12 @@
 /work/build/CMakeFiles/edit_cache.dir
 /work/build/CMakeFiles/rebuild_cache.dir
+/work/build/core/CMakeFiles/core.dir
+/work/build/core/CMakeFiles/edit_cache.dir
+/work/build/core/CMakeFiles/rebuild_cache.dir
+/work/build/app/CMakeFiles/gym_app.dir
+/work/build/app/CMakeFiles/edit_cache.dir
+/work/build/app/CMakeFiles/rebuild_cache.dir
+/work/build/app/CMakeFiles/gym_app_autogen_timestamp_deps.dir
+/work/build/app/CMakeFiles/gym_app_autogen.dir
+/work/build/tests/CMakeFiles/edit_cache.dir
+/work/build/tests/CMakeFiles/rebuild_cache.dir
