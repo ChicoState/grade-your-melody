@@ -4,8 +4,7 @@
 class StaffWidget;
 class ClefWidget;
 
-// Container that draws the 5 staff lines across its full width (so they appear
-// behind both the ClefWidget on the left and StaffWidget on the right).
+// Draws the 5 staff lines behind the clef and note areas.
 class StaffAreaWidget : public QWidget {
     Q_OBJECT
 
@@ -17,7 +16,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent*) override;
-    // Updates clef's fixed width proportional to height so it scales with the staff.
+    // Keeps clef width proportional to height so it scales with the staff.
     void resizeEvent(QResizeEvent*) override;
 
 private:

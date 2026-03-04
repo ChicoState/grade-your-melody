@@ -13,8 +13,7 @@ void ClefWidget::paintEvent(QPaintEvent*) {
     if (!renderer_.isValid()) return;
     QPainter p(this);
 
-    // Fit SVG to full widget height, compute width from aspect ratio.
-    // If that overflows the allocated width, fit to width instead.
+    // Scale SVG to fill height; clamp to width if it overflows.
     int drawH = height();
     int drawW = qRound(drawH * kAspectRatio);
     if (drawW > width()) {

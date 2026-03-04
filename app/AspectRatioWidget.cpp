@@ -24,7 +24,7 @@ void AspectRatioWidget::repositionChild() {
         childH = qRound(w / ratio_);
     }
 
-    // Center in the available space (letterbox margins fill the rest)
+    // Center the child; letterbox margins fill the rest.
     const int x = (w - childW) / 2;
     const int y = (h - childH) / 2;
     child_->setGeometry(x, y, childW, childH);
@@ -37,6 +37,5 @@ void AspectRatioWidget::resizeEvent(QResizeEvent* e) {
 
 void AspectRatioWidget::paintEvent(QPaintEvent*) {
     QPainter p(this);
-    // Letterbox bars — neutral dark fill so they read as borders, not content
     p.fillRect(rect(), Qt::white);
 }

@@ -10,11 +10,8 @@ void StaffWidget::updateLayout() {
     int availH = height() - 2 * marginY;
     cellH = std::min(28, std::max(10, availH / (ROWS - 1)));
 
-    // Bar line is pinned near the right edge; everything else is derived from it.
+    // Bar line is pinned near the right edge; columns span [marginX, barX_].
     barX_ = std::max(marginX + COLS * 20, width() - rightPad);
-
-    // Divide the full measure width evenly so all columns always span [marginX, barX_].
-    // Float division preserves sub-pixel precision for center placement.
     colW = std::max(20.0, static_cast<double>(barX_ - marginX) / COLS);
 }
 
@@ -32,8 +29,6 @@ void StaffWidget::resizeEvent(QResizeEvent* event) {
     updateLayout();
     update();
 }
-
-// ── coordinate helpers ────────────────────────────────────────────────────────
 
 void StaffWidget::gridToPixel(int col, int row, int& cx, int& cy) const {
     cx = qRound(marginX + (col + 0.5) * colW);
@@ -55,8 +50,6 @@ bool StaffWidget::pixelToGrid(int x, int y, int& col, int& row) const {
     return true;
 }
 
-// ── note labels ───────────────────────────────────────────────────────────────
-
 const char* StaffWidget::noteName(int row) {
     static const char* names[11] = {
         "C4", "D4", "E4", "F4", "G4",
@@ -66,20 +59,12 @@ const char* StaffWidget::noteName(int row) {
     return names[row];
 }
 
-// ── painting ──────────────────────────────────────────────────────────────────
-
 void StaffWidget::paintEvent(QPaintEvent*) {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing);
 
-    // Sizing — single source of truth for this paint cycle.
-    // Note head is an oval: height = 75% of line spacing, width = height × 1.35,
-    // drawn with a -20° tilt to match standard music notation style.
-    // ledgerHalf is independent of note-head geometry so ledger lines are unaffected.
+    // Note head: oval tilted -20°, scaled to nearly fill one staff space.
     static constexpr double kAspect = 1.35;
-    // staffStep = one row step = distance from a line to the adjacent space.
-    // noteHeight ≈ 1.8 × staffStep so the oval nearly fills a space, matching
-    // standard notation proportions.  Column-width cap prevents overflow.
     const double staffStep = cellH;
     const double noteHpx = std::max(6.0,
         std::min(staffStep * 1.8,           // nearly fills one space (line→space gap)
@@ -94,7 +79,6 @@ void StaffWidget::paintEvent(QPaintEvent*) {
         int cx, cy;
         QPen faintPen(QColor(180, 180, 180), 1);
         p.setPen(faintPen);
-        // Draw one stub per column so users know where C4 sits in each beat
         for (int col = 0; col < COLS; ++col) {
             gridToPixel(col, 0, cx, cy);
             p.drawLine(cx - ledgerHalf, cy, cx + ledgerHalf, cy);
@@ -114,7 +98,7 @@ void StaffWidget::paintEvent(QPaintEvent*) {
         }
     }
 
-    // Bar line — drawn at barX_ which is the pinned measure end.
+    // Bar line at the measure end.
     {
         int topY, botY, dummy;
         gridToPixel(0, StaffGeometry::lineRows[4], dummy, topY); // top staff line (row 10)
@@ -132,10 +116,7 @@ void StaffWidget::paintEvent(QPaintEvent*) {
             if (presenter.hasNote(col, row)) occupied[numOcc++] = row;
         if (numOcc == 0) continue;
 
-        // Partition notes into maximal adjacent-step clusters, then assign
-        // zigzag offsets: 0, +½W, 0, +½W… bottom-to-top within each cluster.
-        // Isolated notes and notes separated by >1 step keep dx = 0.
-        // This correctly handles chromatic runs of any length.
+        // Assign zigzag horizontal offsets to adjacent-step note clusters.
         double dx[ROWS] = {};
         for (int i = 0; i < numOcc; ) {
             // Extend cluster while each consecutive pair is exactly 1 step apart.
@@ -174,8 +155,6 @@ void StaffWidget::paintEvent(QPaintEvent*) {
         }
     }
 }
-
-// ── input ─────────────────────────────────────────────────────────────────────
 
 void StaffWidget::mousePressEvent(QMouseEvent* event) {
     int col, row;

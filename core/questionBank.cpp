@@ -2,8 +2,6 @@
 #include <random>
 #include <string>
 
-// ── Shared constants ──────────────────────────────────────────────────────────
-
 static const char* ROW_NAMES[11] = {
     "C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5"
 };
@@ -43,8 +41,6 @@ static int randInt(int lo, int hi) {  // inclusive
 
 static bool coinFlip() { return randInt(0, 1) == 1; }
 
-// ── Single Note ───────────────────────────────────────────────────────────────
-
 QuizQuestion generateSingleNote() {
     int row = randInt(0, 10);
     int col = randInt(0, 3);
@@ -56,8 +52,6 @@ QuizQuestion generateSingleNote() {
         expected
     };
 }
-
-// ── Intervals ─────────────────────────────────────────────────────────────────
 
 QuizQuestion generateInterval() {
     int root = randInt(0, 9);
@@ -94,8 +88,6 @@ QuizQuestion generateInterval() {
     return { prompt, explanation, expected };
 }
 
-// ── Triads ────────────────────────────────────────────────────────────────────
-
 QuizQuestion generateTriad() {
     // root+4 must fit within row 10.
     int root = randInt(0, 6);
@@ -130,8 +122,6 @@ QuizQuestion generateTriad() {
 
     return { prompt, explanation, expected };
 }
-
-// ── Seventh Chords ────────────────────────────────────────────────────────────
 
 QuizQuestion generateSeventhChord() {
     // root+6 must fit within row 10.
@@ -169,8 +159,6 @@ QuizQuestion generateSeventhChord() {
 
     return { prompt, explanation, expected };
 }
-
-// ── Inversions ────────────────────────────────────────────────────────────────
 
 // Root-position data for C, F, G major (fits all inversions within rows 0..10).
 static const int INV_ROOTS[3]   = { 0, 3, 4 };
@@ -223,8 +211,6 @@ QuizQuestion generateInversion() {
 
     return { prompt, explanation, expected };
 }
-
-// ── Dispatch ──────────────────────────────────────────────────────────────────
 
 QuizQuestion generateQuestion(QuizMode mode) {
     switch (mode) {

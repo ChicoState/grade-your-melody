@@ -8,19 +8,14 @@ StaffLineGrid::~StaffLineGrid(){
 
 }
 
-/// @brief Check if a specific spot on the grid holds a note.
-/// @param column Column to check
-/// @param row Row to check
-/// @return true if has note, false if no note or invalid position
+// Returns true if the given column and row cell contains a note.
 bool StaffLineGrid::HasNote(const int column, const int row){
     if (!ValidPosition(column, row)) return false;
 
     return grid[column][row];
 }
 
-/// @brief Adds a note to a specific spot on the grid.
-/// @param column Column of added note
-/// @param row Row of added note
+// Places a note at the given column and row; ignored if locked.
 void StaffLineGrid::AddNote(const int column, const int row){
     if (!ValidPosition(column, row)) return;
 
@@ -29,9 +24,7 @@ void StaffLineGrid::AddNote(const int column, const int row){
     grid[column][row] = true;
 }
 
-/// @brief Removes a note from a specific spot on the grid.
-/// @param column Column of removed note
-/// @param row Row of added note
+// Clears the note at the given column and row; ignored if locked.
 void StaffLineGrid::RemoveNote(const int column, const int row){
     if (!ValidPosition(column, row)) return;
 
@@ -40,7 +33,7 @@ void StaffLineGrid::RemoveNote(const int column, const int row){
     grid[column][row] = false;
 }
 
-/// @brief Clears the grid setting all notes to false
+// Resets all cells to false; ignored if locked.
 void StaffLineGrid::ClearGrid(){
     if (locked) return;
 
@@ -51,26 +44,22 @@ void StaffLineGrid::ClearGrid(){
     }
 }
 
-/// @brief Locks the grid, preventing changes
+// Prevents further note changes.
 void StaffLineGrid::LockGrid(){
     locked = true;
 }
 
-/// @brief Unlocks the grid, allowing changes
+// Allows note changes again.
 void StaffLineGrid::UnlockGrid(){
     locked = false;
 }
 
-/// @brief Checks the locked status of the grid.
-/// @return True if locked, false if not
+// Returns true if the grid is locked.
 bool StaffLineGrid::GetLockedStatus(){
     return locked;
 }
 
-/// @brief Checks if a specified position is valid on the grid.
-/// @param column Column to check
-/// @param row Row to check
-/// @return True if valid position, false if not
+// Returns true if the column and row are within grid bounds.
 bool StaffLineGrid::ValidPosition(const int column, const int row){
     if (column < columns && column >= 0 && row < rows && row >= 0)
         return true;

@@ -6,8 +6,6 @@
 #include <QGroupBox>
 #include <QString>
 
-// ── Local helper ──────────────────────────────────────────────────────────────
-
 static char letterGrade(double pct) {
     if (pct >= 90.0) return 'A';
     if (pct >= 80.0) return 'B';
@@ -15,8 +13,6 @@ static char letterGrade(double pct) {
     if (pct >= 60.0) return 'D';
     return 'F';
 }
-
-// ── Styling ───────────────────────────────────────────────────────────────────
 
 static const char* BUTTON_STYLE =
     "QPushButton {"
@@ -31,8 +27,6 @@ static const char* BUTTON_STYLE =
     "  border-color: #6699cc;"
     "}"
     "QPushButton:disabled { color: #aaa; }";
-
-// ── Constructor ───────────────────────────────────────────────────────────────
 
 QuizWidget::QuizWidget(QWidget* parent)
     : QWidget(parent)
@@ -106,8 +100,6 @@ QuizWidget::QuizWidget(QWidget* parent)
     outer->addWidget(group);
 }
 
-// ── Public API ────────────────────────────────────────────────────────────────
-
 void QuizWidget::startQuiz(QuizMode mode) {
     session_ = std::make_unique<QuizSession>(mode, 10);
     placed_  = NoteGrid{};
@@ -121,8 +113,6 @@ void QuizWidget::startQuiz(QuizMode mode) {
 
     showQuestion();
 }
-
-// ── Slots ─────────────────────────────────────────────────────────────────────
 
 void QuizWidget::onNoteToggled(StaffState state) {
     if (!session_ || session_->isFinished()) return;
@@ -138,8 +128,6 @@ void QuizWidget::onNoteToggled(StaffState state) {
 
     checkButton_->setEnabled(anyNotePlaced());
 }
-
-// ── Private helpers ───────────────────────────────────────────────────────────
 
 bool QuizWidget::anyNotePlaced() const {
     for (const auto& col : placed_)

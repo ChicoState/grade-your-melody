@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     auto* content = new QWidget;
 
-    // ── Title ─────────────────────────────────────────────────────────
     auto* title = new QLabel("Grade Your Melody", content);
     QFont tf = title->font();
     tf.setPointSize(24);
@@ -31,14 +30,13 @@ MainWindow::MainWindow(QWidget* parent)
     rule->setFrameShape(QFrame::HLine);
     rule->setFrameShadow(QFrame::Sunken);
 
-    // ── Pages: selection screen vs. game view ─────────────────────────
     pages_ = new QStackedWidget(content);
 
-    // Page 0 — mode selection
+    // Mode selection screen
     selection_ = new QuizSelectionWidget;
     pages_->addWidget(selection_);
 
-    // Page 1 — staff + quiz
+    // Staff and quiz screen
     staffArea_ = new StaffAreaWidget;
     quiz_      = new QuizWidget;
 
@@ -59,7 +57,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     pages_->addWidget(gameView);
 
-    // ── Hint bar ──────────────────────────────────────────────────────
     auto* hint = new QLabel(
         "Click the staff to place or remove a note.", content);
     hint->setAlignment(Qt::AlignCenter);
@@ -68,7 +65,6 @@ MainWindow::MainWindow(QWidget* parent)
     hint->setFont(hf);
     hint->setStyleSheet("color: #666;");
 
-    // ── Root layout ───────────────────────────────────────────────────
     auto* layout = new QVBoxLayout(content);
     layout->setContentsMargins(16, 16, 16, 12);
     layout->setSpacing(10);
@@ -81,7 +77,6 @@ MainWindow::MainWindow(QWidget* parent)
     setCentralWidget(arw);
     resize(960, 720);
 
-    // ── Signal wiring ─────────────────────────────────────────────────
     connect(selection_, &QuizSelectionWidget::modeSelected,
             this,       &MainWindow::onModeSelected);
 

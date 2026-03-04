@@ -1,9 +1,7 @@
 #pragma once
 #include <optional>
 
-// Records a single toggle event on the staff.
-// col/row are always set when a cell is clicked.
-// added: true = note was placed, false = note was removed.
+// Represents a single note toggle event from the staff.
 struct StaffState {
     std::optional<int> col;            // which column was toggled
     std::optional<int> row;            // which row was toggled

@@ -11,8 +11,7 @@ class StaffWidget : public QWidget {
 public:
     explicit StaffWidget(QWidget* parent = nullptr);
 
-    // Exposed so StaffAreaWidget can draw staff lines at the same y positions
-    // and truncate them at the bar line.
+    // Geometry accessors used by StaffAreaWidget for drawing staff lines.
     int cellHeight() const { return cellH; }
     int barX()       const { return barX_; }  // bar line x in widget coords
 
@@ -31,25 +30,25 @@ private:
     StaffLineGrid grid;
     MelodyPresenter presenter;
 
-    // Fixed logical constants — ROWS, marginY, and COLS come from StaffGeometry
+    // Constants from StaffGeometry
     static constexpr int ROWS    = StaffGeometry::ROWS;
     static constexpr int COLS    = StaffGeometry::kMeasureColumns;
     static constexpr int marginX = 10;  // small left padding before the first beat column
     static constexpr int marginY = StaffGeometry::marginY;
 
-    // Dynamic layout values — recomputed on every resize
+    // Layout values recomputed on every resize
     int    cellH = 18;
     double colW  = 80.0;  // float so columns span exactly [marginX, barX_]
     int    barX_ = 0;     // bar line x position (widget coords); defines measure end
 
     void updateLayout();
 
-    // Convert a pixel position to a grid (col, row).  Returns false if out of bounds.
+    // Maps a pixel position to a grid cell; returns false if out of bounds.
     bool pixelToGrid(int x, int y, int& col, int& row) const;
 
-    // Convert a grid position to the pixel center of that cell.
+    // Maps a grid cell to its pixel center.
     void gridToPixel(int col, int row, int& cx, int& cy) const;
 
-    // Human-readable note name for a row index.
+    // Returns the note name for a given row index.
     static const char* noteName(int row);
 };

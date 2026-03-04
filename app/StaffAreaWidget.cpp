@@ -24,8 +24,7 @@ StaffAreaWidget::StaffAreaWidget(QWidget* parent)
 
 void StaffAreaWidget::resizeEvent(QResizeEvent* e) {
     QWidget::resizeEvent(e);
-    // Keep clef width tied to widget height via the SVG aspect ratio so the
-    // clef scales consistently with the staff as the window resizes.
+    // Scale clef width proportional to height using the SVG aspect ratio.
     clef_->setFixedWidth(qRound(height() * ClefWidget::kAspectRatio));
 }
 
@@ -35,8 +34,7 @@ void StaffAreaWidget::paintEvent(QPaintEvent*) {
     // White base for the entire area (clef gutter + staff).
     p.fillRect(rect(), Qt::white);
 
-    // Draw the 5 staff lines from the left edge to the bar line only.
-    // staff_->x() converts the bar line from StaffWidget-local coords to our coords.
+    // Draw staff lines from the left edge to the bar line.
     const int cellH    = staff_->cellHeight();
     const int lineEndX = staff_->x() + staff_->barX();
     p.setPen(QPen(Qt::black, 1.5));
