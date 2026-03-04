@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/qt/qml/GradeYourMelodyUI/">
+    <file alias="App.qml">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/App.qml</file>
+    <file alias="NoteSlot.qml">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/NoteSlot.qml</file>
+    <file alias="Screen01.qml">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/Screen01.qml</file>
+    <file alias="GradeYourMelodyUI/Constants.qml">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/Constants.qml</file>
+    <file alias="GradeYourMelodyUI/EventListModel.qml">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListModel.qml</file>
+    <file alias="GradeYourMelodyUI/EventListSimulator.qml">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListSimulator.qml</file>
+  </qresource>
+</RCC>
+

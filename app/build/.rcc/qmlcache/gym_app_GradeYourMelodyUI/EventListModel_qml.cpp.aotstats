@@ -1,0 +1,15 @@
+{
+    "formatRevision": 1,
+    "modules": [
+        {
+            "moduleFiles": [
+                {
+                    "entries": [
+                    ],
+                    "filePath": "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListModel.qml"
+                }
+            ],
+            "moduleId": "GradeYourMelodyUI(gym_app)"
+        }
+    ]
+}

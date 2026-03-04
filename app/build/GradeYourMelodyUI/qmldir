@@ -1,0 +1,11 @@
+module GradeYourMelodyUI
+typeinfo gym_app.qmltypes
+prefer :/qt/qml/GradeYourMelodyUI/
+App 1.0 App.qml
+NoteSlot 1.0 NoteSlot.qml
+Screen01 1.0 Screen01.qml
+Constants 1.0 GradeYourMelodyUI/Constants.qml
+EventListModel 1.0 GradeYourMelodyUI/EventListModel.qml
+EventListSimulator 1.0 GradeYourMelodyUI/EventListSimulator.qml
+depends QtQuick
+

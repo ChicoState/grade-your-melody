@@ -1,0 +1,14 @@
+-I
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build
+-I
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI
+-I
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build
+-I
+/opt/homebrew/opt/qt/share/qt/qml
+--resource
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc
+--resource
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc
+--module
+GradeYourMelodyUI

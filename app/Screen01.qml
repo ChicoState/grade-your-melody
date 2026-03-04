@@ -7,9 +7,9 @@ import GradeYourMelodyUI
 
 Rectangle {
     id: rectangle
-    width: Constants.width
-    height: Constants.height
-    color: Constants.backgroundColor
+    width: 1920
+    height: 1080
+    color: "#EAEAEA"
     clip: true
     //16 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
@@ -26,8 +26,8 @@ Rectangle {
     Item {
         x: 0
         y: 0
-        width: Constants.width
-        height: Constants.height
+        width: 1920
+        height: 1080
 
         // Measure 1
         Repeater {

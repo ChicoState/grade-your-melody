@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/GradeYourMelodyUI">
+    <file alias="qmldir">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir</file>
+  </qresource>
+</RCC>
+

@@ -1,10 +1,14 @@
-#include <QApplication>
-#include <QLabel>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QUrl>
+#include <QObject>
 
 int main(int argc, char *argv[]) {
-  QApplication app(argc, argv);
-  QLabel label("Grade Your Melody (Qt) — Docker build OK");
-  label.resize(360, 80);
-  label.show();
+  QGuiApplication app(argc, argv);
+  QQmlApplicationEngine engine;
+  engine.addImportPath("qrc:/qt/qml");
+  engine.load(QUrl(QStringLiteral("qrc:/qt/qml/GradeYourMelodyUI/App.qml")));
+  if (engine.rootObjects().isEmpty())
+    return -1;
   return app.exec();
 }
