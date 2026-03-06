@@ -1,0 +1,14 @@
+-rootPath
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app
+-cmake-output
+-output-file
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/qml_imports/gym_app_conf.cmake
+-importPath
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build
+-importPath
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI
+-importPath
+/opt/homebrew/opt/qt/share/qt/qml
+-qrcFiles
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc
