@@ -60,7 +60,7 @@ Rectangle {
         function onBeatChanged(changedBeat) {
             if (changedBeat === beat) {
                 // state will also update via selected binding, but we force a clean state
-                root.state = root.selected ? "clicked" : ""
+                root.selected = gridController.hasNote(beat, row)
             }
         }
     }
