@@ -313,7 +313,7 @@ build app/gym_app_autogen/EWIEGA46WW/qrc_resources.cpp | ${cmake_ninja_workdir}a
 #############################################
 # Phony custom command for app/CMakeFiles/gym_app_autogen_timestamp_deps
 
-build app/CMakeFiles/gym_app_autogen_timestamp_deps | ${cmake_ninja_workdir}app/CMakeFiles/gym_app_autogen_timestamp_deps: phony core/libcore.a /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/aarch64-linux-gnu/libQt5Svg.so.5.15.3 /usr/lib/qt5/bin/moc || core/libcore.a
+build app/CMakeFiles/gym_app_autogen_timestamp_deps | ${cmake_ninja_workdir}app/CMakeFiles/gym_app_autogen_timestamp_deps: phony core/libcore.a /usr/lib/aarch64-linux-gnu/libQt5Svg.so.5.15.3 /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/qt5/bin/moc || core/libcore.a
 
 
 #############################################
