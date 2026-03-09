@@ -16,11 +16,13 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("gridController", &controller);
 
     // Example: set the correct answer (you can do this elsewhere too)
-    controller.setExpectedRow(0, 4);
-    controller.setExpectedRow(1, 4);
-    controller.setExpectedRow(2, 5);
-    controller.setExpectedRow(3, 4);
-    // ... set up to beat 15 as needed
+    //controller.setExpectedRow(0, 4);
+    //controller.setExpectedRow(1, 4);
+    //controller.setExpectedRow(2, 5);
+    //controller.setExpectedRow(3, 4);
+    for (int i = 0; i < 16; i++) {
+    controller.setExpectedRow(i, 4);
+}
 
     const QUrl url(u"qrc:/app/App.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

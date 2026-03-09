@@ -7,8 +7,8 @@ Rectangle {
     width: 45
     height: 35
     color: "#00000000"
-    property int beat: 0
-    property int row: 0
+    property int beat: -1
+    property int row: -1 
     property bool selected: gridController.hasNote(beat,row)
 
     Image {
@@ -49,6 +49,7 @@ Rectangle {
             if (root.selected) {
                 gridController.clearBeat(beat)
             } else  {
+                console.log("clicked beat", beat, "row", row)
                 gridController.setNote(beat, row)
             }
         }

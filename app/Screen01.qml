@@ -36,6 +36,7 @@ Rectangle {
                 x: 276 + (index % 4) * 81
                 y: 616 - Math.floor(index / 4) * 25
                 beat: index % 4
+                row: Math.floor(index / 4)
             }
         }
         // Measure 2
@@ -45,6 +46,7 @@ Rectangle {
                 x: 276 + (324 + 50) + (index % 4) * 81 //Move one full measure (324) plus offset of 50
                 y: 616 - Math.floor(index / 4) * 25
                 beat: 4 + (index % 4) //Shift occupied beats to start at beat 4
+                row: Math.floor(index / 4)
             }
         }
         // Measure 3
@@ -54,6 +56,7 @@ Rectangle {
                 x: 276 + (648 + 125) + (index % 4) * 81 //Move one full measure (324) plus offset of 50
                 y: 616 - Math.floor(index / 4) * 25
                 beat: 8 + (index % 4) //Shift occupied beats to start at beat 4
+                row: Math.floor(index / 4)
             }
         }
         // Measure 4
@@ -63,6 +66,7 @@ Rectangle {
                 x: 276 + (972 + 200) + (index % 4) * 81 //Move one full measure (324) plus offset of 50
                 y: 616 - Math.floor(index / 4) * 25
                 beat: 12 + (index % 4) //Shift occupied beats to start at beat 4
+                row: Math.floor(index / 4)
             }
         }
     }
