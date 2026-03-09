@@ -8,6 +8,8 @@ Rectangle {
     height: 35
     color: "#00000000"
     property int beat: 0
+    property int row: 0
+    property bool selected: gridController.hasNote(beat,row)
 
     Image {
         id: hovernote
@@ -44,15 +46,27 @@ Rectangle {
         }
         onExited: if (root.state != "clicked") root.state = ""
         onPressed: {
-            if (root.state == "clicked") {
-                root.state = "hovered"
-                rectangle.occupiedBeats[beat] = false
-            } else if (!rectangle.occupiedBeats[beat]) {
-                root.state = "clicked"
-                rectangle.occupiedBeats[beat] = true
+            if (root.selected) {
+                gridController.clearBeat(beat)
+            } else  {
+                gridController.setNote(beat, row)
             }
         }
     }
+    // When any slot changes in this beat, refresh this slot's visuals
+    Connections {
+        target: gridController
+        function onBeatChanged(changedBeat) {
+            if (changedBeat === beat) {
+                // state will also update via selected binding, but we force a clean state
+                root.state = root.selected ? "clicked" : ""
+            }
+        }
+    }
+ 
+    // Keep state synced
+    Component.onCompleted: root.state = root.selected ? "clicked" : ""
+    onSelectedChanged: root.state = root.selected ? "clicked" : ""
 
     states: [
         State {

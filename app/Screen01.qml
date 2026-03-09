@@ -76,7 +76,14 @@ Rectangle {
         source: "images/title.png"
         fillMode: Image.PreserveAspectFit
     }
-}
 
+Button {
+    text: "Grade"
+    onClicked: {
+        console.log("Score:", gridController.score(), "/16")
+        console.log("Wrong beats:", gridController.incorrectBeats())
+    }
+}
+}
 
 

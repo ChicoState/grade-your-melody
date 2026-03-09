@@ -2,6 +2,7 @@
 
 StaffLineGrid::StaffLineGrid(){
     locked = false;
+    ClearGrid();
 }
 
 StaffLineGrid::~StaffLineGrid(){
@@ -12,7 +13,7 @@ StaffLineGrid::~StaffLineGrid(){
 /// @param column Column to check
 /// @param row Row to check
 /// @return true if has note, false if no note or invalid position
-bool StaffLineGrid::HasNote(const int column, const int row){
+bool StaffLineGrid::HasNote(const int column, const int row) const {
     if (!ValidPosition(column, row)) return false;
 
     return grid[column][row];
@@ -71,7 +72,7 @@ bool StaffLineGrid::GetLockedStatus(){
 /// @param column Column to check
 /// @param row Row to check
 /// @return True if valid position, false if not
-bool StaffLineGrid::ValidPosition(const int column, const int row){
+bool StaffLineGrid::ValidPosition(const int column, const int row) const {
     if (column < columns && column >= 0 && row < rows && row >= 0)
         return true;
     else
