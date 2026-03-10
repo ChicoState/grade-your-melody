@@ -96,9 +96,9 @@ Column {
     Row {
         spacing: 10
 
-        Button { text: "♭"; onClicked: rectangle.currentAcc = -1 }
-        Button { text: "♮"; onClicked: rectangle.currentAcc = 0 }
-        Button { text: "♯"; onClicked: rectangle.currentAcc = 1 }
+        Button { text: "Flat"; onClicked: rectangle.currentAcc = -1 }
+        Button { text: "Natural"; onClicked: rectangle.currentAcc = 0 }
+        Button { text: "Sharp"; onClicked: rectangle.currentAcc = 1 }
     }
 
     Button {
