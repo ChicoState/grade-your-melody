@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
     //controller.setExpectedRow(2, 5);
     //controller.setExpectedRow(3, 4);
     for (int i = 0; i < 16; i++) {
-    controller.setExpectedRow(i, 4);
+    controller.setExpectedRow(i, 4, -1);
+    
 }
 
     const QUrl url(u"qrc:/app/App.qml"_qs);

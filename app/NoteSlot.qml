@@ -9,8 +9,9 @@ Rectangle {
     color: "#00000000"
     property int beat: -1
     property int row: -1 
-    property bool selected: gridController.hasNote(beat,row)
-
+    property int currentAcc: 0
+    property bool selected: false
+    
     Image {
         id: hovernote
         x: 4
@@ -46,11 +47,12 @@ Rectangle {
         }
         onExited: if (root.state != "clicked") root.state = ""
         onPressed: {
-            if (root.selected) {
+            if(!gridController) return 
+            if (selected) {
                 gridController.clearBeat(beat)
             } else  {
-                console.log("clicked beat", beat, "row", row)
-                gridController.setNote(beat, row)
+                console.log("clicked beat", beat, "row", row, "acc", currentAcc)
+                gridController.setNote(beat, row, currentAcc)
             }
         }
     }
@@ -58,15 +60,19 @@ Rectangle {
     Connections {
         target: gridController
         function onBeatChanged(changedBeat) {
-            if (changedBeat === beat) {
+            if (changedBeat === beat&&gridController) {
                 // state will also update via selected binding, but we force a clean state
-                root.selected = gridController.hasNote(beat, row)
+                selected = gridController.hasNote(beat, row)
             }
         }
     }
  
     // Keep state synced
-    Component.onCompleted: root.state = root.selected ? "clicked" : ""
+    Component.onCompleted: {
+        if(gridController){
+            selected = gridController.hasNote(beat,row)
+        }
+        }
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
 
     states: [
