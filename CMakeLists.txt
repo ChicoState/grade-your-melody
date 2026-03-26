@@ -18,14 +18,19 @@ qt_add_executable(GradeYourMelody
 
 target_include_directories(GradeYourMelody PRIVATE core)
 
-qt_add_resources(GradeYourMelody "app_resources"
-    PREFIX "/"
-    FILES
-        app/Screen01.qml
-        app/NoteSlot.qml
-        app/App.qml
-        app/resources.qrc
-)
+set_source_files_properties(app/App.qml PROPERTIES QT_RESOURCE_ALIAS App.qml)
+set_source_files_properties(app/Screen01.qml PROPERTIES QT_RESOURCE_ALIAS Screen01.qml)
+set_source_files_properties(app/NoteSlot.qml PROPERTIES QT_RESOURCE_ALIAS NoteSlot.qml)
+
+set_source_files_properties("app/images/staff lines 2.png" PROPERTIES QT_RESOURCE_ALIAS "images/staff lines 2.png")
+set_source_files_properties("app/images/title.png" PROPERTIES QT_RESOURCE_ALIAS "images/title.png")
+set_source_files_properties("app/images/note transparent cut.png" PROPERTIES QT_RESOURCE_ALIAS "images/note transparent cut.png")
+set_source_files_properties("app/images/quarternote.png" PROPERTIES QT_RESOURCE_ALIAS "images/quarternote.png")
+set_source_files_properties("app/images/sharpnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/sharpnote.png")
+set_source_files_properties("app/images/notes.png" PROPERTIES QT_RESOURCE_ALIAS "images/notes.png")
+set_source_files_properties("app/images/sheet music.png" PROPERTIES QT_RESOURCE_ALIAS "images/sheet music.png")
+set_source_files_properties("app/images/staff lines with notes.png" PROPERTIES QT_RESOURCE_ALIAS "images/staff lines with notes.png")
+
 qt_add_qml_module(GradeYourMelody
     URI GradeYourMelodyUI
     VERSION 1.0
@@ -34,11 +39,14 @@ qt_add_qml_module(GradeYourMelody
         app/Screen01.qml
         app/NoteSlot.qml
     RESOURCES
-        app/images/staff\ lines\ 2.png
+        "app/images/staff lines 2.png"
         app/images/title.png
-        app/images/note\ transparent\ cut.png
-        app/images/note\ transparent\ cut.png
+        "app/images/note transparent cut.png"
         app/images/quarternote.png
+        app/images/sharpnote.png
+        app/images/notes.png
+        "app/images/sheet music.png"
+        "app/images/staff lines with notes.png"
 )
 
 target_link_libraries(GradeYourMelody

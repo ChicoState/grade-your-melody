@@ -2,14 +2,10 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "GridController.h"
-#include <QResource>
-#include <QFile>
-#include <QDebug>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    Q_INIT_RESOURCE(app_resources);
     QQmlApplicationEngine engine;
 
     GridController controller;
@@ -25,14 +21,12 @@ int main(int argc, char *argv[])
     
 }
 
-    const QUrl url(u"qrc:/app/App.qml"_qs);
+    const QUrl url(u"qrc:/qt/qml/GradeYourMelodyUI/App.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl) QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-qDebug() << "exists :/App.qml =" << QFile(":/App.qml").exists();
-qDebug() << "exists :/app/App.qml =" << QFile(":/app/App.qml").exists();
     engine.load(url);
 
     return app.exec();

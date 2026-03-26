@@ -60,9 +60,17 @@ Rectangle {
     Connections {
         target: gridController
         function onBeatChanged(changedBeat) {
-            if (changedBeat === beat&&gridController) {
-                // state will also update via selected binding, but we force a clean state
+            if (changedBeat === beat && gridController) {
                 selected = gridController.hasNote(beat, row)
+                if (selected) {
+                    var acc = gridController.accidentalForBeat(beat)
+                    if (acc === 1)
+                        placenote.source = "images/sharpnote.png"
+                    else if (acc === -1)
+                        placenote.source = Qt.resolvedUrl("images/quarternote.png")
+                    else
+                        placenote.source = "images/quarternote.png"
+                }
             }
         }
     }

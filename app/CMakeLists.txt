@@ -7,7 +7,13 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Qml Quick)
 
-qt_add_executable(gym_app main.cpp)
+qt_add_executable(gym_app
+    main.cpp
+    ../core/GridController.cpp
+    ../core/staffLineGrid.cpp
+)
+
+target_include_directories(gym_app PRIVATE ../core)
 
 qt_add_qml_module(gym_app
     URI GradeYourMelodyUI
@@ -26,6 +32,7 @@ qt_add_qml_module(gym_app
         "images/staff lines 2.png"
         images/title.png
         "images/sheet music.png"
+        images/sharpnote.png
         images/notes.png
         "images/staff lines with notes.png"
         GradeYourMelodyUI/qmldir
@@ -33,5 +40,4 @@ qt_add_qml_module(gym_app
 
 target_link_libraries(gym_app PRIVATE
     Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Qml Qt6::Quick
-    core
 )
