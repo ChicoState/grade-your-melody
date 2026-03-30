@@ -24,6 +24,7 @@ sudo apt install -y \
 --FROM THE ROOT DIREcTORY run the following.
 
 rm -rf build
+mkdir build
 cd build
 cmake ..
 make

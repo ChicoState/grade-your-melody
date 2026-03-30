@@ -6,7 +6,10 @@ GridController::GridController(QObject *parent)
 {
     // Default: expect empty on every beat
     expectedRow.fill(-1);
+    
 
+    expectedAccidental.fill(0);
+    userAccidental.fill(0);
     // Example answer (change these to your melody):
     // expectedRow[0] = 4; expectedRow[1] = 4; expectedRow[2] = 5; ...
 }
@@ -25,16 +28,22 @@ void GridController::clearBeat(int beat) {
     if (beat < 0 || beat >= StaffLineGrid::columns) return;
     clearBeatInternal(beat);
     emit beatChanged(beat);
+    userAccidental[beat] = 0;
 }
 
-void GridController::setNote(int beat, int row) {
+void GridController::setNote(int beat, int row, int acc) {
     if (!userGrid.ValidPosition(beat, row)) return;
 
     // Enforce ONE note per beat:
     clearBeatInternal(beat);
-    userGrid.AddNote(beat, row);
-
+      userGrid.AddNote(beat, row);
+    userAccidental[beat] = acc;
     emit beatChanged(beat);
+}
+
+int GridController::accidentalForBeat(int beat) const {
+    if (beat < 0 || beat >= (int)userAccidental.size()) return 0;
+    return userAccidental[beat];
 }
 
 int GridController::noteRowForBeat(int beat) const {
@@ -46,17 +55,18 @@ int GridController::noteRowForBeat(int beat) const {
     return -1;
 }
 
-void GridController::setExpectedRow(int beat, int row) {
+void GridController::setExpectedRow(int beat, int row, int acc = 0) {
     if (beat < 0 || beat >= StaffLineGrid::columns) return;
     if (row < -1 || row >= StaffLineGrid::rows) return;
-
+    
     expectedRow[beat] = row;
+    expectedAccidental[beat] = acc;
     emit expectedChanged(beat);
 }
 
 bool GridController::isBeatCorrect(int beat) const {
     if (beat < 0 || beat >= StaffLineGrid::columns) return false;
-    return noteRowForBeat(beat) == expectedRow[beat];
+    return noteRowForBeat(beat) == expectedRow[beat] && userAccidental[beat] == expectedAccidental[beat];
 }
 
 
