@@ -3,6 +3,7 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
+    git-all \
     build-essential \
     cmake \
     ninja-build \
@@ -25,5 +26,6 @@ COPY . /app
 
 # Build
 RUN rm -rf build \
- && cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \
- && cmake --build build
+    && cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+    && cmake --build build && \
+    cd build && ctest --output-on-failure
