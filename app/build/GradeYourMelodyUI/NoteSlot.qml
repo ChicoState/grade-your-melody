@@ -7,8 +7,11 @@ Rectangle {
     width: 45
     height: 35
     color: "#00000000"
-    property int beat: 0
-
+    property int beat: -1
+    property int row: -1 
+    property int currentAcc: 0
+    property bool selected: false
+    
     Image {
         id: hovernote
         x: 4
@@ -44,15 +47,41 @@ Rectangle {
         }
         onExited: if (root.state != "clicked") root.state = ""
         onPressed: {
-            if (root.state == "clicked") {
-                root.state = "hovered"
-                rectangle.occupiedBeats[beat] = false
-            } else if (!rectangle.occupiedBeats[beat]) {
-                root.state = "clicked"
-                rectangle.occupiedBeats[beat] = true
+            if(!gridController) return 
+            if (selected) {
+                gridController.clearBeat(beat)
+            } else  {
+                console.log("clicked beat", beat, "row", row, "acc", currentAcc)
+                gridController.setNote(beat, row, currentAcc)
             }
         }
     }
+    // When any slot changes in this beat, refresh this slot's visuals
+    Connections {
+        target: gridController
+        function onBeatChanged(changedBeat) {
+            if (changedBeat === beat && gridController) {
+                selected = gridController.hasNote(beat, row)
+                if (selected) {
+                    var acc = gridController.accidentalForBeat(beat)
+                    if (acc === 1)
+                        placenote.source = "images/sharpnote.png"
+                    else if (acc === -1)
+                        placenote.source = Qt.resolvedUrl("images/quarternote.png")
+                    else
+                        placenote.source = "images/quarternote.png"
+                }
+            }
+        }
+    }
+ 
+    // Keep state synced
+    Component.onCompleted: {
+        if(gridController){
+            selected = gridController.hasNote(beat,row)
+        }
+        }
+    onSelectedChanged: root.state = root.selected ? "clicked" : ""
 
     states: [
         State {

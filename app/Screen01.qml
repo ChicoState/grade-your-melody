@@ -87,25 +87,57 @@ Rectangle {
     }
 
 Column {
-    spacing: 12
-    anchors.left: parent.left
-    anchors.top: parent.top
-    anchors.leftMargin: 30
-    anchors.topMargin: 30
+    spacing: 20
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: staffLines2.bottom
+    anchors.topMargin: -20
 
     Row {
         spacing: 10
 
-        Button { text: "Flat"; onClicked: rectangle.currentAcc = -1 }
-        Button { text: "Natural"; onClicked: rectangle.currentAcc = 0 }
-        Button { text: "Sharp"; onClicked: rectangle.currentAcc = 1 }
+        Image {
+            source: "images/flatbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentAcc === -1 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentAcc = -1
+            }
+        }
+        Image {
+            source: "images/naturalbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentAcc === 0 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentAcc = 0
+            }
+        }
+        Image {
+            source: "images/sharpbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentAcc === 1 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentAcc = 1
+            }
+        }
     }
 
-    Button {
-        text: "Grade"
-        onClicked: {
-            console.log("Score:", gridController.score(), "/16")
-            console.log("Wrong beats:", gridController.incorrectBeats())
+    Image {
+        source: "images/gradebutton.png"
+        fillMode: Image.PreserveAspectFit
+        height: 40
+        anchors.horizontalCenter: parent.horizontalCenter
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                console.log("Score:", gridController.score(), "/16")
+                console.log("Wrong beats:", gridController.incorrectBeats())
+            }
         }
     }
 }

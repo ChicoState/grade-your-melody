@@ -64,12 +64,18 @@ Rectangle {
                 selected = gridController.hasNote(beat, row)
                 if (selected) {
                     var acc = gridController.accidentalForBeat(beat)
-                    if (acc === 1)
+                    if (acc === 1) {
                         placenote.source = "images/sharpnote.png"
-                    else if (acc === -1)
-                        placenote.source = Qt.resolvedUrl("images/quarternote.png")
-                    else
+                        placenote.x = -43
+                    }
+                    else if (acc === -1) {
+                        placenote.source = Qt.resolvedUrl("images/flatnote.png")
+                        placenote.x = -43
+                    }
+                    else {
                         placenote.source = "images/quarternote.png"
+                        placenote.x = -28
+                    }
                 }
             }
         }

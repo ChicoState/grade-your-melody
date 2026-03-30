@@ -30,10 +30,16 @@ set_source_files_properties("app/images/sharpnote.png" PROPERTIES QT_RESOURCE_AL
 set_source_files_properties("app/images/notes.png" PROPERTIES QT_RESOURCE_ALIAS "images/notes.png")
 set_source_files_properties("app/images/sheet music.png" PROPERTIES QT_RESOURCE_ALIAS "images/sheet music.png")
 set_source_files_properties("app/images/staff lines with notes.png" PROPERTIES QT_RESOURCE_ALIAS "images/staff lines with notes.png")
+set_source_files_properties("app/images/flatbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/flatbutton.png")
+set_source_files_properties("app/images/naturalbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/naturalbutton.png")
+set_source_files_properties("app/images/sharpbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/sharpbutton.png")
+set_source_files_properties("app/images/gradebutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/gradebutton.png")
+set_source_files_properties("app/images/flatnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/flatnote.png")
 
 qt_add_qml_module(GradeYourMelody
     URI GradeYourMelodyUI
     VERSION 1.0
+    RESOURCE_PREFIX /qt/qml
     QML_FILES
         app/App.qml
         app/Screen01.qml
@@ -47,6 +53,11 @@ qt_add_qml_module(GradeYourMelody
         app/images/notes.png
         "app/images/sheet music.png"
         "app/images/staff lines with notes.png"
+        app/images/flatbutton.png
+        app/images/naturalbutton.png
+        app/images/sharpbutton.png
+        app/images/gradebutton.png
+        app/images/flatnote.png
 )
 
 target_link_libraries(GradeYourMelody

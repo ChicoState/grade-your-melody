@@ -22,12 +22,12 @@
                             "message": ""
                         },
                         {
-                            "codegenResult": 2,
+                            "codegenResult": 0,
                             "column": 16,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
                             "line": 13,
-                            "message": "Cannot load property width from const QMetaObject."
+                            "message": ""
                         },
                         {
                             "codegenResult": 0,
