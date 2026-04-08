@@ -44,3 +44,12 @@ docker run -e DISPLAY=host.docker.internal:0 grade-your-melody ./build/GradeYour
 - The `DEPRECATED` warning about the legacy builder is harmless, ignore it
 - If you get a cmake cache error, make sure you're using the latest Dockerfile which includes `rm -rf build` before the cmake step
 - If the app window doesn't open, make sure you ran `xhost +local:docker` first (Ubuntu only)
+
+
+## Testing
+When in the docker image, navigate to the build directory and run:
+```bash
+ctest --output-on-failure
+```
+
+Tests also now auto run when building the docker image and the image will fail to build if tests do not pass.
