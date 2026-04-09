@@ -25,7 +25,13 @@ qt_add_executable(GradeYourMelody
     core/GridController.cpp
     core/staffLineGrid.h
     core/staffLineGrid.cpp
+    core/questionHandler.cpp
 )
+
+configure_file(${CMAKE_SOURCE_DIR}/core/questions.csv
+               ${CMAKE_BINARY_DIR}/questions.csv
+               COPYONLY)
+
 
 target_include_directories(GradeYourMelody PRIVATE core)
 

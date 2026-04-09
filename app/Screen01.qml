@@ -14,7 +14,14 @@ Rectangle {
     //16 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     property int currentAcc: 0 // -1 flat, +1 sharp 
-   onCurrentAccChanged: console.log("currentAcc now", currentAcc) 
+    
+    property int currentScore: 0
+    property var wrongBeats: []
+    property bool hasGraded: false
+
+
+
+    onCurrentAccChanged: console.log("currentAcc now", currentAcc) 
     Image {
         id: staffLines2
         x: 53
@@ -92,7 +99,13 @@ Column {
     anchors.top: parent.top
     anchors.leftMargin: 30
     anchors.topMargin: 30
-
+    
+    Text {
+        text: hasGraded ? ("Score: " + currentScore + " / 16") : "Score: --"
+        font.pixelSize: 24
+        color: "black"
+    }
+    
     Row {
         spacing: 10
 
@@ -101,11 +114,37 @@ Column {
         Button { text: "Sharp"; onClicked: rectangle.currentAcc = 1 }
     }
 
-    Button {
+Text{ 
+    id: benchmarkText
+    text: "place"
+}
+
+Connections {
+    target: gridController
+
+    onBenchmarkFinished: function(result) {
+    benchmarkText.text = result
+    }
+}
+
+Button {
+    text: "run a BILLION "
+    onClicked: {
+        gridController.runMillion()
+    }
+}
+
+Button {
         text: "Grade"
         onClicked: {
+        currentScore = gridController.score()
+        wrongBeats = gridController.incorrectBeats()
+        hasGraded = true 
+
+
             console.log("Score:", gridController.score(), "/16")
-            console.log("Wrong beats:", gridController.incorrectBeats())
+            console.log("Incorrect beats:", gridController.incorrectBeats())
+
         }
     }
 }

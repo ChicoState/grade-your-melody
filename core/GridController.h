@@ -2,9 +2,10 @@
 #include <QObject>
 #include <QList>
 #include <QVariant>
-
+#include <QString>
 #include <array>
 #include "staffLineGrid.h"
+#include "questionHandler.h"
 
 class GridController : public QObject {
     Q_OBJECT
@@ -23,13 +24,16 @@ public:
     Q_INVOKABLE bool isBeatCorrect(int beat) const;
     Q_INVOKABLE int  score() const; // 0..16
     Q_INVOKABLE QVariantList incorrectBeats() const;
+    Q_INVOKABLE void loadQuestion(int questionNum);
+    Q_INVOKABLE void runMillion();
 signals:
     void beatChanged(int beat);     // beat changed, QML should refresh visuals
     void expectedChanged(int beat); // expected answer changed (optional)
-
+    void benchmarkFinished(QString result);
 private:
     StaffLineGrid userGrid;
-
+    QuestionHandler questionHandler;
+    
     // expected answer: for each beat store the one correct row, or -1 for empty
     std::array<int, StaffLineGrid::columns> expectedRow{};
 

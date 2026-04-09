@@ -5,7 +5,7 @@
 #include <QResource>
 #include <QFile>
 #include <QDebug>
-
+#include <iostream>
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -14,16 +14,20 @@ int main(int argc, char *argv[])
 
     GridController controller;
     engine.rootContext()->setContextProperty("gridController", &controller);
-
+    
+    //Load Questions
+    controller.loadQuestion(1);
+    std::cout << "PROGRAM STARTED" << std::endl;
+    std::cout << "Initial score = " << controller.score() << std::endl;
     // Example: set the correct answer (you can do this elsewhere too)
     //controller.setExpectedRow(0, 4);
     //controller.setExpectedRow(1, 4);
     //controller.setExpectedRow(2, 5);
     //controller.setExpectedRow(3, 4);
-    for (int i = 0; i < 16; i++) {
-    controller.setExpectedRow(i, 4, -1);
+   // for (int i = 0; i < 16; i++) {
+    //controller.setExpectedRow(i, 4, -1);
     
-}
+//}
 
     const QUrl url(u"qrc:/app/App.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

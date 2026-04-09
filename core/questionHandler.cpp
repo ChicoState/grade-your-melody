@@ -26,7 +26,8 @@ QuestionHandler::~QuestionHandler(){
 /// @return Question if found, default question if not
 Question QuestionHandler::GetQuestion(const int question){
     if(!bHasReadCSV) ReadCSV();
-    if (questions.size() <= 0) return Question();
+    if (questions.empty()) return Question();
+    if (question <= 0 || question > (int)questions.size()) return Question();
     return questions[question - 1];
 }
 
@@ -41,7 +42,14 @@ vector<Question> QuestionHandler::GetQuestions(){
 void QuestionHandler::ReadCSV(){
     questions.clear();
 
-    ifstream file(QUESTION_CSV_FILE);
+    
+    //ifstream file(QUESTION_CSV_FILE);
+
+        std::ifstream file("questions.csv");
+    if (!file.is_open()) file.open("../questions.csv");
+    if (!file.is_open()) file.open("/app/questions.csv");
+    if (!file.is_open()) file.open("/app/build/questions.csv");
+    
 
     if(!file.is_open()){
         cerr << "Error opening question CSV file" << endl;
@@ -77,23 +85,23 @@ void QuestionHandler::ReadCSV(){
         string noteHolder;
 
         //Get answer key
-        while (getline(cs, noteHolder, ' ')){
-            NoteInfo note;
-            stringstream ns(noteHolder); //Note stream
+            while (getline(cs, noteHolder, ' ')) {
+                 
+                if (noteHolder.front() == '(') noteHolder.erase(0, 1);
+                if (noteHolder.back() == ')') noteHolder.pop_back();
 
-            //Format of notes expected is (Beat-Row-Accent) (Beat-Row-Accent)...
 
-            ns.ignore(); //Ignore (
-            ns >> note.beat;
-            ns.ignore(); //Ignore dash
-            ns >> note.row;
-            ns.ignore(); //Ignore dash
-            ns >> note.accent;
-            //No need to ignore final )
+                NoteInfo note;
+                stringstream ns(noteHolder);
+             
+                string part;
 
-            questionData.notes.push_back(note);
-        }
+                char dash; //dummy var
+                ns >> note.beat >> dash >> note.row >> dash >> note.accent;
+                questionData.notes.push_back(note);
 
+
+            }
         questions.push_back(questionData);
     }
 
