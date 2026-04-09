@@ -1007,6 +1007,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   ".qt/rcc/qmake_GradeYourMelodyUI.qrc"
   "GradeYourMelodyUI/gym_app_qml_module_dir_map.qrc"
   ".qt/rcc/gym_app_raw_qml_0.qrc"
+  ".qt/rcc/gym_app_raw_res_0.qrc"
   "GradeYourMelodyUI/qmldir"
   "CMakeFiles/gym_app_autogen.dir/AutogenInfo.json"
   ".qt/QtDeploySupport.cmake"

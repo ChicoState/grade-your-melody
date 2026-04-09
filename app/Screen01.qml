@@ -8,12 +8,13 @@ import GradeYourMelodyUI
 Rectangle {
     id: rectangle
     width: 1920
-    height: 1080
+    height: 1100
     color: "#EAEAEA"
     clip: true
-    //16 beats
-    property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-    property int currentAcc: 0 // -1 flat, +1 sharp 
+    //32 eighth-note slots (8 per measure × 4 measures)
+    property int currentAcc: 0 // -1 flat, +1 sharp
+    property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note
+    property bool grade: false // false not-graded, true graded
    onCurrentAccChanged: console.log("currentAcc now", currentAcc) 
     Image {
         id: staffLines2
@@ -30,48 +31,52 @@ Rectangle {
         width: 1920
         height: 1080
 
-        // Measure 1
+        // Measure 1 (8 slots × 9 rows = 72)
         Repeater {
-            model: 36
+            model: 72
             NoteSlot {
-                x: 276 + (index % 4) * 81
-                y: 616 - Math.floor(index / 4) * 25
-                beat: index % 4
-                row: Math.floor(index / 4)
+                x: 276 + (index % 8) * 40
+                y: 616 - Math.floor(index / 8) * 25
+                beat: index % 8
+                row: Math.floor(index / 8)
                 currentAcc: rectangle.currentAcc
+                currentNoteLength: rectangle.currentNoteLength
             }
         }
         // Measure 2
         Repeater {
-            model: 36
+            model: 72
             NoteSlot {
-                x: 276 + (324 + 50) + (index % 4) * 81 //Move one full measure (324) plus offset of 50
-                y: 616 - Math.floor(index / 4) * 25
-                beat: 4 + (index % 4) //Shift occupied beats to start at beat 4
-                row: Math.floor(index / 4)
+                x: 276 + (324 + 50) + (index % 8) * 40
+                y: 616 - Math.floor(index / 8) * 25
+                beat: 8 + (index % 8)
+                row: Math.floor(index / 8)
                 currentAcc: rectangle.currentAcc
+                currentNoteLength: rectangle.currentNoteLength
             }
         }
         // Measure 3
         Repeater {
-            model: 36
+            model: 72
             NoteSlot {
-                x: 276 + (648 + 125) + (index % 4) * 81 //Move one full measure (324) plus offset of 50
-                y: 616 - Math.floor(index / 4) * 25
-                beat: 8 + (index % 4) //Shift occupied beats to start at beat 4
-                row: Math.floor(index / 4)
+                x: 276 + (648 + 125) + (index % 8) * 40
+                y: 616 - Math.floor(index / 8) * 25
+                beat: 16 + (index % 8)
+                row: Math.floor(index / 8)
                 currentAcc: rectangle.currentAcc
+                currentNoteLength: rectangle.currentNoteLength
             }
         }
         // Measure 4
         Repeater {
-            model: 36
+            model: 72
             NoteSlot {
-                x: 276 + (972 + 200) + (index % 4) * 81 //Move one full measure (324) plus offset of 50
-                y: 616 - Math.floor(index / 4) * 25
-                beat: 12 + (index % 4) //Shift occupied beats to start at beat 4
-                row: Math.floor(index / 4)
+                x: 276 + (972 + 200) + (index % 8) * 40
+                y: 616 - Math.floor(index / 8) * 25
+                beat: 24 + (index % 8)
+                row: Math.floor(index / 8)
                 currentAcc: rectangle.currentAcc
+                currentNoteLength: rectangle.currentNoteLength
             }
         }
     }
@@ -87,25 +92,86 @@ Rectangle {
     }
 
 Column {
-    spacing: 12
-    anchors.left: parent.left
-    anchors.top: parent.top
-    anchors.leftMargin: 30
-    anchors.topMargin: 30
+    spacing: 20
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: staffLines2.bottom
+    anchors.topMargin: -20
+
+    Text {
+        text: questionText
+        font.pixelSize: 28
+        leftPadding: 30
+        color: "black"
+    }
+    Image {
+        source: "images/gradebutton.png"
+        fillMode: Image.PreserveAspectFit
+        height: 40
+        x: 20
+        opacity: rectangle.grade === true ? 0.6 : 1.0
+        MouseArea {
+            anchors.fill: parent
+            onClicked: rectangle.grade = !rectangle.grade
+        }
+    }
 
     Row {
         spacing: 10
 
-        Button { text: "Flat"; onClicked: rectangle.currentAcc = -1 }
-        Button { text: "Natural"; onClicked: rectangle.currentAcc = 0 }
-        Button { text: "Sharp"; onClicked: rectangle.currentAcc = 1 }
+        Image {
+            source: "images/flatbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentAcc === -1 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentAcc = -1
+            }
+        }
+        Image {
+            source: "images/naturalbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentAcc === 0 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentAcc = 0
+            }
+        }
+        Image {
+            source: "images/sharpbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentAcc === 1 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentAcc = 1
+            }
+        }
     }
 
-    Button {
-        text: "Grade"
-        onClicked: {
-            console.log("Score:", gridController.score(), "/16")
-            console.log("Wrong beats:", gridController.incorrectBeats())
+    Row {
+        spacing: 10
+        x: 35
+        Image {
+            source: "images/quarterbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentNoteLength === 2 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentNoteLength = 2
+            }
+        }
+        Image {
+            source: "images/eighthbutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.currentNoteLength = 1
+            }
         }
     }
 }

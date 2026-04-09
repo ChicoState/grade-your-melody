@@ -69,6 +69,15 @@ include CMakeFiles/gym_app_copy_res.dir/progress.make
 CMakeFiles/gym_app_copy_res: .qt/gym_app_res.txt
 
 .qt/gym_app_res.txt: /opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlCopyFiles.cmake
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/quarternote.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/note\ transparent\ cut.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/staff\ lines\ 2.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/title.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/sheet\ music.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/sharpnote.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/notes.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/staff\ lines\ with\ notes.png
+.qt/gym_app_res.txt: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/qmldir
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Copying gym_app qml resources into build dir"
 	/opt/homebrew/bin/cmake -DFILES_INFO_PATH=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/gym_app_res.cmake -P /opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlCopyFiles.cmake
 

@@ -7,10 +7,10 @@
                     "entries": [
                         {
                             "codegenResult": 0,
-                            "column": 19,
+                            "column": 24,
                             "durationMicroseconds": 0,
-                            "functionName": "fillMode",
-                            "line": 20,
+                            "functionName": "onSelectedChanged",
+                            "line": 84,
                             "message": ""
                         },
                         {
@@ -18,7 +18,15 @@
                             "column": 19,
                             "durationMicroseconds": 0,
                             "functionName": "fillMode",
-                            "line": 31,
+                            "line": 23,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 19,
+                            "durationMicroseconds": 0,
+                            "functionName": "fillMode",
+                            "line": 34,
                             "message": ""
                         },
                         {
@@ -26,7 +34,7 @@
                             "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "onEntered",
-                            "line": 40,
+                            "line": 43,
                             "message": "Cannot access value for name rectangle"
                         },
                         {
@@ -34,7 +42,7 @@
                             "column": 19,
                             "durationMicroseconds": 0,
                             "functionName": "onExited",
-                            "line": 45,
+                            "line": 48,
                             "message": ""
                         },
                         {
@@ -42,15 +50,47 @@
                             "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "onPressed",
-                            "line": 46,
-                            "message": "Cannot access value for name rectangle"
+                            "line": 49,
+                            "message": "Cannot access value for name gridController"
                         },
                         {
                             "codegenResult": 0,
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 38,
+                            "line": 41,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 17,
+                            "durationMicroseconds": 0,
+                            "functionName": "target",
+                            "line": 61,
+                            "message": "Cannot access value for name gridController"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 9,
+                            "durationMicroseconds": 0,
+                            "functionName": "onBeatChanged",
+                            "line": 62,
+                            "message": "Functions without type annotations won't be compiled"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "onCompleted",
+                            "line": 79,
+                            "message": "Cannot access value for name gridController"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "target",
+                            "line": 93,
                             "message": ""
                         },
                         {
@@ -58,15 +98,7 @@
                             "column": 39,
                             "durationMicroseconds": 0,
                             "functionName": "target",
-                            "line": 64,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "target",
-                            "line": 60,
+                            "line": 89,
                             "message": ""
                         }
                     ],

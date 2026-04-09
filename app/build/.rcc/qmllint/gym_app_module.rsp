@@ -10,5 +10,7 @@
 /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc
 --resource
 /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc
+--resource
+/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc
 --module
 GradeYourMelodyUI

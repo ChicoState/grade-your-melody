@@ -1398,6 +1398,7 @@
 		"/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlModuleDirMappingTemplate.qrc.in",
 		"/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
+		"/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6qmldirTemplate.cmake.in",
 		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/qml_imports/gym_app_conf.cmake"
 	],
@@ -1405,7 +1406,21 @@
 	"CROSS_CONFIG" : false,
 	"DEP_FILE" : "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/gym_app_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "gym_app_autogen/timestamp",
-	"HEADERS" : [],
+	"HEADERS" : 
+	[
+		[
+			"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.h",
+			"Mu",
+			"E6PLPW3I3Y/moc_GridController.cpp",
+			null
+		],
+		[
+			"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.h",
+			"Mu",
+			"E6PLPW3I3Y/moc_staffLineGrid.cpp",
+			null
+		]
+	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/gym_app_autogen/include",
 	"MOC_COMPILATION_FILE" : "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/gym_app_autogen/mocs_compilation.cpp",
@@ -1430,6 +1445,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
+		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core",
 		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app",
 		"/opt/homebrew/opt/qt/lib/QtQml.framework/Headers",
 		"/opt/homebrew/opt/qt/lib/QtQml.framework",
@@ -1448,10 +1464,10 @@
 		"/opt/homebrew/opt/qt/lib/QtQuick.framework",
 		"/opt/homebrew/opt/qt/lib/QtOpenGL.framework/Headers",
 		"/opt/homebrew/opt/qt/lib/QtOpenGL.framework",
-		"/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1",
-		"/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include",
-		"/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
-		"/Library/Developer/CommandLineTools/usr/include"
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"
 	],
 	"MOC_MACRO_NAMES" : 
 	[
@@ -1478,6 +1494,7 @@
 	"MOC_SKIP" : 
 	[
 		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp",
+		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp",
 		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp",
 		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_App_qml.cpp",
 		"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp",
@@ -1500,6 +1517,16 @@
 	[
 		[
 			"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/main.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp",
 			"Mu",
 			null
 		]

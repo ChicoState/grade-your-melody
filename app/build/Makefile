@@ -337,6 +337,54 @@ gym_app_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app_autogen.dir/build.make CMakeFiles/gym_app_autogen.dir/build
 .PHONY : gym_app_autogen/fast
 
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.o: Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.o
+
+# target to build an object file
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o
+
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.i: Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.i
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.i
+
+# target to preprocess a source file
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.i
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.i
+
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.s: Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.s
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.s
+
+# target to generate assembly for a file
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.s
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.s
+
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.o: Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.o
+
+# target to build an object file
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o
+
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.i: Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.i
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.i
+
+# target to preprocess a source file
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.i
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.i
+
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.s: Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.s
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.s
+
+# target to generate assembly for a file
+Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.s
+.PHONY : Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.s
+
 build/.qt/rcc/qrc_gym_app_raw_qml_0.o: build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o
 .PHONY : build/.qt/rcc/qrc_gym_app_raw_qml_0.o
 
@@ -360,6 +408,30 @@ build/.qt/rcc/qrc_gym_app_raw_qml_0.s: build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.s
 build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.s
 .PHONY : build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.s
+
+build/.qt/rcc/qrc_gym_app_raw_res_0.o: build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o
+.PHONY : build/.qt/rcc/qrc_gym_app_raw_res_0.o
+
+# target to build an object file
+build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o
+.PHONY : build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o
+
+build/.qt/rcc/qrc_gym_app_raw_res_0.i: build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.i
+.PHONY : build/.qt/rcc/qrc_gym_app_raw_res_0.i
+
+# target to preprocess a source file
+build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.i
+.PHONY : build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.i
+
+build/.qt/rcc/qrc_gym_app_raw_res_0.s: build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.s
+.PHONY : build/.qt/rcc/qrc_gym_app_raw_res_0.s
+
+# target to generate assembly for a file
+build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gym_app.dir/build.make CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.s
+.PHONY : build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.s
 
 build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.o: build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o
 .PHONY : build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.o
@@ -650,9 +722,18 @@ help:
 	@echo "... gym_app_qmltyperegistration"
 	@echo "... module_gym_app_aotstats_target"
 	@echo "... gym_app"
+	@echo "... Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.o"
+	@echo "... Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.i"
+	@echo "... Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.s"
+	@echo "... Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.o"
+	@echo "... Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.i"
+	@echo "... Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.s"
 	@echo "... build/.qt/rcc/qrc_gym_app_raw_qml_0.o"
 	@echo "... build/.qt/rcc/qrc_gym_app_raw_qml_0.i"
 	@echo "... build/.qt/rcc/qrc_gym_app_raw_qml_0.s"
+	@echo "... build/.qt/rcc/qrc_gym_app_raw_res_0.o"
+	@echo "... build/.qt/rcc/qrc_gym_app_raw_res_0.i"
+	@echo "... build/.qt/rcc/qrc_gym_app_raw_res_0.s"
 	@echo "... build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.o"
 	@echo "... build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.i"
 	@echo "... build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.s"

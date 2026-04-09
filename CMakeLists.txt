@@ -25,31 +25,63 @@ qt_add_executable(GradeYourMelody
     core/GridController.cpp
     core/staffLineGrid.h
     core/staffLineGrid.cpp
+    core/questionHandler.cpp
 )
 
 target_include_directories(GradeYourMelody PRIVATE core)
 
-qt_add_resources(GradeYourMelody "app_resources"
-    PREFIX "/"
-    FILES
-        app/Screen01.qml
-        app/NoteSlot.qml
-        app/App.qml
-        app/resources.qrc
-)
+set_source_files_properties(app/App.qml PROPERTIES QT_RESOURCE_ALIAS App.qml)
+set_source_files_properties(app/Screen01.qml PROPERTIES QT_RESOURCE_ALIAS Screen01.qml)
+set_source_files_properties(app/NoteSlot.qml PROPERTIES QT_RESOURCE_ALIAS NoteSlot.qml)
+
+set_source_files_properties("app/images/staff lines 2.png" PROPERTIES QT_RESOURCE_ALIAS "images/staff lines 2.png")
+set_source_files_properties("app/images/title.png" PROPERTIES QT_RESOURCE_ALIAS "images/title.png")
+set_source_files_properties("app/images/note transparent cut.png" PROPERTIES QT_RESOURCE_ALIAS "images/note transparent cut.png")
+set_source_files_properties("app/images/quarternote.png" PROPERTIES QT_RESOURCE_ALIAS "images/quarternote.png")
+set_source_files_properties("app/images/sharpnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/sharpnote.png")
+set_source_files_properties("app/images/notes.png" PROPERTIES QT_RESOURCE_ALIAS "images/notes.png")
+set_source_files_properties("app/images/sheet music.png" PROPERTIES QT_RESOURCE_ALIAS "images/sheet music.png")
+set_source_files_properties("app/images/staff lines with notes.png" PROPERTIES QT_RESOURCE_ALIAS "images/staff lines with notes.png")
+set_source_files_properties("app/images/flatbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/flatbutton.png")
+set_source_files_properties("app/images/naturalbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/naturalbutton.png")
+set_source_files_properties("app/images/sharpbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/sharpbutton.png")
+set_source_files_properties("app/images/gradebutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/gradebutton.png")
+set_source_files_properties("app/images/flatnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/flatnote.png")
+set_source_files_properties("app/images/eighthnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/eighthnote.png")
+set_source_files_properties("app/images/quarterbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/quarterbutton.png")
+set_source_files_properties("app/images/eighthbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/eighthbutton.png")
+
 qt_add_qml_module(GradeYourMelody
     URI GradeYourMelodyUI
     VERSION 1.0
+    RESOURCE_PREFIX /qt/qml
     QML_FILES
         app/App.qml
         app/Screen01.qml
         app/NoteSlot.qml
     RESOURCES
-        app/images/staff\ lines\ 2.png
+        "app/images/staff lines 2.png"
         app/images/title.png
-        app/images/note\ transparent\ cut.png
-        app/images/note\ transparent\ cut.png
+        "app/images/note transparent cut.png"
         app/images/quarternote.png
+        app/images/sharpnote.png
+        app/images/notes.png
+        "app/images/sheet music.png"
+        "app/images/staff lines with notes.png"
+        app/images/flatbutton.png
+        app/images/naturalbutton.png
+        app/images/sharpbutton.png
+        app/images/gradebutton.png
+        app/images/flatnote.png
+        app/images/eighthnote.png
+        app/images/quarterbutton.png
+        app/images/eighthbutton.png
+)
+
+add_custom_command(TARGET GradeYourMelody POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_SOURCE_DIR}/core/questions.csv
+        $<TARGET_FILE_DIR:GradeYourMelody>/questions.csv
 )
 
 target_link_libraries(GradeYourMelody

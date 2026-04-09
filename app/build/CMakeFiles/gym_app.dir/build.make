@@ -103,6 +103,7 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 .rcc/qmlcache/gym_app_qmlcache_loader.cpp: .rcc/qmlcache/gym_app_qml_loader_file_list.rsp
 .rcc/qmlcache/gym_app_qmlcache_loader.cpp: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .rcc/qmlcache/gym_app_qmlcache_loader.cpp: .qt/rcc/gym_app_raw_qml_0.qrc
+.rcc/qmlcache/gym_app_qmlcache_loader.cpp: .qt/rcc/gym_app_raw_res_0.qrc
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating .rcc/qmlcache/gym_app_qmlcache_loader.cpp"
 	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --resource-name qmlcache_gym_app -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp @/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_qml_loader_file_list.rsp
 
@@ -110,11 +111,12 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 .rcc/qmlcache/gym_app_App_qml.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/App.qml
 .rcc/qmlcache/gym_app_App_qml.cpp: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .rcc/qmlcache/gym_app_App_qml.cpp: .qt/rcc/gym_app_raw_qml_0.qrc
+.rcc/qmlcache/gym_app_App_qml.cpp: .qt/rcc/gym_app_raw_res_0.qrc
 .rcc/qmlcache/gym_app_App_qml.cpp: GradeYourMelodyUI/gym_app.qmltypes
 .rcc/qmlcache/gym_app_App_qml.cpp: GradeYourMelodyUI/qmldir
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating .rcc/qmlcache/gym_app_App_qml.cpp, .rcc/qmlcache/gym_app_App_qml.cpp.aotstats"
 	/opt/homebrew/bin/cmake -E make_directory /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache
-	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/App.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_App_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/App.qml
+	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/App.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_App_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/App.qml
 
 .rcc/qmlcache/gym_app_App_qml.cpp.aotstats: .rcc/qmlcache/gym_app_App_qml.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate .rcc/qmlcache/gym_app_App_qml.cpp.aotstats
@@ -123,11 +125,12 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 .rcc/qmlcache/gym_app_NoteSlot_qml.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/NoteSlot.qml
 .rcc/qmlcache/gym_app_NoteSlot_qml.cpp: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .rcc/qmlcache/gym_app_NoteSlot_qml.cpp: .qt/rcc/gym_app_raw_qml_0.qrc
+.rcc/qmlcache/gym_app_NoteSlot_qml.cpp: .qt/rcc/gym_app_raw_res_0.qrc
 .rcc/qmlcache/gym_app_NoteSlot_qml.cpp: GradeYourMelodyUI/gym_app.qmltypes
 .rcc/qmlcache/gym_app_NoteSlot_qml.cpp: GradeYourMelodyUI/qmldir
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating .rcc/qmlcache/gym_app_NoteSlot_qml.cpp, .rcc/qmlcache/gym_app_NoteSlot_qml.cpp.aotstats"
 	/opt/homebrew/bin/cmake -E make_directory /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache
-	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/NoteSlot.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/NoteSlot.qml
+	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/NoteSlot.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/NoteSlot.qml
 
 .rcc/qmlcache/gym_app_NoteSlot_qml.cpp.aotstats: .rcc/qmlcache/gym_app_NoteSlot_qml.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate .rcc/qmlcache/gym_app_NoteSlot_qml.cpp.aotstats
@@ -136,11 +139,12 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 .rcc/qmlcache/gym_app_Screen01_qml.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/Screen01.qml
 .rcc/qmlcache/gym_app_Screen01_qml.cpp: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .rcc/qmlcache/gym_app_Screen01_qml.cpp: .qt/rcc/gym_app_raw_qml_0.qrc
+.rcc/qmlcache/gym_app_Screen01_qml.cpp: .qt/rcc/gym_app_raw_res_0.qrc
 .rcc/qmlcache/gym_app_Screen01_qml.cpp: GradeYourMelodyUI/gym_app.qmltypes
 .rcc/qmlcache/gym_app_Screen01_qml.cpp: GradeYourMelodyUI/qmldir
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating .rcc/qmlcache/gym_app_Screen01_qml.cpp, .rcc/qmlcache/gym_app_Screen01_qml.cpp.aotstats"
 	/opt/homebrew/bin/cmake -E make_directory /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache
-	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/Screen01.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/Screen01.qml
+	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/Screen01.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/Screen01.qml
 
 .rcc/qmlcache/gym_app_Screen01_qml.cpp.aotstats: .rcc/qmlcache/gym_app_Screen01_qml.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate .rcc/qmlcache/gym_app_Screen01_qml.cpp.aotstats
@@ -149,11 +153,12 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/Constants.qml
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp: .qt/rcc/gym_app_raw_qml_0.qrc
+.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp: .qt/rcc/gym_app_raw_res_0.qrc
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp: GradeYourMelodyUI/gym_app.qmltypes
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp: GradeYourMelodyUI/qmldir
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp, .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.aotstats"
 	/opt/homebrew/bin/cmake -E make_directory /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI
-	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/Constants.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/Constants.qml
+	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/Constants.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/Constants.qml
 
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.aotstats: .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.aotstats
@@ -162,11 +167,12 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListModel.qml
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp: .qt/rcc/gym_app_raw_qml_0.qrc
+.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp: .qt/rcc/gym_app_raw_res_0.qrc
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp: GradeYourMelodyUI/gym_app.qmltypes
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp: GradeYourMelodyUI/qmldir
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp, .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.aotstats"
 	/opt/homebrew/bin/cmake -E make_directory /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI
-	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListModel.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListModel.qml
+	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListModel.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListModel.qml
 
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.aotstats: .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.aotstats
@@ -175,11 +181,12 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListSimulator.qml
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp: .qt/rcc/gym_app_raw_qml_0.qrc
+.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp: .qt/rcc/gym_app_raw_res_0.qrc
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp: GradeYourMelodyUI/gym_app.qmltypes
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp: GradeYourMelodyUI/qmldir
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp, .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.aotstats"
 	/opt/homebrew/bin/cmake -E make_directory /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI
-	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListSimulator.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListSimulator.qml
+	/opt/homebrew/opt/qt/share/qt/libexec/qmlcachegen --bare --resource-path /qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListSimulator.qml -I /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build -I /opt/homebrew/opt/qt/share/qt/qml -i /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/GradeYourMelodyUI/qmldir --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qmake_GradeYourMelodyUI.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc --resource /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc --dump-aot-stats "--module-id=GradeYourMelodyUI(gym_app)" -o /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/EventListSimulator.qml
 
 .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.aotstats: .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.aotstats
@@ -195,19 +202,33 @@ GradeYourMelodyUI/gym_app.qmltypes: gym_app_qmltyperegistrations.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Running rcc for resource gym_app_raw_qml_0"
 	/opt/homebrew/opt/qt/share/qt/libexec/rcc --output /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp --name gym_app_raw_qml_0 /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_qml_0.qrc
 
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/quarternote.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/note\ transparent\ cut.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/staff\ lines\ 2.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/title.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/sheet\ music.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/sharpnote.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/notes.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/staff\ lines\ with\ notes.png
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/qmldir
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: .qt/rcc/gym_app_raw_res_0.qrc
+.qt/rcc/qrc_gym_app_raw_res_0.cpp: /opt/homebrew/opt/qt/share/qt/libexec/rcc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Running rcc for resource gym_app_raw_res_0"
+	/opt/homebrew/opt/qt/share/qt/libexec/rcc --output /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp --name gym_app_raw_res_0 /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/gym_app_raw_res_0.qrc
+
 gym_app_autogen/timestamp: /opt/homebrew/opt/qt/share/qt/libexec/moc
 gym_app_autogen/timestamp: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Automatic MOC for target gym_app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Automatic MOC for target gym_app"
 	/opt/homebrew/bin/cmake -E cmake_autogen /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles/gym_app_autogen.dir/AutogenInfo.json ""
 	/opt/homebrew/bin/cmake -E touch /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/gym_app_autogen/timestamp
 
 meta_types/gym_app_json_file_list.txt: /opt/homebrew/opt/qt/share/qt/libexec/cmake_automoc_parser
 meta_types/gym_app_json_file_list.txt: gym_app_autogen/timestamp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Running AUTOMOC file extraction for target gym_app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Running AUTOMOC file extraction for target gym_app"
 	/opt/homebrew/opt/qt/share/qt/libexec/cmake_automoc_parser --cmake-autogen-cache-file /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles/gym_app_autogen.dir/ParseCache.txt --cmake-autogen-info-file /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles/gym_app_autogen.dir/AutogenInfo.json --output-file-path /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/meta_types/gym_app_json_file_list.txt --timestamp-file-path /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/meta_types/gym_app_json_file_list.txt.timestamp --cmake-autogen-include-dir-path /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/gym_app_autogen/include
 
 meta_types/qt6gym_app_metatypes.json: meta_types/qt6gym_app_metatypes.json.gen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating meta_types/qt6gym_app_metatypes.json"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Generating meta_types/qt6gym_app_metatypes.json"
 	/opt/homebrew/bin/cmake -E true
 
 CMakeFiles/gym_app.dir/codegen:
@@ -216,7 +237,7 @@ CMakeFiles/gym_app.dir/codegen:
 CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o: gym_app_autogen/mocs_compilation.cpp
 CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o -MF CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/gym_app_autogen/mocs_compilation.cpp
 
 CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.i: cmake_force
@@ -230,7 +251,7 @@ CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.s: cmake_force
 CMakeFiles/gym_app.dir/main.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/main.cpp.o: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/main.cpp
 CMakeFiles/gym_app.dir/main.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/gym_app.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/gym_app.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/main.cpp.o -MF CMakeFiles/gym_app.dir/main.cpp.o.d -o CMakeFiles/gym_app.dir/main.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/main.cpp
 
 CMakeFiles/gym_app.dir/main.cpp.i: cmake_force
@@ -241,10 +262,38 @@ CMakeFiles/gym_app.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gym_app.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/main.cpp -o CMakeFiles/gym_app.dir/main.cpp.s
 
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o: CMakeFiles/gym_app.dir/flags.make
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o -MF CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o.d -o CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp
+
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp > CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.i
+
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp -o CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.s
+
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o: CMakeFiles/gym_app.dir/flags.make
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o -MF CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o.d -o CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp
+
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp > CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.i
+
+CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp -o CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.s
+
 CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o: gym_app_qmltyperegistrations.cpp
 CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o -MF CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o.d -o CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/gym_app_qmltyperegistrations.cpp
 
 CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.i: cmake_force
@@ -258,7 +307,7 @@ CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.s: cmake_force
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o: .qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o -MF CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o.d -o CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp
 
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.i: cmake_force
@@ -272,7 +321,7 @@ CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.s: cmake_fo
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o: .rcc/qmlcache/gym_app_qmlcache_loader.cpp
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o -MF CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o.d -o CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp
 
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.i: cmake_force
@@ -286,7 +335,7 @@ CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.s: cmake_
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o: .rcc/qmlcache/gym_app_App_qml.cpp
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o -MF CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o.d -o CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_App_qml.cpp
 
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.i: cmake_force
@@ -300,7 +349,7 @@ CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.s: cmake_force
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o: .rcc/qmlcache/gym_app_NoteSlot_qml.cpp
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o -MF CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o.d -o CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp
 
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.i: cmake_force
@@ -314,7 +363,7 @@ CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_NoteSlot_qml.cpp.s: cmake_for
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o: .rcc/qmlcache/gym_app_Screen01_qml.cpp
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o -MF CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o.d -o CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp
 
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.i: cmake_force
@@ -328,7 +377,7 @@ CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_Screen01_qml.cpp.s: cmake_for
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o: .rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o -MF CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o.d -o CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp
 
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.i: cmake_force
@@ -342,7 +391,7 @@ CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_q
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o: .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o -MF CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o.d -o CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp
 
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.i: cmake_force
@@ -356,7 +405,7 @@ CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListMo
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o: .rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o -MF CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o.d -o CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp
 
 CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.i: cmake_force
@@ -370,7 +419,7 @@ CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSi
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o: CMakeFiles/gym_app.dir/flags.make
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o: .qt/rcc/qrc_gym_app_raw_qml_0.cpp
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o -MF CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o.d -o CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp
 
 CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.i: cmake_force
@@ -381,10 +430,26 @@ CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp -o CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.s
 
+CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o: CMakeFiles/gym_app.dir/flags.make
+CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o: .qt/rcc/qrc_gym_app_raw_res_0.cpp
+CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o: CMakeFiles/gym_app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o -MF CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o.d -o CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o -c /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp
+
+CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp > CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.i
+
+CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp -o CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.s
+
 # Object files for target gym_app
 gym_app_OBJECTS = \
 "CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/gym_app.dir/main.cpp.o" \
+"CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o" \
+"CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o" \
 "CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o" \
 "CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o" \
 "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o" \
@@ -394,13 +459,16 @@ gym_app_OBJECTS = \
 "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o" \
 "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o" \
 "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o" \
-"CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o"
+"CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o" \
+"CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o"
 
 # External object files for target gym_app
 gym_app_EXTERNAL_OBJECTS =
 
 gym_app: CMakeFiles/gym_app.dir/gym_app_autogen/mocs_compilation.cpp.o
 gym_app: CMakeFiles/gym_app.dir/main.cpp.o
+gym_app: CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o
+gym_app: CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o
 gym_app: CMakeFiles/gym_app.dir/gym_app_qmltyperegistrations.cpp.o
 gym_app: CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o
 gym_app: CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_qmlcache_loader.cpp.o
@@ -411,6 +479,7 @@ gym_app: CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Co
 gym_app: CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListModel_qml.cpp.o
 gym_app: CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/EventListSimulator_qml.cpp.o
 gym_app: CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o
+gym_app: CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o
 gym_app: CMakeFiles/gym_app.dir/build.make
 gym_app: /opt/homebrew/opt/qt/lib/QtWidgets.framework/Versions/A/QtWidgets
 gym_app: /opt/homebrew/opt/qt/lib/QtQuick.framework/Versions/A/QtQuick
@@ -420,7 +489,7 @@ gym_app: /opt/homebrew/opt/qt/lib/QtQml.framework/Versions/A/QtQml
 gym_app: /opt/homebrew/opt/qt/lib/QtNetwork.framework/Versions/A/QtNetwork
 gym_app: /opt/homebrew/opt/qt/lib/QtCore.framework/Versions/A/QtCore
 gym_app: CMakeFiles/gym_app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Linking CXX executable gym_app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking CXX executable gym_app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gym_app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -432,6 +501,7 @@ CMakeFiles/gym_app.dir/clean:
 .PHONY : CMakeFiles/gym_app.dir/clean
 
 CMakeFiles/gym_app.dir/depend: .qt/rcc/qrc_gym_app_raw_qml_0.cpp
+CMakeFiles/gym_app.dir/depend: .qt/rcc/qrc_gym_app_raw_res_0.cpp
 CMakeFiles/gym_app.dir/depend: .qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp
 CMakeFiles/gym_app.dir/depend: .rcc/qmlcache/gym_app_App_qml.cpp
 CMakeFiles/gym_app.dir/depend: .rcc/qmlcache/gym_app_App_qml.cpp.aotstats
