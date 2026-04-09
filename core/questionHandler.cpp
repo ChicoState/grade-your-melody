@@ -81,7 +81,7 @@ void QuestionHandler::ReadCSV(){
 
         getline(ss, cell, ',');
         stringstream cs(cell); //Cell stream
-
+        
         string noteHolder;
 
         //Get answer key
@@ -89,7 +89,9 @@ void QuestionHandler::ReadCSV(){
                  
                 if (noteHolder.front() == '(') noteHolder.erase(0, 1);
                 if (noteHolder.back() == ')') noteHolder.pop_back();
+                
 
+                //Format of notes expected is (Beat-Row-Accent) (Beat-Row-Accent)...
 
                 NoteInfo note;
                 stringstream ns(noteHolder);
