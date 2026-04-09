@@ -25,6 +25,7 @@ qt_add_executable(GradeYourMelody
     core/GridController.cpp
     core/staffLineGrid.h
     core/staffLineGrid.cpp
+    core/questionHandler.cpp
 )
 
 target_include_directories(GradeYourMelody PRIVATE core)
@@ -46,6 +47,9 @@ set_source_files_properties("app/images/naturalbutton.png" PROPERTIES QT_RESOURC
 set_source_files_properties("app/images/sharpbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/sharpbutton.png")
 set_source_files_properties("app/images/gradebutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/gradebutton.png")
 set_source_files_properties("app/images/flatnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/flatnote.png")
+set_source_files_properties("app/images/eighthnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/eighthnote.png")
+set_source_files_properties("app/images/quarterbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/quarterbutton.png")
+set_source_files_properties("app/images/eighthbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/eighthbutton.png")
 
 qt_add_qml_module(GradeYourMelody
     URI GradeYourMelodyUI
@@ -69,6 +73,15 @@ qt_add_qml_module(GradeYourMelody
         app/images/sharpbutton.png
         app/images/gradebutton.png
         app/images/flatnote.png
+        app/images/eighthnote.png
+        app/images/quarterbutton.png
+        app/images/eighthbutton.png
+)
+
+add_custom_command(TARGET GradeYourMelody POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_SOURCE_DIR}/core/questions.csv
+        $<TARGET_FILE_DIR:GradeYourMelody>/questions.csv
 )
 
 target_link_libraries(GradeYourMelody

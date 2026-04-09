@@ -10,7 +10,7 @@ Summary: Data based grid of the staff lines. Currently handles if a note is at
 #include <memory>
 
 //Used for easy resizing
-#define columnsNum 16
+#define columnsNum 32
 #define rowsNum 9 //36 slots 4 beats per measure
 
 struct Note {

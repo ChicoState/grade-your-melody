@@ -10,6 +10,7 @@ Rectangle {
     property int beat: -1
     property int row: -1 
     property int currentAcc: 0
+    property int currentNoteLength: 1
     property bool selected: false
     
     Image {
@@ -41,18 +42,22 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
         onEntered: {
-            if (root.state != "clicked" && !rectangle.occupiedBeats[beat]) {
+            if (root.state != "clicked") {
+                // Don't show hover ghost if quarter note can't be placed here
+                if (currentNoteLength === 2 && beat % 2 !== 0) return
                 root.state = "hovered"
             }
         }
         onExited: if (root.state != "clicked") root.state = ""
         onPressed: {
-            if(!gridController) return 
+            if(!gridController) return
             if (selected) {
                 gridController.clearBeat(beat)
             } else  {
-                console.log("clicked beat", beat, "row", row, "acc", currentAcc)
-                gridController.setNote(beat, row, currentAcc)
+                // Quarter notes (length 2) can only go on even beats (main beats)
+                if (currentNoteLength === 2 && beat % 2 !== 0) return
+                console.log("clicked beat", beat, "row", row, "acc", currentAcc, "len", currentNoteLength)
+                gridController.setNote(beat, row, currentAcc, currentNoteLength)
             }
         }
     }
@@ -61,20 +66,34 @@ Rectangle {
         target: gridController
         function onBeatChanged(changedBeat) {
             if (changedBeat === beat && gridController) {
-                selected = gridController.hasNote(beat, row)
+                var len = gridController.noteLengthForBeat(beat)
+                var hasNoteHere = gridController.hasNote(beat, row)
+
+                // Only show on note start beats (len > 0), not continuations
+                selected = hasNoteHere && len > 0
                 if (selected) {
                     var acc = gridController.accidentalForBeat(beat)
-                    if (acc === 1) {
+
+                    if (len === 1) {
+                        placenote.source = "images/eighthnote.png"
+                        placenote.x = -20
+                        placenote.width = 92
+                        placenote.height = 91
+                    } else if (acc === 1) {
                         placenote.source = "images/sharpnote.png"
                         placenote.x = -43
-                    }
-                    else if (acc === -1) {
-                        placenote.source = Qt.resolvedUrl("images/flatnote.png")
+                        placenote.width = 98
+                        placenote.height = 96
+                    } else if (acc === -1) {
+                        placenote.source = "images/flatnote.png"
                         placenote.x = -43
-                    }
-                    else {
+                        placenote.width = 98
+                        placenote.height = 96
+                    } else {
                         placenote.source = "images/quarternote.png"
                         placenote.x = -28
+                        placenote.width = 98
+                        placenote.height = 96
                     }
                 }
             }
