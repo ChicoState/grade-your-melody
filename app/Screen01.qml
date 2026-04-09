@@ -122,7 +122,7 @@ Text{
 Connections {
     target: gridController
 
-    onBenchmarkFinished: function(result) {
+    function onBenchmarkFinished(result) {
     benchmarkText.text = result
     }
 }

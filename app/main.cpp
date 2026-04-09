@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
     
     //Load Questions
     controller.loadQuestion(1);
-    std::cout << "PROGRAM STARTED" << std::endl;
     std::cout << "Initial score = " << controller.score() << std::endl;
     // Example: set the correct answer (you can do this elsewhere too)
     //controller.setExpectedRow(0, 4);
@@ -30,13 +29,12 @@ int main(int argc, char *argv[])
 //}
 
     const QUrl url(u"qrc:/app/App.qml"_qs);
+    
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl) QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-qDebug() << "exists :/App.qml =" << QFile(":/App.qml").exists();
-qDebug() << "exists :/app/App.qml =" << QFile(":/app/App.qml").exists();
     engine.load(url);
 
     return app.exec();
