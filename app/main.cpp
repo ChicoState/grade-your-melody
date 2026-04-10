@@ -42,8 +42,8 @@ int main(int argc, char *argv[])
     QuestionHandler qh;
     Question q = qh.GetQuestion(1);
     engine.rootContext()->setContextProperty("questionText", QString::fromStdString(q.questionText));
-    //Mac implemenation: const QUrl url(u"qrc:/qt/qml/GradeYourMelodyUI/App.qml"_qs);
-    const QUrl url(u"qrc:/app/App.qml"_qs);
+    const QUrl url(u"qrc:/qt/qml/GradeYourMelodyUI/App.qml"_qs);
+    //const QUrl url(u"qrc:/app/App.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl) QCoreApplication::exit(-1);
