@@ -4,7 +4,7 @@ import QtQuick
 
 Rectangle {
     id: root
-    width: 45
+    width: 60
     height: 35
     color: "#00000000"
     property int beat: -1
@@ -12,6 +12,8 @@ Rectangle {
     property int currentAcc: 0
     property int currentNoteLength: 1
     property bool selected: false
+    property var wrongBeats: []
+    property bool hasGraded: false
     
     Image {
         id: hovernote
@@ -36,6 +38,15 @@ Rectangle {
         Behavior on opacity {
             NumberAnimation { duration: 150 }
         }
+    }
+    Image {
+        id: wrongMark
+        source: "images/redx.png"
+        width: 25
+        height: 25
+        visible: hasGraded && selected && !gridController.isBeatCorrect(beat)
+        x: 5
+        y: 2
     }
 
     MouseArea {

@@ -34,9 +34,6 @@ int main(int argc, char *argv[])
 
    
     
-    for (int i = 0; i < 32; i++) {
-        controller.setExpectedRow(i, 4, -1, 1);
-    }
 
     // TODO: hardcoded to question 1 for demo — replace with dynamic question selection from UI
     QuestionHandler qh;

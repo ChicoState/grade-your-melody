@@ -14,7 +14,7 @@ Rectangle {
     //32 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     property int currentAcc: 0 // -1 flat, +1 sharp 
-    property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note
+    property int currentNoteLength: 2 // 1 = eighth note, 2 = quarter note
     property int currentScore: 0
     property var wrongBeats: []
     property bool hasGraded: false // false not-graded, true graded
@@ -38,6 +38,8 @@ Rectangle {
         Repeater {
             model: 72
             NoteSlot {
+                wrongBeats: rectangle.wrongBeats
+                hasGraded: rectangle.hasGraded
                 x: 276 + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: index % 8
@@ -50,6 +52,8 @@ Rectangle {
         Repeater {
             model: 72
             NoteSlot {
+                wrongBeats: rectangle.wrongBeats
+                hasGraded: rectangle.hasGraded
                 x: 276 + (324 + 50) + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
@@ -62,6 +66,8 @@ Rectangle {
         Repeater {
             model: 72
             NoteSlot {
+                wrongBeats: rectangle.wrongBeats
+                hasGraded: rectangle.hasGraded
                 x: 276 + (648 + 125) + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: 16 + (index % 8)
@@ -74,6 +80,8 @@ Rectangle {
         Repeater {
             model: 72
             NoteSlot {
+                wrongBeats: rectangle.wrongBeats
+                hasGraded: rectangle.hasGraded
                 x: 276 + (972 + 200) + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: 24 + (index % 8)
@@ -93,88 +101,102 @@ Rectangle {
         source: "images/title.png"
         fillMode: Image.PreserveAspectFit
     }
-
-Column {
-    spacing: 20
-    anchors.horizontalCenter: parent.horizontalCenter
-    anchors.top: staffLines2.bottom
-    anchors.topMargin: -20
+    //Score Text
     Text {
-        text: questionText
+        x: 1650
+        y: 400
+        text: hasGraded ? "Score: " + currentScore + "/" + gridController.totalExpected() : ""
         font.pixelSize: 28
-        leftPadding: 30
         color: "black"
     }
-    Image {
-        source: "images/gradebutton.png"
-        fillMode: Image.PreserveAspectFit
-        height: 40
-        x: 20
-        opacity: rectangle.hasGraded === true ? 0.6 : 1.0
-        MouseArea {
-            anchors.fill: parent
-            onClicked: rectangle.hasGraded = !rectangle.hasGraded
+    // Bottom Buttons
+    Column {
+        spacing: 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: staffLines2.bottom
+        anchors.topMargin: -20
+        Text {
+            text: questionText
+            font.pixelSize: 28
+            leftPadding: 30
+            color: "black"
         }
-    }
-    Row {
-        spacing: 10
+        Image {
+            source: "images/gradebutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            x: 20
+            opacity: gradeArea.pressed ? 0.6 : 1.0
+            MouseArea {
+                id: gradeArea
+                anchors.fill: parent
+                onClicked: {
+                    currentScore = gridController.score()
+                    wrongBeats = gridController.incorrectBeats()
+                    rectangle.hasGraded = !rectangle.hasGraded
+                }
+            }
+        }
+        Row {
+            spacing: 10
 
-        Image {
-            source: "images/flatbutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
-            opacity: rectangle.currentAcc === -1 ? 0.6 : 1.0
-            MouseArea {
-                anchors.fill: parent
-                onClicked: rectangle.currentAcc = -1
+            Image {
+                source: "images/flatbutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentAcc === -1 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentAcc = -1
+                }
+            }
+            Image {
+                source: "images/naturalbutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentAcc === 0 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentAcc = 0
+                }
+            }
+            Image {
+                source: "images/sharpbutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentAcc === 1 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentAcc = 1
+                }
             }
         }
-        Image {
-            source: "images/naturalbutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
-            opacity: rectangle.currentAcc === 0 ? 0.6 : 1.0
-            MouseArea {
-                anchors.fill: parent
-                onClicked: rectangle.currentAcc = 0
+        Row {
+            spacing: 10
+            x: 35
+            Image {
+                source: "images/quarterbutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentNoteLength === 2 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentNoteLength = 2
+                }
+            }
+            Image {
+                source: "images/eighthbutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentNoteLength = 1
+                }
             }
         }
-        Image {
-            source: "images/sharpbutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
-            opacity: rectangle.currentAcc === 1 ? 0.6 : 1.0
-            MouseArea {
-                anchors.fill: parent
-                onClicked: rectangle.currentAcc = 1
-            }
-        }
+
     }
-    Row {
-        spacing: 10
-        x: 35
-        Image {
-            source: "images/quarterbutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
-            opacity: rectangle.currentNoteLength === 2 ? 0.6 : 1.0
-            MouseArea {
-                anchors.fill: parent
-                onClicked: rectangle.currentNoteLength = 2
-            }
-        }
-        Image {
-            source: "images/eighthbutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
-            opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
-            MouseArea {
-                anchors.fill: parent
-                onClicked: rectangle.currentNoteLength = 1
-            }
-        }
-    }
-}
 
 
 
