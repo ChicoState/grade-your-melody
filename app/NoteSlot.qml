@@ -39,14 +39,17 @@ Rectangle {
             NumberAnimation { duration: 150 }
         }
     }
-    Image {
+    AnimatedImage {
         id: wrongMark
-        source: "images/redx.png"
-        width: 25
-        height: 25
+        source: "images/redx.gif"
+        width: 27
+        height: 27
         visible: hasGraded && selected && !gridController.isBeatCorrect(beat)
+        playing: visible
+        cache: false
+        speed: 2
         x: 5
-        y: 2
+        y: 3
     }
 
     MouseArea {

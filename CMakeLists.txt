@@ -55,7 +55,7 @@ set_source_files_properties("app/images/flatnote.png" PROPERTIES QT_RESOURCE_ALI
 set_source_files_properties("app/images/eighthnote.png" PROPERTIES QT_RESOURCE_ALIAS "images/eighthnote.png")
 set_source_files_properties("app/images/quarterbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/quarterbutton.png")
 set_source_files_properties("app/images/eighthbutton.png" PROPERTIES QT_RESOURCE_ALIAS "images/eighthbutton.png")
-set_source_files_properties("app/images/redx.png" PROPERTIES QT_RESOURCE_ALIAS "images/redx.png")
+set_source_files_properties("app/images/redx.gif" PROPERTIES QT_RESOURCE_ALIAS "images/redx.gif")
 
 qt_add_qml_module(GradeYourMelody
     URI GradeYourMelodyUI
@@ -82,7 +82,7 @@ qt_add_qml_module(GradeYourMelody
         app/images/eighthnote.png
         app/images/quarterbutton.png
         app/images/eighthbutton.png
-        app/images/redx.png
+        app/images/redx.gif
 )
 
 add_custom_command(TARGET GradeYourMelody POST_BUILD

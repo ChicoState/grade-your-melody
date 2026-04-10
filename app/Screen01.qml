@@ -104,7 +104,7 @@ Rectangle {
     //Score Text
     Text {
         x: 1650
-        y: 400
+        y: 380
         text: hasGraded ? "Score: " + currentScore + "/" + gridController.totalExpected() : ""
         font.pixelSize: 28
         color: "black"
