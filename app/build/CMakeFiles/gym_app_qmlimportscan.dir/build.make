@@ -71,6 +71,7 @@ CMakeFiles/gym_app_qmlimportscan: .qt/qml_imports/gym_app_build.cmake
 .qt/qml_imports/gym_app_build.cmake: /opt/homebrew/opt/qt/share/qt/libexec/qmlimportscanner
 .qt/qml_imports/gym_app_build.cmake: .qt/rcc/qmake_GradeYourMelodyUI.qrc
 .qt/qml_imports/gym_app_build.cmake: .qt/rcc/gym_app_raw_qml_0.qrc
+.qt/qml_imports/gym_app_build.cmake: .qt/rcc/gym_app_raw_res_0.qrc
 .qt/qml_imports/gym_app_build.cmake: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/App.qml
 .qt/qml_imports/gym_app_build.cmake: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/NoteSlot.qml
 .qt/qml_imports/gym_app_build.cmake: /Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/Screen01.qml

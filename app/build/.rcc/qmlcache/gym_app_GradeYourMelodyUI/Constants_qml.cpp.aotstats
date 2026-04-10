@@ -10,7 +10,7 @@
                             "column": 34,
                             "durationMicroseconds": 0,
                             "functionName": "font",
-                            "line": 12,
+                            "line": 7,
                             "message": "Cannot load property font from QtObject::application with type QQmlApplication."
                         },
                         {
@@ -18,16 +18,8 @@
                             "column": 39,
                             "durationMicroseconds": 0,
                             "functionName": "largeFont",
-                            "line": 16,
+                            "line": 11,
                             "message": "Cannot load property font from QtObject::application with type QQmlApplication."
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 19,
-                            "durationMicroseconds": 0,
-                            "functionName": "fontPath",
-                            "line": 25,
-                            "message": "Could not find property \"fontPath\"."
                         }
                     ],
                     "filePath": "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/Constants.qml"

@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="/qt/qml/GradeYourMelodyUI/">
+    <file alias="images/quarternote.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/quarternote.png</file>
+    <file alias="images/note transparent cut.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/note transparent cut.png</file>
+    <file alias="images/staff lines 2.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/staff lines 2.png</file>
+    <file alias="images/title.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/title.png</file>
+    <file alias="images/sheet music.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/sheet music.png</file>
+    <file alias="images/sharpnote.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/sharpnote.png</file>
+    <file alias="images/notes.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/notes.png</file>
+    <file alias="images/staff lines with notes.png">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/images/staff lines with notes.png</file>
+    <file alias="GradeYourMelodyUI/qmldir">/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/GradeYourMelodyUI/qmldir</file>
+  </qresource>
+</RCC>
+

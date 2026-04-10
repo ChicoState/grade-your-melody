@@ -9,7 +9,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "" "gym_app_autogen/timestamp" "custom" "gym_app_autogen/deps"
+  "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp" "CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o" "gcc" "CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/GridController.cpp.o.d"
+  "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp" "CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o" "gcc" "CMakeFiles/gym_app.dir/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/core/staffLineGrid.cpp.o.d"
   "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp" "CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o" "gcc" "CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_qml_0.cpp.o.d"
+  "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp" "CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o" "gcc" "CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_gym_app_raw_res_0.cpp.o.d"
   "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp" "CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o" "gcc" "CMakeFiles/gym_app.dir/build/.qt/rcc/qrc_qmake_GradeYourMelodyUI.cpp.o.d"
   "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_App_qml.cpp" "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o" "gcc" "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_App_qml.cpp.o.d"
   "/Users/garrettmeyer/Documents/SoftwareEng/grade-your-melody/app/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp" "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o" "gcc" "CMakeFiles/gym_app.dir/build/.rcc/qmlcache/gym_app_GradeYourMelodyUI/Constants_qml.cpp.o.d"
