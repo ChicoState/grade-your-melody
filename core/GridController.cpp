@@ -1,15 +1,18 @@
 #include "GridController.h"
 #include <QVariantList>
-
+#include <QDebug>
+#include <QString>
+#include <iostream>
+#include <chrono>
+#include <random>
 GridController::GridController(QObject *parent)
     : QObject(parent)
 {
     // Default: expect empty on every beat
     expectedRow.fill(-1);
-    
 
     expectedAccidental.fill(0);
-    userAccidental.fill(0);
+    userAccidental.fill(0);    
     userLength.fill(0);
     expectedLength.fill(0);
     // Example answer (change these to your melody):
@@ -105,4 +108,86 @@ int GridController::score() const {
         if (isBeatCorrect(b)) ++s;
     }
     return s;
+}
+
+void GridController::runMillion() {
+    
+     int melodyCount = 10000000; // do NOT try above 10,000,000 unless you hate your WSL instance
+     
+     int beatsPerMelody = StaffLineGrid::columns;
+    
+     int rows = StaffLineGrid::rows;
+    
+
+    int randomRow = rand() % rows; //random place in the melody row
+    int randomAcc = (rand() % 3) - 1; // -1, 0, 1
+
+
+    int perfectMatches = 0;
+    long long totalCorrectBeats = 0;
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int m = 0; m < melodyCount; ++m) {
+        int correctBeats = 0;
+        for (int b = 0; b < beatsPerMelody; ++b) {
+            int randomRow = rand() % rows;
+            int randomAcc = (rand() % 3) -1;
+
+            if (randomRow == expectedRow[b] &&
+                randomAcc == expectedAccidental[b]) {
+                ++correctBeats; }}
+
+        totalCorrectBeats += correctBeats;
+
+        if (correctBeats == beatsPerMelody) {
+            ++perfectMatches;
+        }
+    }
+    //clock mat
+    auto end = std::chrono::high_resolution_clock::now();
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    
+    double melodiesPerSecond = (melodyCount * 1000.0) / ms;
+    
+    QString result =
+    "melodies: " + QString::number(melodyCount) + "\n" +
+    "time: " + QString::number(ms) + " ms\n" +
+    "melodies per second (MPS): " + QString::number(melodiesPerSecond, 'f', 0) +
+    
+    " perfect melodies:" + QString::number(perfectMatches) + "\n" +
+    
+    "amount of beats correct:" + QString::number(totalCorrectBeats);
+
+    emit benchmarkFinished(result);    
+}
+
+
+void GridController::loadQuestion(int questionNum) {
+    // reset expected answers to empty
+    expectedRow.fill(-1);
+    expectedAccidental.fill(0);    
+
+    Question q = questionHandler.GetQuestion(questionNum);
+    //debug question logic
+    //for (const NoteInfo& note : q.notes) 
+    //{
+     //   qDebug() << "Beat:" << note.beat
+       //         << "Row:" << note.row
+         //       << "Acc:" << note.accent;
+
+    //}
+    
+    // copy notes from question vector into arrays
+    for (const NoteInfo& note : q.notes) { if (note.beat >= 0 && note.beat < StaffLineGrid::columns && note.row >= 0 && note.row < StaffLineGrid::rows) {        
+            expectedRow[note.beat] = note.row;
+            expectedAccidental[note.beat] = note.accent;
+        }
+    }
+    // notify QML/UI that everything changed
+    // if we do not do this everytiime we load a question the ui will knot know to look for a new question. definitions in .h
+    for (int b = 0; b < StaffLineGrid::columns; ++b) {
+        emit expectedChanged(b); 
+        emit beatChanged(b);
+    }
 }

@@ -1,6 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QResource>
+#include <QFile>
+#include <QDebug>
+#include <iostream>
+
 #include "GridController.h"
 #include "questionHandler.h"
 
@@ -13,12 +18,22 @@ int main(int argc, char *argv[])
 
     GridController controller;
     engine.rootContext()->setContextProperty("gridController", &controller);
-
+    
+    //Load Questions
+    controller.loadQuestion(1);
+    std::cout << "Initial score = " << controller.score() << std::endl;
     // Example: set the correct answer (you can do this elsewhere too)
     //controller.setExpectedRow(0, 4);
     //controller.setExpectedRow(1, 4);
     //controller.setExpectedRow(2, 5);
     //controller.setExpectedRow(3, 4);
+   // for (int i = 0; i < 16; i++) {
+    //controller.setExpectedRow(i, 4, -1);
+    
+//}
+
+   
+    
     for (int i = 0; i < 32; i++) {
         controller.setExpectedRow(i, 4, -1, 1);
     }
@@ -27,7 +42,8 @@ int main(int argc, char *argv[])
     QuestionHandler qh;
     Question q = qh.GetQuestion(1);
     engine.rootContext()->setContextProperty("questionText", QString::fromStdString(q.questionText));
-    const QUrl url(u"qrc:/qt/qml/GradeYourMelodyUI/App.qml"_qs);
+    //Mac implemenation: const QUrl url(u"qrc:/qt/qml/GradeYourMelodyUI/App.qml"_qs);
+    const QUrl url(u"qrc:/app/App.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl) QCoreApplication::exit(-1);

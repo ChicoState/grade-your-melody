@@ -28,6 +28,11 @@ qt_add_executable(GradeYourMelody
     core/questionHandler.cpp
 )
 
+configure_file(${CMAKE_SOURCE_DIR}/core/questions.csv
+               ${CMAKE_BINARY_DIR}/questions.csv
+               COPYONLY)
+
+
 target_include_directories(GradeYourMelody PRIVATE core)
 
 set_source_files_properties(app/App.qml PROPERTIES QT_RESOURCE_ALIAS App.qml)

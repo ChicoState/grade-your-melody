@@ -11,11 +11,14 @@ Rectangle {
     height: 1100
     color: "#EAEAEA"
     clip: true
-    //32 eighth-note slots (8 per measure × 4 measures)
-    property int currentAcc: 0 // -1 flat, +1 sharp
+    //32 beats
+    property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+    property int currentAcc: 0 // -1 flat, +1 sharp 
     property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note
-    property bool grade: false // false not-graded, true graded
-   onCurrentAccChanged: console.log("currentAcc now", currentAcc) 
+    property int currentScore: 0
+    property var wrongBeats: []
+    property bool hasGraded: false // false not-graded, true graded
+    onCurrentAccChanged: console.log("currentAcc now", currentAcc) 
     Image {
         id: staffLines2
         x: 53
@@ -96,7 +99,6 @@ Column {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: staffLines2.bottom
     anchors.topMargin: -20
-
     Text {
         text: questionText
         font.pixelSize: 28
@@ -108,13 +110,12 @@ Column {
         fillMode: Image.PreserveAspectFit
         height: 40
         x: 20
-        opacity: rectangle.grade === true ? 0.6 : 1.0
+        opacity: rectangle.hasGraded === true ? 0.6 : 1.0
         MouseArea {
             anchors.fill: parent
-            onClicked: rectangle.grade = !rectangle.grade
+            onClicked: rectangle.hasGraded = !rectangle.hasGraded
         }
     }
-
     Row {
         spacing: 10
 
@@ -149,7 +150,6 @@ Column {
             }
         }
     }
-
     Row {
         spacing: 10
         x: 35
