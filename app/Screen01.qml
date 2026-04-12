@@ -17,7 +17,7 @@ Rectangle {
     property int currentNoteLength: 2 // 1 = eighth note, 2 = quarter note
     property int currentScore: 0
     property var wrongBeats: []
-    property bool hasGraded: false // false not-graded, true graded
+    property int gradeCount: 0 // increments each time grade is clicked
     onCurrentAccChanged: console.log("currentAcc now", currentAcc) 
     Image {
         id: staffLines2
@@ -39,7 +39,7 @@ Rectangle {
             model: 72
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
-                hasGraded: rectangle.hasGraded
+                gradeCount: rectangle.gradeCount
                 x: 276 + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: index % 8
@@ -53,7 +53,7 @@ Rectangle {
             model: 72
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
-                hasGraded: rectangle.hasGraded
+                gradeCount: rectangle.gradeCount
                 x: 276 + (324 + 50) + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
@@ -67,7 +67,7 @@ Rectangle {
             model: 72
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
-                hasGraded: rectangle.hasGraded
+                gradeCount: rectangle.gradeCount
                 x: 276 + (648 + 125) + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: 16 + (index % 8)
@@ -81,7 +81,7 @@ Rectangle {
             model: 72
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
-                hasGraded: rectangle.hasGraded
+                gradeCount: rectangle.gradeCount
                 x: 276 + (972 + 200) + (index % 8) * 40
                 y: 616 - Math.floor(index / 8) * 25
                 beat: 24 + (index % 8)
@@ -105,7 +105,7 @@ Rectangle {
     Text {
         x: 1650
         y: 380
-        text: hasGraded ? "Score: " + currentScore + "/" + gridController.totalExpected() : ""
+        text: gradeCount > 0 ? "Score: " + currentScore + "/" + gridController.totalExpected() : ""
         font.pixelSize: 28
         color: "black"
     }
@@ -118,7 +118,7 @@ Rectangle {
         Text {
             text: questionText
             font.pixelSize: 28
-            leftPadding: 30
+            leftPadding: 0
             color: "black"
         }
         Image {
@@ -133,7 +133,7 @@ Rectangle {
                 onClicked: {
                     currentScore = gridController.score()
                     wrongBeats = gridController.incorrectBeats()
-                    rectangle.hasGraded = !rectangle.hasGraded
+                    gradeCount++
                 }
             }
         }

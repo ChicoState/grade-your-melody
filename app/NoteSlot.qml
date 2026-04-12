@@ -13,7 +13,7 @@ Rectangle {
     property int currentNoteLength: 1
     property bool selected: false
     property var wrongBeats: []
-    property bool hasGraded: false
+    property int gradeCount: 0
     
     Image {
         id: hovernote
@@ -44,7 +44,7 @@ Rectangle {
         source: "images/redx.gif"
         width: 27
         height: 27
-        visible: hasGraded && selected && !gridController.isBeatCorrect(beat)
+        visible: gradeCount > 0 && selected && !gridController.isBeatCorrect(beat)
         playing: visible
         cache: false
         speed: 2
@@ -120,6 +120,10 @@ Rectangle {
         }
         }
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
+    onGradeCountChanged: {
+        wrongMark.currentFrame = 0
+        wrongMark.playing = (gradeCount > 0 && selected && !gridController.isBeatCorrect(beat))
+    }
 
     states: [
         State {
