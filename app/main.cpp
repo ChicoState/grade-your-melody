@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
     
     //Load Questions
     controller.loadQuestion(1);
-    std::cout << "Initial score = " << controller.score() << std::endl;
     // Example: set the correct answer (you can do this elsewhere too)
     //controller.setExpectedRow(0, 4);
     //controller.setExpectedRow(1, 4);

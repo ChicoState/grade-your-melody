@@ -70,7 +70,6 @@ Rectangle {
             } else  {
                 // Quarter notes (length 2) can only go on even beats (main beats)
                 if (currentNoteLength === 2 && beat % 2 !== 0) return
-                console.log("clicked beat", beat, "row", row, "acc", currentAcc, "len", currentNoteLength)
                 gridController.setNote(beat, row, currentAcc, currentNoteLength)
             }
         }
