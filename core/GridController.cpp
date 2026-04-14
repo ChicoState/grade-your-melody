@@ -89,14 +89,15 @@ void GridController::setExpectedRow(int beat, int row, int acc, int length) {
 bool GridController::isBeatCorrect(int beat) const {
     if (beat < 0 || beat >= StaffLineGrid::columns) return false;
     return noteRowForBeat(beat) == expectedRow[beat]
-        && userAccidental[beat] == expectedAccidental[beat]
-        && userLength[beat] == expectedLength[beat];
+        && userAccidental[beat] == expectedAccidental[beat];
+        
 }
 
 
 QVariantList GridController::incorrectBeats() const {
     QVariantList wrong;
     for (int b = 0; b < StaffLineGrid::columns; ++b) {
+        if (expectedRow[b] == -1) continue; // skip beats with no expected note
         if (!isBeatCorrect(b)) wrong.append(b);
     }
     return wrong;
@@ -105,9 +106,18 @@ QVariantList GridController::incorrectBeats() const {
 int GridController::score() const {
     int s = 0;
     for (int b = 0; b < StaffLineGrid::columns; ++b) {
+        if (expectedRow[b] == -1) continue;
         if (isBeatCorrect(b)) ++s;
     }
     return s;
+}
+
+int GridController::totalExpected() const {
+    int t = 0;
+    for (int b = 0; b < StaffLineGrid::columns; ++b) {
+        if (expectedRow[b] != -1) ++t;
+    }
+    return t;
 }
 
 void GridController::runMillion() {

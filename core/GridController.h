@@ -23,7 +23,8 @@ public:
     // grading
     Q_INVOKABLE void setExpectedRow(int beat, int row, int acc, int length = 1); // row -1 means "should be empty"
     Q_INVOKABLE bool isBeatCorrect(int beat) const;
-    Q_INVOKABLE int  score() const; // 0..16
+    Q_INVOKABLE int  score() const;
+    Q_INVOKABLE int  totalExpected() const;
     Q_INVOKABLE QVariantList incorrectBeats() const;
     Q_INVOKABLE void loadQuestion(int questionNum);
     Q_INVOKABLE void runMillion();

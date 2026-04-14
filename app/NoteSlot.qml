@@ -4,7 +4,7 @@ import QtQuick
 
 Rectangle {
     id: root
-    width: 45
+    width: 60
     height: 35
     color: "#00000000"
     property int beat: -1
@@ -12,6 +12,8 @@ Rectangle {
     property int currentAcc: 0
     property int currentNoteLength: 1
     property bool selected: false
+    property var wrongBeats: []
+    property int gradeCount: 0
     
     Image {
         id: hovernote
@@ -37,6 +39,18 @@ Rectangle {
             NumberAnimation { duration: 150 }
         }
     }
+    AnimatedImage {
+        id: wrongMark
+        source: "images/redx.gif"
+        width: 27
+        height: 27
+        visible: gradeCount > 0 && selected && !gridController.isBeatCorrect(beat)
+        playing: visible
+        cache: false
+        speed: 2
+        x: 5
+        y: 3
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -56,7 +70,6 @@ Rectangle {
             } else  {
                 // Quarter notes (length 2) can only go on even beats (main beats)
                 if (currentNoteLength === 2 && beat % 2 !== 0) return
-                console.log("clicked beat", beat, "row", row, "acc", currentAcc, "len", currentNoteLength)
                 gridController.setNote(beat, row, currentAcc, currentNoteLength)
             }
         }
@@ -107,6 +120,10 @@ Rectangle {
         }
         }
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
+    onGradeCountChanged: {
+        wrongMark.currentFrame = 0
+        wrongMark.playing = (gradeCount > 0 && selected && !gridController.isBeatCorrect(beat))
+    }
 
     states: [
         State {
