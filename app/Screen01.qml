@@ -14,7 +14,7 @@ Rectangle {
     //32 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     property int currentAcc: 0 // -1 flat, +1 sharp 
-    property int currentNoteLength: 2 // 1 = eighth note, 2 = quarter note
+    property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note, 3 = half note
     property int currentScore: 0
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
@@ -25,7 +25,7 @@ Rectangle {
         y: 403
         width: 1814
         height: 275
-        source: "images/staff lines 2.png"
+        source: "images/stafflines_two_measures.png"
         fillMode: Image.PreserveAspectFit
     }
     Item {
@@ -40,7 +40,7 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
-                x: 276 + (index % 8) * 40
+                x: 276 + (index % 8) * 90
                 y: 616 - Math.floor(index / 8) * 25
                 beat: index % 8
                 row: Math.floor(index / 8)
@@ -54,37 +54,9 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
-                x: 276 + (324 + 50) + (index % 8) * 40
+                x: 276 + (648 + 125) + (index % 8) * 90
                 y: 616 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
-                row: Math.floor(index / 8)
-                currentAcc: rectangle.currentAcc
-                currentNoteLength: rectangle.currentNoteLength
-            }
-        }
-        // Measure 3
-        Repeater {
-            model: 72
-            NoteSlot {
-                wrongBeats: rectangle.wrongBeats
-                gradeCount: rectangle.gradeCount
-                x: 276 + (648 + 125) + (index % 8) * 40
-                y: 616 - Math.floor(index / 8) * 25
-                beat: 16 + (index % 8)
-                row: Math.floor(index / 8)
-                currentAcc: rectangle.currentAcc
-                currentNoteLength: rectangle.currentNoteLength
-            }
-        }
-        // Measure 4
-        Repeater {
-            model: 72
-            NoteSlot {
-                wrongBeats: rectangle.wrongBeats
-                gradeCount: rectangle.gradeCount
-                x: 276 + (972 + 200) + (index % 8) * 40
-                y: 616 - Math.floor(index / 8) * 25
-                beat: 24 + (index % 8)
                 row: Math.floor(index / 8)
                 currentAcc: rectangle.currentAcc
                 currentNoteLength: rectangle.currentNoteLength
@@ -173,7 +145,16 @@ Rectangle {
         }
         Row {
             spacing: 10
-            x: 35
+            Image {
+                source: "images/eighthbutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentNoteLength = 1
+                }
+            }
             Image {
                 source: "images/quarterbutton.png"
                 fillMode: Image.PreserveAspectFit
@@ -185,13 +166,13 @@ Rectangle {
                 }
             }
             Image {
-                source: "images/eighthbutton.png"
+                source: "images/halfbutton.png"
                 fillMode: Image.PreserveAspectFit
                 height: 40
-                opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
+                opacity: rectangle.currentNoteLength === 3 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: rectangle.currentNoteLength = 1
+                    onClicked: rectangle.currentNoteLength = 3
                 }
             }
         }
