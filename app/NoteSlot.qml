@@ -92,15 +92,10 @@ Rectangle {
                     if (len === 1) {
                         placenote.source = "images/eighthnote.png"
                         placenote.x = -20
+                        placenote.y = -62
                         placenote.width = 92
                         placenote.height = 91
-                    } else if (len === 2) {
-                        placenote.source = "images/quarternote.png"
-                        placenote.x = -28
-                        placenote.width = 98
-                        placenote.height = 96
-                    }
-                    else if (len === 3) {
+                    } else if (len === 3) {
                         placenote.source = "images/halfnote.png"
                         placenote.x = -28
                         placenote.y = -65
@@ -109,11 +104,19 @@ Rectangle {
                     } else if (acc === 1) {
                         placenote.source = "images/sharpnote.png"
                         placenote.x = -43
+                        placenote.y = -62
                         placenote.width = 98
                         placenote.height = 96
                     } else if (acc === -1) {
                         placenote.source = "images/flatnote.png"
                         placenote.x = -43
+                        placenote.y = -62
+                        placenote.width = 98
+                        placenote.height = 96
+                    } else {
+                        placenote.source = "images/quarternote.png"
+                        placenote.x = -28
+                        placenote.y = -62
                         placenote.width = 98
                         placenote.height = 96
                     }
