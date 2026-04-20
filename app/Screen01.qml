@@ -14,7 +14,7 @@ Rectangle {
     //32 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     property int currentAcc: 0 // -1 flat, +1 sharp 
-    property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note, 3 = half note
+    property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note, 3 = half note, 4 = whole note
     property int currentScore: 0
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
@@ -145,6 +145,7 @@ Rectangle {
         }
         Row {
             spacing: 10
+            x: -40
             Image {
                 source: "images/eighthbutton.png"
                 fillMode: Image.PreserveAspectFit
@@ -175,6 +176,17 @@ Rectangle {
                     onClicked: rectangle.currentNoteLength = 3
                 }
             }
+            Image {
+                source: "images/wholebutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentNoteLength === 4 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentNoteLength = 4
+                }
+            }
+            
         }
 
     }

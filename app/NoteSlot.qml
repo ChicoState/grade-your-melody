@@ -60,6 +60,7 @@ Rectangle {
                 // Don't show hover ghost if quarter note can't be placed here
                 if (currentNoteLength === 2 && beat % 2 !== 0) return
                 if (currentNoteLength === 3 && beat % 4 !== 0) return
+                if (currentNoteLength === 4 && beat % 8 !== 0) return
                 root.state = "hovered"
             }
         }
@@ -106,6 +107,12 @@ Rectangle {
                         placenote.y = -65
                         placenote.width = 97
                         placenote.height = 95
+                    } else if (len === 4) {
+                        placenote.source = "images/wholenote.png"
+                        placenote.x = 0
+                        placenote.y = -3
+                        placenote.width = 40
+                        placenote.height = 38
                     } else if (acc === 1) {
                         placenote.source = "images/sharpnote.png"
                         placenote.x = -43
