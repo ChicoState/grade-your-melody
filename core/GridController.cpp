@@ -39,21 +39,105 @@ void GridController::clearBeat(int beat) {
 
 void GridController::setNote(int beat, int row, int acc, int length) {
     if (!userGrid.ValidPosition(beat, row)) return;
+    if (beat < 0 || beat >= StaffLineGrid::columns) return;
+    if (length <= 0) return;
     if (beat + length > StaffLineGrid::columns) return;
 
+    const int measureStart = (beat / 8) * 8;
+    const int measureOffset = beat % 8;
+
+    // Prevent crossing the current measure boundary
+    if (measureOffset + length > 8) return;
+
+    // Enforce notation-based start positions for 4/4 with 8 columns per measure
+    switch (length) {
+        case 8: // whole note: beat 1 only
+            if (measureOffset != 0) return;
+            break;
+
+        case 4: // half note: beats 1 or 3
+            if (measureOffset != 0 && measureOffset != 4) return;
+            break;
+
+        case 2: // quarter note: beats 1, 2, 3, 4
+            if (measureOffset % 2 != 0) return;
+            break;
+
+        case 1: // eighth note: anywhere
+            break;
+
+        default:
+            return; // unsupported note length
+    }
+
+    const int measureEnd = measureStart + 8;
+
+    // Track which beats in this measure need UI refresh
+    bool beatsToRefresh[8] = { false };
+
+    // Simulate currently occupied columns in this measure
+    bool occupied[8] = { false };
+    for (int c = measureStart; c < measureEnd; ++c) {
+        if (noteRowForBeat(c) != -1) {
+            occupied[c - measureStart] = true;
+        }
+    }
+
+    // Simulate clearing any note touched by the new note.
+    // RemoveNote removes the entire existing note, not just one column.
+    for (int c = beat; c < beat + length; ++c) {
+        for (int r = 0; r < StaffLineGrid::rows; ++r) {
+            if (!userGrid.HasNote(c, r)) continue;
+
+            // Find the start of the existing note on this row
+            int noteStart = c;
+            while (noteStart > measureStart && userGrid.HasNote(noteStart - 1, r)) {
+                --noteStart;
+            }
+
+            int existingLength = userLength[noteStart];
+            if (existingLength <= 0) existingLength = 1;
+
+            for (int k = noteStart; k < noteStart + existingLength && k < measureEnd; ++k) {
+                occupied[k - measureStart] = false;
+                beatsToRefresh[k - measureStart] = true;
+            }
+        }
+    }
+
+    int occupiedAfterClear = 0;
+    for (int i = 0; i < 8; ++i) {
+        if (occupied[i]) {
+            ++occupiedAfterClear;
+        }
+    }
+
+    // Reject if total occupied duration in the measure would exceed capacity
+    if (occupiedAfterClear + length > 8) return;
+
     // Clear all beats this note will occupy
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length; ++i) {
         clearBeatInternal(beat + i);
         userAccidental[beat + i] = 0;
         userLength[beat + i] = 0;
+        beatsToRefresh[beat + i - measureStart] = true;
     }
 
+    // Place the new note
     userGrid.AddNote(beat, row, length);
     userAccidental[beat] = acc;
     userLength[beat] = length;
 
-    for (int i = 0; i < length; i++) {
-        emit beatChanged(beat + i);
+    // Refresh the new note's occupied columns too
+    for (int i = 0; i < length; ++i) {
+        beatsToRefresh[beat + i - measureStart] = true;
+    }
+
+    // Emit updates for every affected beat in the measure
+    for (int i = 0; i < 8; ++i) {
+        if (beatsToRefresh[i]) {
+            emit beatChanged(measureStart + i);
+        }
     }
 }
 
