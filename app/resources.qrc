@@ -7,5 +7,19 @@
         <file>images/title.png</file>
         <file>images/note transparent cut.png</file>
         <file>images/quarternote.png</file>
+
+        <file>sounds/Piano_C4.wav</file>
+        <file>sounds/Piano_D4.wav</file>
+        <file>sounds/Piano_E4.wav</file>
+        <file>sounds/Piano_F4.wav</file>
+        <file>sounds/Piano_G4.wav</file>
+        <file>sounds/Piano_A4.wav</file>
+        <file>sounds/Piano_B4.wav</file>
+
+        <file>sounds/Piano_Cs4.wav</file>
+        <file>sounds/Piano_Ds4.wav</file>
+        <file>sounds/Piano_Fs4.wav</file>
+        <file>sounds/Piano_Gs4.wav</file>
+        <file>sounds/Piano_As4.wav</file>
     </qresource>
 </RCC>
