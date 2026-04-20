@@ -18,12 +18,22 @@ struct NoteInfo {
     int beat;
     int row;
     int accent;
+
+    vector<int> allowedLengths;
+    vector<int> allowedColumns;
+    bool allowStacking = false;
+    bool requireAllFilled = false;
 };
 
 struct Question {
     int num = 0;
     string questionText = "Invalid Question";
     vector<NoteInfo> notes;
+
+    vector<int> allowedLengths;
+    vector<int> allowedStartColumns;
+    bool allowStacking = false;
+    bool requireAllFilled = false;
 };
 
 class QuestionHandler {

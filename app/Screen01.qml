@@ -116,7 +116,7 @@ Rectangle {
         anchors.top: staffLines2.bottom
         anchors.topMargin: -20
         Text {
-            text: questionText
+            text: gridController.currentQuestionText
             font.pixelSize: 28
             leftPadding: 0
             color: "black"

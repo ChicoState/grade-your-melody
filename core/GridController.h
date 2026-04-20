@@ -4,12 +4,13 @@
 #include <QVariant>
 #include <QString>
 #include <array>
+#include <vector>
 #include "staffLineGrid.h"
 #include "questionHandler.h"
 
 class GridController : public QObject {
     Q_OBJECT
-
+    Q_PROPERTY(QString currentQuestionText READ currentQuestionText NOTIFY questionChanged)
 public:
     explicit GridController(QObject *parent = nullptr);
 
@@ -28,10 +29,17 @@ public:
     Q_INVOKABLE QVariantList incorrectBeats() const;
     Q_INVOKABLE void loadQuestion(int questionNum);
     Q_INVOKABLE void runMillion();
+
+    QString currentQuestionText() const;
+
+    Q_INVOKABLE bool isLengthAllowed(int length) const;
+    Q_INVOKABLE bool isStartColumnAllowed(int beat) const;
+    Q_INVOKABLE bool canGrade() const;
 signals:
     void beatChanged(int beat);     // beat changed, QML should refresh visuals
     void expectedChanged(int beat); // expected answer changed (optional)
     void benchmarkFinished(QString result);
+    void questionChanged();
 private:
     StaffLineGrid userGrid;
     QuestionHandler questionHandler;
@@ -46,4 +54,10 @@ private:
     std::array<int, StaffLineGrid::columns> expectedLength{};
 
     void clearBeatInternal(int beat);
+
+    QString m_currentQuestionText;
+    std::vector<int> m_allowedLengths;
+    std::vector<int> m_allowedStartColumns;
+    bool m_allowStacking = false;
+    bool m_requireAllFilled = false;
 };

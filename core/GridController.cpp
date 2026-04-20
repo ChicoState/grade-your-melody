@@ -19,6 +19,44 @@ GridController::GridController(QObject *parent)
     // expectedRow[0] = 4; expectedRow[1] = 4; expectedRow[2] = 5; ...
 }
 
+//Getter for question text
+QString GridController::currentQuestionText() const {
+    return m_currentQuestionText;
+}
+
+//Helper: is note length allowed
+bool GridController::isLengthAllowed(int length) const {
+    if (m_allowedLengths.empty()) return true;
+
+    for (int allowed : m_allowedLengths) {
+        if (allowed == length) return true;
+    }
+    return false;
+}
+
+//Helper: is beat allowed
+bool GridController::isStartColumnAllowed(int beat) const {
+    if (m_allowedStartColumns.empty()) return true;
+
+    for (int allowed : m_allowedStartColumns) {
+        if (allowed == beat) return true;
+    }
+    return false;
+}
+
+//Helper: can grade yet
+bool GridController::canGrade() const {
+    if (!m_requireAllFilled) return true;
+
+    for (int beat : m_allowedStartColumns) {
+        if (noteLengthForBeat(beat) <= 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 bool GridController::hasNote(int beat, int row) const {
     return userGrid.HasNote(beat, row);
 }
@@ -42,6 +80,18 @@ void GridController::setNote(int beat, int row, int acc, int length) {
     if (beat < 0 || beat >= StaffLineGrid::columns) return;
     if (length <= 0) return;
     if (beat + length > StaffLineGrid::columns) return;
+
+    // Question-based restrictions
+    if (!isLengthAllowed(length)) return;
+    if (!isStartColumnAllowed(beat)) return;
+
+    if (!m_allowStacking) {
+        for (int r = 0; r < StaffLineGrid::rows; ++r) {
+            if (userGrid.HasNote(beat, r)) {
+            return;
+            }
+        }
+    }   
 
     const int measureStart = (beat / 8) * 8;
     const int measureOffset = beat % 8;
@@ -272,6 +322,16 @@ void GridController::loadQuestion(int questionNum) {
 
     //}
     
+    //when a question loads:the text updates the restrictions are stored QML can query them
+    m_currentQuestionText = QString::fromStdString(q.questionText);
+    m_allowedLengths = q.allowedLengths;
+    m_allowedStartColumns = q.allowedStartColumns;
+    m_allowStacking = q.allowStacking;
+    m_requireAllFilled = q.requireAllFilled;
+
+    emit questionChanged();
+
+
     // copy notes from question vector into arrays
     for (const NoteInfo& note : q.notes) { if (note.beat >= 0 && note.beat < StaffLineGrid::columns && note.row >= 0 && note.row < StaffLineGrid::rows) {        
             expectedRow[note.beat] = note.row;

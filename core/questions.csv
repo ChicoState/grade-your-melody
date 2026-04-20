@@ -1,3 +1,3 @@
-Question,Answer
-Example,(0-4-0)
-Eighth with rests,(0-4-0 1-5-0 2--1-0 3-3-0 4-4-0 5--1-0 6-6-0 7-5-0 8-4-0 9--1-0 10-4-0 11-5-0 12--1-0 13-7-0 14-6-0 15--1-0 16-4-0 17-3-0 18--1-0 19-3-0 20-4-0 21--1-0 22-4-0 23-3-0 24--1-0 25-1-0 26-2-0 27--1-0 28-4-0 29-5-0 30--1-0 31-3-0)
+Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled
+Write a C major scale,"(0-4-0 2-5-0 4-6-0 6-7-0 8-8-0 10-9-0 12-10-0 14-11-0)","2","0 2 4 6 8 10 12 14",false,true
+Write a C chord,"(0-4-0 0-6-0 0-8-0)","8","0",true,false
