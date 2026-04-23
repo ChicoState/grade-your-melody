@@ -11,7 +11,7 @@ Summary: Data based grid of the staff lines. Currently handles if a note is at
 
 //Used for easy resizing
 #define columnsNum 16
-#define rowsNum 9 //36 slots 4 beats per measure
+#define rowsNum 14 //C4 to B5 range
 
 struct Note {
     int column = 0; // Column of the note in the measure

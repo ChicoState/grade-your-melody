@@ -14,7 +14,7 @@ Rectangle {
     //32 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     property int currentAcc: 0 // -1 flat, +1 sharp 
-    property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note, 3 = half note
+    property int currentNoteLength: 1 // 1 = eighth note, 2 = quarter note, 3 = half note, 4 = whole note
     property int currentScore: 0
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
@@ -34,14 +34,14 @@ Rectangle {
         width: 1920
         height: 1080
 
-        // Measure 1 (8 slots × 9 rows = 72)
+        // Measure 1 (8 slots × 14 rows = 112)
         Repeater {
-            model: 72
+            model: 112
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
                 x: 276 + (index % 8) * 90
-                y: 616 - Math.floor(index / 8) * 25
+                y: 666 - Math.floor(index / 8) * 25
                 beat: index % 8
                 row: Math.floor(index / 8)
                 currentAcc: rectangle.currentAcc
@@ -50,12 +50,12 @@ Rectangle {
         }
         // Measure 2
         Repeater {
-            model: 72
+            model: 112
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
                 x: 276 + (648 + 125) + (index % 8) * 90
-                y: 616 - Math.floor(index / 8) * 25
+                y: 666 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
                 row: Math.floor(index / 8)
                 currentAcc: rectangle.currentAcc
@@ -67,7 +67,7 @@ Rectangle {
     Image {
         id: title
         x: 447
-        y: 312
+        y: 240
         width: 1027
         height: 72
         source: "images/title.png"
@@ -145,6 +145,7 @@ Rectangle {
         }
         Row {
             spacing: 10
+            x: -40
             Image {
                 source: "images/eighthbutton.png"
                 fillMode: Image.PreserveAspectFit
@@ -175,6 +176,17 @@ Rectangle {
                     onClicked: rectangle.currentNoteLength = 3
                 }
             }
+            Image {
+                source: "images/wholebutton.png"
+                fillMode: Image.PreserveAspectFit
+                height: 40
+                opacity: rectangle.currentNoteLength === 4 ? 0.6 : 1.0
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: rectangle.currentNoteLength = 4
+                }
+            }
+            
         }
 
     }
