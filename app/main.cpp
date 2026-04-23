@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     GridController controller;
+
     engine.rootContext()->setContextProperty("gridController", &controller);
     
     //Load Questions
@@ -34,10 +35,6 @@ int main(int argc, char *argv[])
    
     
 
-    // TODO: hardcoded to question 1 for demo — replace with dynamic question selection from UI
-    QuestionHandler qh;
-    Question q = qh.GetQuestion(1);
-    engine.rootContext()->setContextProperty("questionText", QString::fromStdString(q.questionText));
     const QUrl url(u"qrc:/qt/qml/GradeYourMelodyUI/App.qml"_qs);
     //const QUrl url(u"qrc:/app/App.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

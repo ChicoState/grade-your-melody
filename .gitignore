@@ -1,2 +1,6 @@
 # Build Folder
 /build/
+#macOSjunk
+.DS_Store
+#Qt / editor autosaves
+*.autosave

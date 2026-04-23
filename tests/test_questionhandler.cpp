@@ -7,12 +7,12 @@
 using namespace std;
 
 TEST(QuestionHandlerTest, ReadsCsvAndCreatesQuestions) {
-    // Create a local test CSV in the test working directory.
+    // Write a minimal 6-column CSV matching the current parser format.
     const string filename = "questions.csv";
-    const string data = "Question,Answer\n"
-                        "Put a C note,(Beat-Row-Accent) (1-5-0)\n"
-                        "Test first question,(1-2-0) (2-3-1)\n"
-                        "Test second question,(4-5-0)\n";
+    const string data =
+        "Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled\n"
+        "Test first question,\"(1-2-0 2-3-1)\",1 2,0 2,false,false\n"
+        "Test second question,\"(4-5-0)\",1,0,false,false\n";
 
     {
         ofstream out(filename);
