@@ -38,7 +38,7 @@ Rectangle {
         source: "images/quarternote.png"
         fillMode: Image.PreserveAspectFit
         transform: Scale {
-            // 180° flip (both axes) = stem down, head facing right; whole notes never flip
+            // 180° flip (both axes) = stem down; whole notes never flip
             xScale: (root.flipped && root.noteLen !== 4) ? -1 : 1
             yScale: (root.flipped && root.noteLen !== 4) ? -1 : 1
             origin.x: placenote.width / 2
@@ -48,6 +48,18 @@ Rectangle {
             NumberAnimation { duration: 150 }
         }
     }
+
+    // Accidental glyph — rendered as unicode text so it is never affected by the note flip transform
+    Text {
+        id: accidentalText
+        visible: false
+        text: ""
+        font.pixelSize: 58
+        color: "black"
+        x: -28
+        y: -26
+    }
+
     // Ledger line — shown when a note is placed at or adjacent to a ledger line position
     Rectangle {
         id: ledgerLine
@@ -114,16 +126,11 @@ Rectangle {
                 if (selected) {
                     var acc = gridController.accidentalForBeat(beat)
 
+                    // Note body: always use the plain note image so the flip transform
+                    // controls stem direction independently of any accidental.
                     if (len === 1) {
                         root.noteLen = 1
                         placenote.source = "images/eighthnote.png"
-<<<<<<< HEAD
-                        placenote.x = -20
-                        placenote.y = -62
-                        placenote.width = 92
-                        placenote.height = 91
-                    } else if (len === 3) {
-=======
                         placenote.x = root.flipped ? -35.5 : -19
                         placenote.y = root.flipped ? 1 : -62
                         placenote.width = 92
@@ -137,7 +144,6 @@ Rectangle {
                         placenote.height = 96
                     } else if (len === 3) {
                         root.noteLen = 3
->>>>>>> feature/NoteRangeAndStemFlip
                         placenote.source = "images/halfnote.png"
                         placenote.x = root.flipped ? -29.5 : -29
                         placenote.y = root.flipped ? 3 : -63
@@ -151,33 +157,21 @@ Rectangle {
                         placenote.width = 40
                         placenote.height = 38
                     }
+
+                    // Accidental glyph: rendered as a separate Text element with no
+                    // transform, so it is always upright regardless of stem direction.
                     if (acc === 1) {
-                        placenote.source = "images/sharpnote.png"
-                        placenote.x = -43
-<<<<<<< HEAD
-                        placenote.y = -62
-=======
-                        placenote.y = root.flipped ? -9 : -62
->>>>>>> feature/NoteRangeAndStemFlip
-                        placenote.width = 98
-                        placenote.height = 96
+                        accidentalText.text = "♯"
+                        accidentalText.visible = true
                     } else if (acc === -1) {
-                        placenote.source = "images/flatnote.png"
-                        placenote.x = -43
-<<<<<<< HEAD
-                        placenote.y = -62
-                        placenote.width = 98
-                        placenote.height = 96
+                        accidentalText.text = "♭"
+                        accidentalText.visible = true
                     } else {
-                        placenote.source = "images/quarternote.png"
-                        placenote.x = -28
-                        placenote.y = -62
-=======
-                        placenote.y = root.flipped ? -9 : -62
->>>>>>> feature/NoteRangeAndStemFlip
-                        placenote.width = 98
-                        placenote.height = 96
+                        accidentalText.text = ""
+                        accidentalText.visible = false
                     }
+                } else {
+                    accidentalText.visible = false
                 }
             }
         }
