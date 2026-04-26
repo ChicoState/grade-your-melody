@@ -5,6 +5,7 @@
 #include <iostream>
 #include <chrono>
 #include <random>
+#include <cmath>
 GridController::GridController(QObject *parent)
     : QObject(parent)
 {
@@ -374,6 +375,45 @@ void GridController::runMillion() {
     emit benchmarkFinished(result);    
 }
 
+
+// ── Audio preparation helpers ─────────────────────────────────────────────────
+
+// Converts a diatonic row index and accidental to the nearest equal-tempered
+// frequency in Hz, using C4 = 261.63 Hz as the reference pitch.
+// Row 0 = C4; each group of 7 rows is one octave (white keys only).
+// acc: -1 = flat, 0 = natural, +1 = sharp.
+static double pitchToFrequency(int row, int acc) {
+    static const int diatonicOffsets[] = {0, 2, 4, 5, 7, 9, 11}; // C D E F G A B
+    const int octave      = row / 7;
+    const int scaleDegree = row % 7;
+    const int semitone    = octave * 12 + diatonicOffsets[scaleDegree] + acc;
+    return 261.63 * std::pow(2.0, semitone / 12.0);
+}
+
+// Returns one entry per placed note start: {beat, row, acc, length, frequency}.
+// Continuation columns are skipped (userLength[beat] == 0 for them).
+// Supports both single notes (non-stacking) and chords (stacking).
+QVariantList GridController::getCurrentNotes() const {
+    QVariantList result;
+    for (int beat = 0; beat < StaffLineGrid::columns; ++beat) {
+        const int len = userLength[beat];
+        if (len <= 0) continue; // empty beat or continuation column
+
+        for (int row = 0; row < StaffLineGrid::rows; ++row) {
+            if (!userGrid.HasNote(beat, row)) continue;
+
+            const int acc = userAccidental[beat][row];
+            QVariantMap note;
+            note["beat"]      = beat;
+            note["row"]       = row;
+            note["acc"]       = acc;
+            note["length"]    = len;
+            note["frequency"] = pitchToFrequency(row, acc);
+            result.append(note);
+        }
+    }
+    return result;
+}
 
 int GridController::currentQuestionNum() const {
     return m_currentQuestionNum;

@@ -42,6 +42,9 @@ public:
     Q_INVOKABLE bool isLengthAllowed(int length) const;
     Q_INVOKABLE bool isStartColumnAllowed(int beat) const;
     Q_INVOKABLE bool canGrade() const;
+
+    // Audio preparation: returns all currently placed note starts with pitch data
+    Q_INVOKABLE QVariantList getCurrentNotes() const;
 signals:
     void beatChanged(int beat);     // beat changed, QML should refresh visuals
     void expectedChanged(int beat); // expected answer changed (optional)
