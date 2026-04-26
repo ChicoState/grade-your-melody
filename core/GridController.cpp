@@ -12,7 +12,7 @@ GridController::GridController(QObject *parent)
     expectedRow.fill(-1);
 
     expectedAccidental.fill(0);
-    userAccidental.fill(0);    
+    for (auto& rowArr : userAccidental) rowArr.fill(0);
     userLength.fill(0);
     expectedLength.fill(0);
     // Example answer (change these to your melody):
@@ -70,7 +70,7 @@ void GridController::clearBeatInternal(int beat) {
 void GridController::clearBeat(int beat) {
     if (beat < 0 || beat >= StaffLineGrid::columns) return;
     clearBeatInternal(beat);
-    userAccidental[beat] = 0;
+    userAccidental[beat].fill(0);
     userLength[beat] = 0;
     emit beatChanged(beat);
 }
@@ -81,17 +81,30 @@ void GridController::setNote(int beat, int row, int acc, int length) {
     if (length <= 0) return;
     if (beat + length > StaffLineGrid::columns) return;
 
-    // Question-based restrictions
+    // Question-based restrictions (apply to both paths)
     if (!isLengthAllowed(length)) return;
     if (!isStartColumnAllowed(beat)) return;
 
-    if (!m_allowStacking) {
-        for (int r = 0; r < StaffLineGrid::rows; ++r) {
-            if (userGrid.HasNote(beat, r)) {
-            return;
-            }
-        }
-    }   
+    // ── Stacking path ────────────────────────────────────────────────────────
+    // Only touch the target (beat, row). All other rows at this beat survive.
+    if (m_allowStacking) {
+        userGrid.RemoveNote(beat, row);       // no-op if the cell was empty
+        userAccidental[beat][row] = 0;
+
+        userGrid.AddNote(beat, row, length);
+        userAccidental[beat][row] = acc;
+        userLength[beat] = length;            // all chord notes share one duration
+
+        for (int i = 0; i < length; ++i)
+            emit beatChanged(beat + i);
+        return;
+    }
+
+    // ── Non-stacking path (original behaviour) ────────────────────────────────
+    // Abort if any note already exists anywhere on this beat
+    for (int r = 0; r < StaffLineGrid::rows; ++r) {
+        if (userGrid.HasNote(beat, r)) return;
+    }
 
     const int measureStart = (beat / 8) * 8;
     const int measureOffset = beat % 8;
@@ -99,33 +112,20 @@ void GridController::setNote(int beat, int row, int acc, int length) {
     // Prevent crossing the current measure boundary
     if (measureOffset + length > 8) return;
 
-    // Enforce notation-based start positions for 4/4 with 8 columns per measure
+    // Enforce notation-based start positions for 4/4 with 8 columns per measure.
+    // length uses the UI type-ID convention: 4=whole, 3=half, 2=quarter, 1=eighth.
     switch (length) {
-        case 8: // whole note: beat 1 only
-            if (measureOffset != 0) return;
-            break;
-
-        case 4: // half note: beats 1 or 3
-            if (measureOffset != 0 && measureOffset != 4) return;
-            break;
-
-        case 2: // quarter note: beats 1, 2, 3, 4
-            if (measureOffset % 2 != 0) return;
-            break;
-
-        case 1: // eighth note: anywhere
-            break;
-
-        default:
-            return; // unsupported note length
+        case 4: if (measureOffset != 0) return; break;                       // whole: beat 1 only
+        case 3: if (measureOffset != 0 && measureOffset != 4) return; break; // half: beats 1 or 3
+        case 2: if (measureOffset % 2 != 0) return; break;                   // quarter: beats 1-4
+        case 1: break;                                                         // eighth: anywhere
+        default: return;
     }
 
     const int measureEnd = measureStart + 8;
 
-    // Track which beats in this measure need UI refresh
     bool beatsToRefresh[8] = { false };
 
-    // Simulate currently occupied columns in this measure
     bool occupied[8] = { false };
     for (int c = measureStart; c < measureEnd; ++c) {
         if (noteRowForBeat(c) != -1) {
@@ -133,17 +133,13 @@ void GridController::setNote(int beat, int row, int acc, int length) {
         }
     }
 
-    // Simulate clearing any note touched by the new note.
-    // RemoveNote removes the entire existing note, not just one column.
     for (int c = beat; c < beat + length; ++c) {
         for (int r = 0; r < StaffLineGrid::rows; ++r) {
             if (!userGrid.HasNote(c, r)) continue;
 
-            // Find the start of the existing note on this row
             int noteStart = c;
-            while (noteStart > measureStart && userGrid.HasNote(noteStart - 1, r)) {
+            while (noteStart > measureStart && userGrid.HasNote(noteStart - 1, r))
                 --noteStart;
-            }
 
             int existingLength = userLength[noteStart];
             if (existingLength <= 0) existingLength = 1;
@@ -156,44 +152,41 @@ void GridController::setNote(int beat, int row, int acc, int length) {
     }
 
     int occupiedAfterClear = 0;
-    for (int i = 0; i < 8; ++i) {
-        if (occupied[i]) {
-            ++occupiedAfterClear;
-        }
-    }
+    for (int i = 0; i < 8; ++i)
+        if (occupied[i]) ++occupiedAfterClear;
 
-    // Reject if total occupied duration in the measure would exceed capacity
     if (occupiedAfterClear + length > 8) return;
 
-    // Clear all beats this note will occupy
     for (int i = 0; i < length; ++i) {
         clearBeatInternal(beat + i);
-        userAccidental[beat + i] = 0;
+        userAccidental[beat + i].fill(0);
         userLength[beat + i] = 0;
         beatsToRefresh[beat + i - measureStart] = true;
     }
 
-    // Place the new note
     userGrid.AddNote(beat, row, length);
-    userAccidental[beat] = acc;
+    userAccidental[beat][row] = acc;
     userLength[beat] = length;
 
-    // Refresh the new note's occupied columns too
-    for (int i = 0; i < length; ++i) {
+    for (int i = 0; i < length; ++i)
         beatsToRefresh[beat + i - measureStart] = true;
-    }
 
-    // Emit updates for every affected beat in the measure
-    for (int i = 0; i < 8; ++i) {
-        if (beatsToRefresh[i]) {
-            emit beatChanged(measureStart + i);
-        }
-    }
+    for (int i = 0; i < 8; ++i)
+        if (beatsToRefresh[i]) emit beatChanged(measureStart + i);
 }
 
 int GridController::accidentalForBeat(int beat) const {
-    if (beat < 0 || beat >= (int)userAccidental.size()) return 0;
-    return userAccidental[beat];
+    // Returns the accidental of the lowest placed note at this beat.
+    // Use accidentalForBeatRow() when per-row precision is needed.
+    int row = noteRowForBeat(beat);
+    if (row < 0 || beat < 0 || beat >= StaffLineGrid::columns) return 0;
+    return userAccidental[beat][row];
+}
+
+int GridController::accidentalForBeatRow(int beat, int row) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return 0;
+    if (row < 0 || row >= StaffLineGrid::rows) return 0;
+    return userAccidental[beat][row];
 }
 
 int GridController::noteLengthForBeat(int beat) const {
@@ -220,37 +213,112 @@ void GridController::setExpectedRow(int beat, int row, int acc, int length) {
     emit expectedChanged(beat);
 }
 
+bool GridController::isNoteIncorrect(int beat, int row) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return false;
+    if (row < 0 || row >= StaffLineGrid::rows) return false;
+
+    if (!m_allowStacking) {
+        // Non-stacking: a placed note is wrong iff the whole beat is wrong
+        return !isBeatCorrect(beat);
+    }
+
+    // Stacking: evaluate only this specific (beat, row) note
+    if (!userGrid.HasNote(beat, row)) return false; // nothing placed here
+
+    for (const NoteInfo& exp : m_expectedNotes) {
+        if (exp.beat == beat && exp.row == row)
+            return userAccidental[beat][row] != exp.accent; // expected but wrong accidental?
+    }
+    return true; // placed but not expected → wrong
+}
+
 bool GridController::isBeatCorrect(int beat) const {
     if (beat < 0 || beat >= StaffLineGrid::columns) return false;
-    return noteRowForBeat(beat) == expectedRow[beat]
-        && userAccidental[beat] == expectedAccidental[beat];
-        
+
+    if (!m_allowStacking) {
+        // Non-stacking: one expected row per beat
+        int userRow = noteRowForBeat(beat);
+        if (userRow != expectedRow[beat]) return false;
+        if (expectedRow[beat] == -1) return true; // both empty
+        return userAccidental[beat][userRow] == expectedAccidental[beat];
+    }
+
+    // Stacking: every expected note at this beat must be present with the
+    // correct accidental, and no unexpected notes may exist.
+    bool anyExpected = false;
+    for (const NoteInfo& exp : m_expectedNotes) {
+        if (exp.beat != beat) continue;
+        anyExpected = true;
+        if (!userGrid.HasNote(beat, exp.row)) return false;
+        if (userAccidental[beat][exp.row] != exp.accent) return false;
+    }
+    if (!anyExpected) return true;
+
+    for (int r = 0; r < StaffLineGrid::rows; ++r) {
+        if (!userGrid.HasNote(beat, r)) continue;
+        bool isExpected = false;
+        for (const NoteInfo& exp : m_expectedNotes)
+            if (exp.beat == beat && exp.row == r) { isExpected = true; break; }
+        if (!isExpected) return false;
+    }
+    return true;
 }
 
 
 QVariantList GridController::incorrectBeats() const {
     QVariantList wrong;
-    for (int b = 0; b < StaffLineGrid::columns; ++b) {
-        if (expectedRow[b] == -1) continue; // skip beats with no expected note
-        if (!isBeatCorrect(b)) wrong.append(b);
+    if (!m_allowStacking) {
+        for (int b = 0; b < StaffLineGrid::columns; ++b) {
+            if (expectedRow[b] == -1) continue;
+            if (!isBeatCorrect(b)) wrong.append(b);
+        }
+        return wrong;
     }
+    // Stacking: collect distinct beats that have expected notes and are wrong
+    bool hasBeat[StaffLineGrid::columns] = {};
+    for (const NoteInfo& note : m_expectedNotes)
+        if (note.beat >= 0 && note.beat < StaffLineGrid::columns)
+            hasBeat[note.beat] = true;
+    for (int b = 0; b < StaffLineGrid::columns; ++b)
+        if (hasBeat[b] && !isBeatCorrect(b)) wrong.append(b);
     return wrong;
 }
 
 int GridController::score() const {
-    int s = 0;
-    for (int b = 0; b < StaffLineGrid::columns; ++b) {
-        if (expectedRow[b] == -1) continue;
-        if (isBeatCorrect(b)) ++s;
+    if (!m_allowStacking) {
+        int s = 0;
+        for (int b = 0; b < StaffLineGrid::columns; ++b) {
+            if (expectedRow[b] == -1) continue;
+            if (isBeatCorrect(b)) ++s;
+        }
+        return s;
     }
+    // Stacking: one point per beat where every expected chord note is correct
+    bool hasBeat[StaffLineGrid::columns] = {};
+    for (const NoteInfo& note : m_expectedNotes)
+        if (note.beat >= 0 && note.beat < StaffLineGrid::columns)
+            hasBeat[note.beat] = true;
+    int s = 0;
+    for (int b = 0; b < StaffLineGrid::columns; ++b)
+        if (hasBeat[b] && isBeatCorrect(b)) ++s;
     return s;
 }
 
 int GridController::totalExpected() const {
-    int t = 0;
-    for (int b = 0; b < StaffLineGrid::columns; ++b) {
-        if (expectedRow[b] != -1) ++t;
+    if (!m_allowStacking) {
+        int t = 0;
+        for (int b = 0; b < StaffLineGrid::columns; ++b)
+            if (expectedRow[b] != -1) ++t;
+        return t;
     }
+    // Stacking: one expected "slot" per distinct beat that has expected notes
+    bool hasBeat[StaffLineGrid::columns] = {};
+    for (const NoteInfo& note : m_expectedNotes)
+        if (note.beat >= 0 && note.beat < StaffLineGrid::columns)
+            hasBeat[note.beat] = true;
+    int t = 0;
+    for (int b = 0; b < StaffLineGrid::columns; ++b)
+        if (hasBeat[b]) ++t;
     return t;
 }
 
@@ -334,12 +402,13 @@ void GridController::loadQuestion(int questionNum) {
 
     // Clear user-placed notes and per-beat state
     userGrid.ClearGrid();
-    userAccidental.fill(0);
+    for (auto& rowArr : userAccidental) rowArr.fill(0);
     userLength.fill(0);
 
     // Reset expected answers to empty
     expectedRow.fill(-1);
     expectedAccidental.fill(0);
+    m_expectedNotes.clear();
 
     Question q = questionHandler.GetQuestion(questionNum);
     //debug question logic
@@ -361,10 +430,18 @@ void GridController::loadQuestion(int questionNum) {
     emit questionChanged();
 
 
-    // copy notes from question vector into arrays
-    for (const NoteInfo& note : q.notes) { if (note.beat >= 0 && note.beat < StaffLineGrid::columns && note.row >= 0 && note.row < StaffLineGrid::rows) {        
-            expectedRow[note.beat] = note.row;
-            expectedAccidental[note.beat] = note.accent;
+    // Copy expected notes into both storage structures.
+    // m_expectedNotes holds the full list (supports multiple per beat for chords).
+    // expectedRow/Accidental flat arrays are populated for non-stacking questions
+    // and used by the non-stacking grading path.
+    for (const NoteInfo& note : q.notes) {
+        if (note.beat >= 0 && note.beat < StaffLineGrid::columns
+            && note.row >= 0 && note.row < StaffLineGrid::rows) {
+            m_expectedNotes.push_back(note);
+            if (!m_allowStacking) {
+                expectedRow[note.beat] = note.row;
+                expectedAccidental[note.beat] = note.accent;
+            }
         }
     }
     // notify QML/UI that everything changed
