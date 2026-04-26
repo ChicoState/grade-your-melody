@@ -11,6 +11,7 @@
 class GridController : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentQuestionText READ currentQuestionText NOTIFY questionChanged)
+    Q_PROPERTY(int currentQuestionNum READ currentQuestionNum NOTIFY questionChanged)
 public:
     explicit GridController(QObject *parent = nullptr);
 
@@ -28,6 +29,10 @@ public:
     Q_INVOKABLE int  totalExpected() const;
     Q_INVOKABLE QVariantList incorrectBeats() const;
     Q_INVOKABLE void loadQuestion(int questionNum);
+    Q_INVOKABLE void nextQuestion();
+    Q_INVOKABLE void previousQuestion();
+    Q_INVOKABLE int  currentQuestionNum() const;
+    Q_INVOKABLE int  totalQuestionsAvailable();
     Q_INVOKABLE void runMillion();
 
     QString currentQuestionText() const;
@@ -56,6 +61,7 @@ private:
     void clearBeatInternal(int beat);
 
     QString m_currentQuestionText;
+    int m_currentQuestionNum = 0;
     std::vector<int> m_allowedLengths;
     std::vector<int> m_allowedStartColumns;
     bool m_allowStacking = false;
