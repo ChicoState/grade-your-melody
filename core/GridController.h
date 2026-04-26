@@ -11,6 +11,7 @@
 class GridController : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentQuestionText READ currentQuestionText NOTIFY questionChanged)
+    Q_PROPERTY(int currentQuestionNum READ currentQuestionNum NOTIFY questionChanged)
 public:
     explicit GridController(QObject *parent = nullptr);
 
@@ -20,14 +21,20 @@ public:
     Q_INVOKABLE void clearBeat(int beat);            // removes any note in that beat
     Q_INVOKABLE int  noteRowForBeat(int beat) const; // -1 if none
     Q_INVOKABLE int accidentalForBeat(int beat) const;
+    Q_INVOKABLE int accidentalForBeatRow(int beat, int row) const;
     Q_INVOKABLE int noteLengthForBeat(int beat) const;
     // grading
     Q_INVOKABLE void setExpectedRow(int beat, int row, int acc, int length = 1); // row -1 means "should be empty"
     Q_INVOKABLE bool isBeatCorrect(int beat) const;
+    Q_INVOKABLE bool isNoteIncorrect(int beat, int row) const;
     Q_INVOKABLE int  score() const;
     Q_INVOKABLE int  totalExpected() const;
     Q_INVOKABLE QVariantList incorrectBeats() const;
     Q_INVOKABLE void loadQuestion(int questionNum);
+    Q_INVOKABLE void nextQuestion();
+    Q_INVOKABLE void previousQuestion();
+    Q_INVOKABLE int  currentQuestionNum() const;
+    Q_INVOKABLE int  totalQuestionsAvailable();
     Q_INVOKABLE void runMillion();
 
     QString currentQuestionText() const;
@@ -47,15 +54,19 @@ private:
     // expected answer: for each beat store the one correct row, or -1 for empty
     std::array<int, StaffLineGrid::columns> expectedRow{};
 
-    //-1 = fat, 0 = norm, +1 = sharp
+    //-1 = flat, 0 = natural, +1 = sharp — indexed [beat][row] to support stacked notes
     std::array<int, StaffLineGrid::columns> expectedAccidental{};
-    std::array<int, StaffLineGrid::columns> userAccidental{};
+    std::array<std::array<int, StaffLineGrid::rows>, StaffLineGrid::columns> userAccidental{};
     std::array<int, StaffLineGrid::columns> userLength{};
     std::array<int, StaffLineGrid::columns> expectedLength{};
+
+    // Full list of expected notes; supports multiple entries per beat for chord questions
+    std::vector<NoteInfo> m_expectedNotes;
 
     void clearBeatInternal(int beat);
 
     QString m_currentQuestionText;
+    int m_currentQuestionNum = 0;
     std::vector<int> m_allowedLengths;
     std::vector<int> m_allowedStartColumns;
     bool m_allowStacking = false;
