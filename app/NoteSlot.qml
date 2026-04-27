@@ -16,7 +16,7 @@ Rectangle {
     property int gradeCount: 0
     property bool flipped: row >= 6   // above B4 middle line → stem down
     property int noteLen: 1           // tracks placed note type for transform
-    
+
     Image {
         id: hovernote
         x: 4

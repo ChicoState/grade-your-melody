@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick Multimedia)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -23,6 +23,7 @@ add_subdirectory(tests)
 qt_add_executable(GradeYourMelody
     app/main.cpp
     core/GridController.cpp
+    core/AudioEngine.cpp
     core/staffLineGrid.h
     core/staffLineGrid.cpp
     core/questionHandler.cpp
@@ -33,7 +34,7 @@ configure_file(${CMAKE_SOURCE_DIR}/core/questions.csv
                COPYONLY)
 
 
-target_include_directories(GradeYourMelody PRIVATE core)
+target_include_directories(GradeYourMelody PRIVATE core third_party/tsf)
 
 set_source_files_properties(app/App.qml PROPERTIES QT_RESOURCE_ALIAS App.qml)
 set_source_files_properties(app/Screen01.qml PROPERTIES QT_RESOURCE_ALIAS Screen01.qml)
@@ -105,6 +106,17 @@ add_custom_command(TARGET GradeYourMelody POST_BUILD
         $<TARGET_FILE_DIR:GradeYourMelody>/questions.csv
 )
 
+# Copy piano.sf2 to the build output directory if it exists.
+# Place the file at app/soundfonts/piano.sf2 before building.
+if(EXISTS "${CMAKE_SOURCE_DIR}/app/soundfonts/piano.sf2")
+    add_custom_command(TARGET GradeYourMelody POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/app/soundfonts/piano.sf2"
+            "$<TARGET_FILE_DIR:GradeYourMelody>/piano.sf2"
+        COMMENT "Copying piano.sf2 to build output"
+    )
+endif()
+
 target_link_libraries(GradeYourMelody
-    PRIVATE Qt6::Core Qt6::Gui Qt6::Qml Qt6::Quick
+    PRIVATE Qt6::Core Qt6::Gui Qt6::Qml Qt6::Quick Qt6::Multimedia
 )

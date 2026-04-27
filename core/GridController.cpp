@@ -18,6 +18,15 @@ GridController::GridController(QObject *parent)
     expectedLength.fill(0);
     // Example answer (change these to your melody):
     // expectedRow[0] = 4; expectedRow[1] = 4; expectedRow[2] = 5; ...
+
+    // Forward AudioEngine beat notifications to QML via playbackBeatChanged
+    connect(&m_audioEngine, &AudioEngine::beatAdvanced, this, [this](int beat) {
+        qDebug() << "[GridController] beatAdvanced received:" << beat
+                 << "→ m_currentPlaybackBeat was" << m_currentPlaybackBeat;
+        if (m_currentPlaybackBeat == beat) return;
+        m_currentPlaybackBeat = beat;
+        emit playbackBeatChanged();
+    });
 }
 
 //Getter for question text
@@ -98,6 +107,7 @@ void GridController::setNote(int beat, int row, int acc, int length) {
 
         for (int i = 0; i < length; ++i)
             emit beatChanged(beat + i);
+        m_audioEngine.playPreview(row, acc);
         return;
     }
 
@@ -174,6 +184,8 @@ void GridController::setNote(int beat, int row, int acc, int length) {
 
     for (int i = 0; i < 8; ++i)
         if (beatsToRefresh[i]) emit beatChanged(measureStart + i);
+
+    m_audioEngine.playPreview(row, acc);
 }
 
 int GridController::accidentalForBeat(int beat) const {
@@ -413,6 +425,46 @@ QVariantList GridController::getCurrentNotes() const {
         }
     }
     return result;
+}
+
+int GridController::currentPlaybackBeat() const {
+    return m_currentPlaybackBeat;
+}
+
+void GridController::stopPlayback() {
+    m_audioEngine.stop();
+    // Clear cursor immediately — pending beat timers are already invalidated by stop()
+    if (m_currentPlaybackBeat != -1) {
+        m_currentPlaybackBeat = -1;
+        emit playbackBeatChanged();
+    }
+}
+
+int GridController::tempoBpm() const {
+    return m_tempoBpm;
+}
+
+void GridController::setTempoBpm(int bpm) {
+    const int clamped = qBound(40, bpm, 200);
+    if (clamped == m_tempoBpm) return;
+    m_tempoBpm = clamped;
+    emit tempoChanged();
+}
+
+void GridController::decreaseTempo() { setTempoBpm(m_tempoBpm - 5); }
+void GridController::increaseTempo() { setTempoBpm(m_tempoBpm + 5); }
+
+void GridController::playCurrentNotes() {
+    const QVariantList all = getCurrentNotes();
+    if (all.isEmpty()) return;
+
+    // Convert QVariantList → QList<QVariantMap> and play all beats in sequence
+    QList<QVariantMap> notes;
+    notes.reserve(all.size());
+    for (const QVariant& v : all)
+        notes.append(v.toMap());
+
+    m_audioEngine.playSequence(notes, static_cast<double>(m_tempoBpm));
 }
 
 int GridController::currentQuestionNum() const {

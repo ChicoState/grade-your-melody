@@ -201,6 +201,68 @@ Rectangle {
 
         }
 
+        // Audio playback
+        Row {
+            spacing: 30
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Text {
+                text: "▶ Play"
+                font.pixelSize: 24
+                color: playArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: playArea
+                    anchors.fill: parent
+                    onClicked: gridController.playCurrentNotes()
+                }
+            }
+
+            Text {
+                text: "■ Stop"
+                font.pixelSize: 24
+                color: stopArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: stopArea
+                    anchors.fill: parent
+                    onClicked: gridController.stopPlayback()
+                }
+            }
+        }
+
+        // Tempo control
+        Row {
+            spacing: 16
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Text {
+                text: "−"
+                font.pixelSize: 28
+                color: tempoMinusArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: tempoMinusArea
+                    anchors.fill: parent
+                    onClicked: gridController.decreaseTempo()
+                }
+            }
+
+            Text {
+                text: "Tempo: " + gridController.tempoBpm + " BPM"
+                font.pixelSize: 24
+                color: "black"
+            }
+
+            Text {
+                text: "+"
+                font.pixelSize: 28
+                color: tempoPlusArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: tempoPlusArea
+                    anchors.fill: parent
+                    onClicked: gridController.increaseTempo()
+                }
+            }
+        }
+
         // Question navigation
         Row {
             spacing: 30
@@ -233,6 +295,40 @@ Rectangle {
                     onClicked: gridController.nextQuestion()
                 }
             }
+        }
+    }
+
+    // ── Playback beat cursor ─────────────────────────────────────────────────
+    // Deliberately extreme size/color/z to confirm the signal chain is working.
+    // Dial back once confirmed visible.
+    Rectangle {
+        id: playbackCursor
+        visible: gridController.currentPlaybackBeat >= 0
+        z: 9999
+        opacity: 0.75
+
+        // Column x: Measure 1 beats 0–7, Measure 2 beats 8–15
+        x: {
+            const b = gridController.currentPlaybackBeat
+            if (b < 0) return 0
+            return b < 8 ? 276 + b * 90
+                         : 1049 + (b - 8) * 90
+        }
+        y: 0
+        width: 120
+        height: 900
+
+        color: "red"
+        radius: 0
+    }
+
+    // ── Beat cursor diagnostic ───────────────────────────────────────────────
+    // Logs currentPlaybackBeat to the console so you can confirm it's updating.
+    // Remove once verified working.
+    Connections {
+        target: gridController
+        function onPlaybackBeatChanged() {
+            console.log("[PlaybackCursor] beat →", gridController.currentPlaybackBeat)
         }
     }
 }

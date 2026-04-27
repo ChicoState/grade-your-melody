@@ -7,11 +7,14 @@
 #include <vector>
 #include "staffLineGrid.h"
 #include "questionHandler.h"
+#include "AudioEngine.h"
 
 class GridController : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentQuestionText READ currentQuestionText NOTIFY questionChanged)
     Q_PROPERTY(int currentQuestionNum READ currentQuestionNum NOTIFY questionChanged)
+    Q_PROPERTY(int tempoBpm READ tempoBpm WRITE setTempoBpm NOTIFY tempoChanged)
+    Q_PROPERTY(int currentPlaybackBeat READ currentPlaybackBeat NOTIFY playbackBeatChanged)
 public:
     explicit GridController(QObject *parent = nullptr);
 
@@ -45,11 +48,26 @@ public:
 
     // Audio preparation: returns all currently placed note starts with pitch data
     Q_INVOKABLE QVariantList getCurrentNotes() const;
+
+    // Play the first occupied beat as a chord using the loaded SoundFont
+    Q_INVOKABLE void playCurrentNotes();
+
+    // Stop any currently playing audio immediately
+    Q_INVOKABLE void stopPlayback();
+
+    int  tempoBpm() const;
+    void setTempoBpm(int bpm);         // clamped to [40, 200]
+    Q_INVOKABLE void decreaseTempo();  // decreases by 5, clamped
+    Q_INVOKABLE void increaseTempo();  // increases by 5, clamped
+
+    int currentPlaybackBeat() const;   // -1 = none, 0..15 = active beat
 signals:
     void beatChanged(int beat);     // beat changed, QML should refresh visuals
     void expectedChanged(int beat); // expected answer changed (optional)
     void benchmarkFinished(QString result);
     void questionChanged();
+    void tempoChanged();
+    void playbackBeatChanged(); // currentPlaybackBeat changed; -1 = idle
 private:
     StaffLineGrid userGrid;
     QuestionHandler questionHandler;
@@ -68,8 +86,12 @@ private:
 
     void clearBeatInternal(int beat);
 
+    AudioEngine m_audioEngine;
+
     QString m_currentQuestionText;
     int m_currentQuestionNum = 0;
+    int m_tempoBpm           = 100; // clamped to [40, 200]
+    int m_currentPlaybackBeat = -1; // -1 = idle, 0..15 = active beat
     std::vector<int> m_allowedLengths;
     std::vector<int> m_allowedStartColumns;
     bool m_allowStacking = false;
