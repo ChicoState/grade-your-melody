@@ -33,17 +33,47 @@ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ./build/GradeYourMelody
 ```
+## Run with Audio in Docker (PulseAudio)
 
-### Ubuntu (VM) — GUI + Audio
+> ⚠️ This setup allows audio playback from inside the Docker container using PulseAudio.
+> Requires a Linux host with PulseAudio or PipeWire (Pulse compatibility).
+
+---
+
+### 1. Allow Docker to access display
+
 ```bash
 xhost +local:docker
-docker run -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    --device /dev/snd \
-    grade-your-melody ./build/GradeYourMelody
-```
 
-`--device /dev/snd` passes the host audio device into the container so `QAudioSink` can play sound.
+### 2. Run app with Audio enabled
+
+docker run --rm \
+  --user $(id -u):$(id -g) \
+  -e DISPLAY=$DISPLAY \
+  -e XDG_RUNTIME_DIR=/run/user/$(id -u) \
+  -e PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native \
+  -e PULSE_COOKIE=/home/$(whoami)/.config/pulse/cookie \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse \
+  -v ~/.config/pulse/cookie:/home/$(whoami)/.config/pulse/cookie:ro \
+  --device /dev/snd \
+  grade-your-melody ./build/GradeYourMelody
+
+3. (Optional) Test Audio Connection
+
+You can verify PulseAudio connectivity inside Docker:
+
+docker run --rm \
+  --user $(id -u):$(id -g) \
+  -e XDG_RUNTIME_DIR=/run/user/$(id -u) \
+  -e PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native \
+  -e PULSE_COOKIE=/home/$(whoami)/.config/pulse/cookie \
+  -v /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse \
+  -v ~/.config/pulse/cookie:/home/$(whoami)/.config/pulse/cookie:ro \
+  --device /dev/snd \
+  grade-your-melody pactl info
+
+If successful, it will print PulseAudio server information.
 
 ### Ubuntu (VM) — GUI only (no audio)
 ```bash
