@@ -80,7 +80,7 @@ Rectangle {
         source: "images/redx.gif"
         width: 27
         height: 27
-        visible: gradeCount > 0 && selected && !gridController.isBeatCorrect(beat)
+        visible: gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row)
         playing: visible
         cache: false
         speed: 2
@@ -124,7 +124,7 @@ Rectangle {
                 // Only show on note start beats (len > 0), not continuations
                 selected = hasNoteHere && len > 0
                 if (selected) {
-                    var acc = gridController.accidentalForBeat(beat)
+                    var acc = gridController.accidentalForBeatRow(beat, row)
 
                     // Note body: always use the plain note image so the flip transform
                     // controls stem direction independently of any accidental.
@@ -186,7 +186,7 @@ Rectangle {
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
     onGradeCountChanged: {
         wrongMark.currentFrame = 0
-        wrongMark.playing = (gradeCount > 0 && selected && !gridController.isBeatCorrect(beat))
+        wrongMark.playing = (gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row))
     }
 
     states: [
