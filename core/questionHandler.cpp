@@ -32,35 +32,68 @@ static bool ParseBool(const string& field) {
     return field == "true" || field == "True" || field == "1";
 }
 
-// If the CSV field is: (0-4-0 2-5-0 4-6-0) it first removes the outer parentheses, leaving: 0-4-0 2-5-0 4-6-0
-//Then it reads each token: 0-4-0 2-5-0 4-6-0 and splits each one at the dashes.
+// Converts a pitch name like "F4", "Bb4", or "F#5" into a diatonic row index and
+// accidental value. Row 0 = C4; each octave adds 7 rows (white keys only).
+// Returns false if the string is not a recognised pitch name.
+static bool parsePitch(const string& pitch, int& outRow, int& outAccent) {
+    if (pitch.empty()) return false;
+
+    // Map note letter to diatonic offset: C=0 D=1 E=2 F=3 G=4 A=5 B=6
+    static const string noteLetters = "CDEFGAB";
+    size_t i = 0;
+    char letter = (char)toupper((unsigned char)pitch[i++]);
+    size_t noteIndex = noteLetters.find(letter);
+    if (noteIndex == string::npos) return false;
+
+    // Optional accidental modifier
+    int accent = 0;
+    if (i < pitch.size() && pitch[i] == 'b') { accent = -1; ++i; }
+    else if (i < pitch.size() && pitch[i] == '#') { accent =  1; ++i; }
+
+    // Octave digit
+    if (i >= pitch.size() || !isdigit((unsigned char)pitch[i])) return false;
+    int octave = pitch[i] - '0';
+
+    outRow    = (octave - 4) * 7 + (int)noteIndex;
+    outAccent = accent;
+    return true;
+}
+
+// Parses the answer field.  Each space-separated token is either:
+//   Pitch-name format  "beat-PitchName"  e.g. 0-F4, 6-Bb4, 14-F#5
+//   Legacy row format  "beat-row-accent"  e.g. 0-3-0, 6-6--1
+// Both formats may appear in the same field for backwards compatibility.
 static vector<NoteInfo> ParseNotes(const string& field) {
     vector<NoteInfo> notes;
 
     string cleaned = field;
-
-    if (!cleaned.empty() && cleaned.front() == '(') {
-        cleaned.erase(0, 1);
-    }
-    if (!cleaned.empty() && cleaned.back() == ')') {
-        cleaned.pop_back();
-    }
+    if (!cleaned.empty() && cleaned.front() == '(') cleaned.erase(0, 1);
+    if (!cleaned.empty() && cleaned.back() == ')')  cleaned.pop_back();
 
     stringstream ss(cleaned);
     string token;
 
     while (ss >> token) {
         size_t firstDash = token.find('-');
-        size_t secondDash = token.find('-', firstDash + 1);
-
-        if (firstDash == string::npos || secondDash == string::npos) {
-            continue;
-        }
+        if (firstDash == string::npos) continue;
 
         NoteInfo note;
         note.beat = stoi(token.substr(0, firstDash));
-        note.row = stoi(token.substr(firstDash + 1, secondDash - firstDash - 1));
-        note.accent = stoi(token.substr(secondDash + 1));
+        string rest = token.substr(firstDash + 1);
+
+        if (!rest.empty() && isalpha((unsigned char)rest[0])) {
+            // Pitch-name format: rest is something like "F4" or "Bb4"
+            if (!parsePitch(rest, note.row, note.accent)) {
+                cerr << "WARNING: unrecognised pitch '" << rest << "' in CSV, skipping\n";
+                continue;
+            }
+        } else {
+            // Legacy format: rest is "row-accent" e.g. "3-0" or "6--1"
+            size_t sepDash = rest.find('-');
+            if (sepDash == string::npos) continue;
+            note.row    = stoi(rest.substr(0, sepDash));
+            note.accent = stoi(rest.substr(sepDash + 1));
+        }
 
         notes.push_back(note);
     }

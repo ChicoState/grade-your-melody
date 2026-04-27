@@ -18,7 +18,18 @@ Rectangle {
     property int currentScore: 0
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
-    onCurrentAccChanged: console.log("currentAcc now", currentAcc) 
+    onCurrentAccChanged: console.log("currentAcc now", currentAcc)
+
+    // Reset local score state whenever the controller loads a new question
+    Connections {
+        target: gridController
+        function onQuestionChanged() {
+            currentScore = 0
+            wrongBeats   = []
+            gradeCount   = 0
+        }
+    }
+
     Image {
         id: staffLines2
         x: 53
@@ -36,7 +47,7 @@ Rectangle {
 
         // Measure 1 (8 slots × 14 rows = 112)
         Repeater {
-            model: 112
+            model: 184
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
@@ -90,14 +101,14 @@ Rectangle {
         Text {
             text: gridController.currentQuestionText
             font.pixelSize: 28
-            leftPadding: 0
             color: "black"
+            anchors.horizontalCenter: parent.horizontalCenter
         }
         Image {
             source: "images/gradebutton.png"
             fillMode: Image.PreserveAspectFit
             height: 40
-            x: 20
+            anchors.horizontalCenter: parent.horizontalCenter
             opacity: gradeArea.pressed ? 0.6 : 1.0
             MouseArea {
                 id: gradeArea
@@ -111,6 +122,7 @@ Rectangle {
         }
         Row {
             spacing: 10
+            anchors.horizontalCenter: parent.horizontalCenter
 
             Image {
                 source: "images/flatbutton.png"
@@ -145,7 +157,7 @@ Rectangle {
         }
         Row {
             spacing: 10
-            x: -40
+            anchors.horizontalCenter: parent.horizontalCenter
             Image {
                 source: "images/eighthbutton.png"
                 fillMode: Image.PreserveAspectFit
@@ -186,14 +198,44 @@ Rectangle {
                     onClicked: rectangle.currentNoteLength = 4
                 }
             }
-            
+
         }
 
+        // Question navigation
+        Row {
+            spacing: 30
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Text {
+                text: "◀ Back"
+                font.pixelSize: 24
+                color: backArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: backArea
+                    anchors.fill: parent
+                    onClicked: gridController.previousQuestion()
+                }
+            }
+
+            Text {
+                text: "Question " + gridController.currentQuestionNum + " / " + gridController.totalQuestionsAvailable()
+                font.pixelSize: 24
+                color: "black"
+            }
+
+            Text {
+                text: "Next ▶"
+                font.pixelSize: 24
+                color: nextArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: nextArea
+                    anchors.fill: parent
+                    onClicked: gridController.nextQuestion()
+                }
+            }
+        }
     }
-
-
-
-
 }
+
 
 

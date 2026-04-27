@@ -307,10 +307,39 @@ void GridController::runMillion() {
 }
 
 
+int GridController::currentQuestionNum() const {
+    return m_currentQuestionNum;
+}
+
+int GridController::totalQuestionsAvailable() {
+    return (int)questionHandler.GetQuestions().size();
+}
+
+void GridController::nextQuestion() {
+    int total = (int)questionHandler.GetQuestions().size();
+    if (m_currentQuestionNum < total)
+        loadQuestion(m_currentQuestionNum + 1);
+}
+
+void GridController::previousQuestion() {
+    if (m_currentQuestionNum > 1)
+        loadQuestion(m_currentQuestionNum - 1);
+}
+
 void GridController::loadQuestion(int questionNum) {
-    // reset expected answers to empty
+    int total = (int)questionHandler.GetQuestions().size();
+    if (questionNum < 1 || questionNum > total) return;
+
+    m_currentQuestionNum = questionNum;
+
+    // Clear user-placed notes and per-beat state
+    userGrid.ClearGrid();
+    userAccidental.fill(0);
+    userLength.fill(0);
+
+    // Reset expected answers to empty
     expectedRow.fill(-1);
-    expectedAccidental.fill(0);    
+    expectedAccidental.fill(0);
 
     Question q = questionHandler.GetQuestion(questionNum);
     //debug question logic
