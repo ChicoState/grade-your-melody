@@ -18,6 +18,7 @@ Rectangle {
     property int currentScore: 0
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
+    property bool showAnswer: false
     onCurrentAccChanged: console.log("currentAcc now", currentAcc)
 
     // Reset local score state whenever the controller loads a new question
@@ -51,6 +52,7 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
+                showAnswer: rectangle.showAnswer
                 x: 276 + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: index % 8
@@ -65,6 +67,7 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
+                showAnswer: rectangle.showAnswer
                 x: 276 + (648 + 125) + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
@@ -119,6 +122,24 @@ Rectangle {
                     gradeCount++
                 }
             }
+        }
+        Image {
+            source: "images/gradebutton.png"
+            fillMode: Image.PreserveAspectFit
+            height: 40
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: showAnswerArea.pressed ? 0.6 : 1.0
+            MouseArea {
+                id: showAnswerArea
+                anchors.fill: parent
+                onClicked: rectangle.showAnswer = !rectangle.showAnswer
+            }
+        }
+        Text {
+            text: rectangle.showAnswer ? "Hide Answer" : "Show Answer"
+            font.pixelSize: 16
+            color: "black"
+            anchors.horizontalCenter: parent.horizontalCenter
         }
         Row {
             spacing: 10
