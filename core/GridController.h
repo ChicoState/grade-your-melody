@@ -28,6 +28,11 @@ public:
     Q_INVOKABLE int noteLengthForBeat(int beat) const;
     // grading
     Q_INVOKABLE void setExpectedRow(int beat, int row, int acc, int length = 1); // row -1 means "should be empty"
+    Q_INVOKABLE int  expectedRowForBeat(int beat) const;      // get expected row at this beat (-1 if empty)
+    Q_INVOKABLE int  expectedLengthForBeat(int beat) const;   // get expected length at this beat
+    Q_INVOKABLE int  expectedAccForBeat(int beat) const;      // get expected accidental at this beat
+    Q_INVOKABLE bool hasExpectedNote(int beat, int row) const; // check if (beat, row) is expected (for stacking)
+    Q_INVOKABLE int  expectedNoteLengthAt(int beat, int row) const; // get expected length at (beat, row)
     Q_INVOKABLE bool isBeatCorrect(int beat) const;
     Q_INVOKABLE bool isNoteIncorrect(int beat, int row) const;
     Q_INVOKABLE int  score() const;

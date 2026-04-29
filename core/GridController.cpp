@@ -226,6 +226,46 @@ void GridController::setExpectedRow(int beat, int row, int acc, int length) {
     emit expectedChanged(beat);
 }
 
+int GridController::expectedRowForBeat(int beat) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return -1;
+    return expectedRow[beat];
+}
+
+int GridController::expectedLengthForBeat(int beat) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return 0;
+    return expectedLength[beat];
+}
+
+int GridController::expectedAccForBeat(int beat) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return 0;
+    return expectedAccidental[beat];
+}
+bool GridController::hasExpectedNote(int beat, int row) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return false;
+    if (row < 0 || row >= StaffLineGrid::rows) return false;
+
+    if (!m_allowStacking) {
+        // Non-stacking: check flat array
+        return expectedRow[beat] == row;
+    }
+
+    // Stacking: search m_expectedNotes
+    for (const NoteInfo& note : m_expectedNotes) {
+        if (note.beat == beat && note.row == row) return true;
+    }
+    return false;
+}
+
+int GridController::expectedNoteLengthAt(int beat, int row) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return 0;
+    if (row < 0 || row >= StaffLineGrid::rows) return 0;
+
+    // Check if this cell has an expected note
+    if (!hasExpectedNote(beat, row)) return 0;
+
+    // Return the expected length at this beat (shared by all notes on the beat)
+    return expectedLength[beat];
+}
 bool GridController::isNoteIncorrect(int beat, int row) const {
     if (beat < 0 || beat >= StaffLineGrid::columns) return false;
     if (row < 0 || row >= StaffLineGrid::rows) return false;
@@ -526,10 +566,12 @@ void GridController::loadQuestion(int questionNum) {
     // m_expectedNotes holds the full list (supports multiple per beat for chords).
     // expectedRow/Accidental flat arrays are populated for non-stacking questions
     // and used by the non-stacking grading path.
+    int defaultExpectedLength = q.allowedLengths.empty() ? 1 : q.allowedLengths[0];
     for (const NoteInfo& note : q.notes) {
         if (note.beat >= 0 && note.beat < StaffLineGrid::columns
             && note.row >= 0 && note.row < StaffLineGrid::rows) {
             m_expectedNotes.push_back(note);
+            expectedLength[note.beat] = defaultExpectedLength;
             if (!m_allowStacking) {
                 expectedRow[note.beat] = note.row;
                 expectedAccidental[note.beat] = note.accent;

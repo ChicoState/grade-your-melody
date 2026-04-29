@@ -18,6 +18,7 @@ Rectangle {
     property int currentScore: 0
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
+    property bool showAnswer: false
     onCurrentAccChanged: console.log("currentAcc now", currentAcc)
 
     // Reset local score state whenever the controller loads a new question
@@ -27,6 +28,7 @@ Rectangle {
             currentScore = 0
             wrongBeats   = []
             gradeCount   = 0
+            showAnswer   = false
         }
     }
 
@@ -51,6 +53,7 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
+                showAnswer: rectangle.showAnswer
                 x: 276 + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: index % 8
@@ -65,6 +68,7 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
+                showAnswer: rectangle.showAnswer
                 x: 276 + (648 + 125) + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
@@ -118,6 +122,17 @@ Rectangle {
                     wrongBeats = gridController.incorrectBeats()
                     gradeCount++
                 }
+            }
+        }
+        Text {
+            text: rectangle.showAnswer ? "◀ Hide Answer" : "Show Answer ▶"
+            font.pixelSize: 20
+            color: showAnswerArea.containsPress ? "#888888" : "#1565C0"
+            anchors.horizontalCenter: parent.horizontalCenter
+            MouseArea {
+                id: showAnswerArea
+                anchors.fill: parent
+                onClicked: rectangle.showAnswer = !rectangle.showAnswer
             }
         }
         Row {

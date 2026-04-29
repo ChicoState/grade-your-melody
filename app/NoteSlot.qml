@@ -14,9 +14,69 @@ Rectangle {
     property bool selected: false
     property var wrongBeats: []
     property int gradeCount: 0
+    property bool showAnswer: false
     property bool flipped: row >= 6   // above B4 middle line → stem down
     property int noteLen: 1           // tracks placed note type for transform
 
+<<<<<<< HEAD
+=======
+    function updateAnswerNote() {
+        if (!gridController) return;
+
+        var hasExpected = gridController.hasExpectedNote(beat, row)
+        answernote.visible = root.showAnswer && hasExpected
+        if (!answernote.visible) {
+            answerAccidentalText.visible = false
+            return
+        }
+
+        var expectedLen = gridController.expectedNoteLengthAt(beat, row)
+        var expectedFlipped = row >= 6
+
+        if (expectedLen === 1) {
+            answernote.source = "images/eighthnote.png"
+            answernote.x = expectedFlipped ? -35.5 : -19
+            answernote.y = expectedFlipped ? 1 : -62
+            answernote.width = 92
+            answernote.height = 91
+        } else if (expectedLen === 2) {
+            answernote.source = "images/quarternote.png"
+            answernote.x = expectedFlipped ? -32 : -28
+            answernote.y = expectedFlipped ? -2 : -62
+            answernote.width = 98
+            answernote.height = 96
+        } else if (expectedLen === 3) {
+            answernote.source = "images/halfnote.png"
+            answernote.x = expectedFlipped ? -29.5 : -29
+            answernote.y = expectedFlipped ? 3 : -63
+            answernote.width = 96
+            answernote.height = 94
+        } else if (expectedLen === 4) {
+            answernote.source = "images/wholenote.png"
+            answernote.x = 0
+            answernote.y = -3
+            answernote.width = 40
+            answernote.height = 38
+        }
+
+        var flipScale = (expectedFlipped && expectedLen !== 4) ? -1 : 1
+        answerScale.xScale = flipScale
+        answerScale.yScale = flipScale
+
+        var expectedAcc = gridController.expectedAccForBeat(beat)
+        if (expectedAcc === 1) {
+            answerAccidentalText.text = "♯"
+            answerAccidentalText.visible = true
+        } else if (expectedAcc === -1) {
+            answerAccidentalText.text = "♭"
+            answerAccidentalText.visible = true
+        } else {
+            answerAccidentalText.text = ""
+            answerAccidentalText.visible = false
+        }
+    }
+    
+>>>>>>> fix/show-answer-visibility
     Image {
         id: hovernote
         x: 4
@@ -47,6 +107,38 @@ Rectangle {
         Behavior on opacity {
             NumberAnimation { duration: 150 }
         }
+    }
+
+    Image {
+        id: answernote
+        x: -28
+        y: -62
+        width: 98
+        height: 96
+        visible: false
+        source: "images/quarternote.png"
+        fillMode: Image.PreserveAspectFit
+        opacity: 0.35
+        transform: Scale {
+            // 180° flip (both axes) = stem down; whole notes never flip
+            id: answerScale
+            xScale: 1
+            yScale: 1
+            origin.x: answernote.width / 2
+            origin.y: answernote.height / 2
+        }
+    }
+
+    // Correct-answer accidental glyph — shown alongside answernote when showAnswer is ON
+    Text {
+        id: answerAccidentalText
+        visible: false
+        text: ""
+        font.pixelSize: 58
+        color: "black"
+        opacity: 0.35
+        x: -28
+        y: -26
     }
 
     // Accidental glyph — rendered as unicode text so it is never affected by the note flip transform
@@ -80,7 +172,7 @@ Rectangle {
         source: "images/redx.gif"
         width: 27
         height: 27
-        visible: gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row)
+        visible: gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer
         playing: visible
         cache: false
         speed: 2
@@ -162,10 +254,10 @@ Rectangle {
                     // transform, so it is always upright regardless of stem direction.
                     if (acc === 1) {
                         accidentalText.text = "♯"
-                        accidentalText.visible = true
+                        accidentalText.visible = !root.showAnswer
                     } else if (acc === -1) {
                         accidentalText.text = "♭"
-                        accidentalText.visible = true
+                        accidentalText.visible = !root.showAnswer
                     } else {
                         accidentalText.text = ""
                         accidentalText.visible = false
@@ -173,7 +265,13 @@ Rectangle {
                 } else {
                     accidentalText.visible = false
                 }
+
+                // Handle answer ghost note visibility
+                updateAnswerNote()
             }
+        }
+        function onExpectedChanged(changedBeat) {
+            if (changedBeat === beat) updateAnswerNote()
         }
     }
  
@@ -186,7 +284,16 @@ Rectangle {
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
     onGradeCountChanged: {
         wrongMark.currentFrame = 0
-        wrongMark.playing = (gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row))
+        wrongMark.playing = (gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer)
+    }
+
+    onShowAnswerChanged: {
+        updateAnswerNote()
+        // Re-sync user accidental text when toggling answer mode
+        if (selected) {
+            var acc = gridController.accidentalForBeatRow(beat, row)
+            accidentalText.visible = !root.showAnswer && (acc !== 0)
+        }
     }
 
     states: [
@@ -196,7 +303,7 @@ Rectangle {
         },
         State {
             name: "clicked"
-            PropertyChanges { target: placenote; visible: true; opacity: 1 }
+            PropertyChanges { target: placenote; visible: !root.showAnswer; opacity: 1 }
         }
     ]
 }
