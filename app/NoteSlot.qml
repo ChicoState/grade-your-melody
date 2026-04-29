@@ -23,7 +23,10 @@ Rectangle {
 
         var hasExpected = gridController.hasExpectedNote(beat, row)
         answernote.visible = root.showAnswer && hasExpected
-        if (!answernote.visible) return;
+        if (!answernote.visible) {
+            answerAccidentalText.visible = false
+            return
+        }
 
         var expectedLen = gridController.expectedNoteLengthAt(beat, row)
         var expectedFlipped = row >= 6
@@ -57,6 +60,18 @@ Rectangle {
         var flipScale = (expectedFlipped && expectedLen !== 4) ? -1 : 1
         answerScale.xScale = flipScale
         answerScale.yScale = flipScale
+
+        var expectedAcc = gridController.expectedAccForBeat(beat)
+        if (expectedAcc === 1) {
+            answerAccidentalText.text = "♯"
+            answerAccidentalText.visible = true
+        } else if (expectedAcc === -1) {
+            answerAccidentalText.text = "♭"
+            answerAccidentalText.visible = true
+        } else {
+            answerAccidentalText.text = ""
+            answerAccidentalText.visible = false
+        }
     }
     
     Image {
@@ -111,6 +126,18 @@ Rectangle {
         }
     }
 
+    // Correct-answer accidental glyph — shown alongside answernote when showAnswer is ON
+    Text {
+        id: answerAccidentalText
+        visible: false
+        text: ""
+        font.pixelSize: 58
+        color: "black"
+        opacity: 0.35
+        x: -28
+        y: -26
+    }
+
     // Accidental glyph — rendered as unicode text so it is never affected by the note flip transform
     Text {
         id: accidentalText
@@ -142,7 +169,7 @@ Rectangle {
         source: "images/redx.gif"
         width: 27
         height: 27
-        visible: gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row)
+        visible: gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer
         playing: visible
         cache: false
         speed: 2
@@ -224,10 +251,10 @@ Rectangle {
                     // transform, so it is always upright regardless of stem direction.
                     if (acc === 1) {
                         accidentalText.text = "♯"
-                        accidentalText.visible = true
+                        accidentalText.visible = !root.showAnswer
                     } else if (acc === -1) {
                         accidentalText.text = "♭"
-                        accidentalText.visible = true
+                        accidentalText.visible = !root.showAnswer
                     } else {
                         accidentalText.text = ""
                         accidentalText.visible = false
@@ -240,6 +267,9 @@ Rectangle {
                 updateAnswerNote()
             }
         }
+        function onExpectedChanged(changedBeat) {
+            if (changedBeat === beat) updateAnswerNote()
+        }
     }
  
     // Keep state synced
@@ -251,10 +281,17 @@ Rectangle {
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
     onGradeCountChanged: {
         wrongMark.currentFrame = 0
-        wrongMark.playing = (gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row))
+        wrongMark.playing = (gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer)
     }
 
-    onShowAnswerChanged: updateAnswerNote()
+    onShowAnswerChanged: {
+        updateAnswerNote()
+        // Re-sync user accidental text when toggling answer mode
+        if (selected) {
+            var acc = gridController.accidentalForBeatRow(beat, row)
+            accidentalText.visible = !root.showAnswer && (acc !== 0)
+        }
+    }
 
     states: [
         State {
@@ -263,7 +300,7 @@ Rectangle {
         },
         State {
             name: "clicked"
-            PropertyChanges { target: placenote; visible: true; opacity: 1 }
+            PropertyChanges { target: placenote; visible: !root.showAnswer; opacity: 1 }
         }
     ]
 }

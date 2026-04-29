@@ -28,6 +28,7 @@ Rectangle {
             currentScore = 0
             wrongBeats   = []
             gradeCount   = 0
+            showAnswer   = false
         }
     }
 
@@ -123,23 +124,16 @@ Rectangle {
                 }
             }
         }
-        Image {
-            source: "images/gradebutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
+        Text {
+            text: rectangle.showAnswer ? "◀ Hide Answer" : "Show Answer ▶"
+            font.pixelSize: 20
+            color: showAnswerArea.containsPress ? "#888888" : "#1565C0"
             anchors.horizontalCenter: parent.horizontalCenter
-            opacity: showAnswerArea.pressed ? 0.6 : 1.0
             MouseArea {
                 id: showAnswerArea
                 anchors.fill: parent
                 onClicked: rectangle.showAnswer = !rectangle.showAnswer
             }
-        }
-        Text {
-            text: rectangle.showAnswer ? "Hide Answer" : "Show Answer"
-            font.pixelSize: 16
-            color: "black"
-            anchors.horizontalCenter: parent.horizontalCenter
         }
         Row {
             spacing: 10
