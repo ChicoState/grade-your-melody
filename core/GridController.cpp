@@ -82,6 +82,8 @@ void GridController::clearBeatInternal(int beat) {
 }
 
 // Removes any existing note whose occupied range overlaps [newBeat, newBeat+newLength-1].
+// Why: prevents a longer/shorter note from leaving stale fragments behind when the user
+// places something on top of it (e.g., placing a half over an existing quarter).
 // Chord-preservation rule: notes with the same start AND same length as the new note
 // are kept so users can stack multiple rows at the same beat.
 void GridController::clearOverlappingNotes(int newBeat, int newLength) {
@@ -318,6 +320,9 @@ int GridController::expectedAccForBeat(int beat) const {
     return expectedAccidental[beat];
 }
 
+// Per-row variant. Required for chord answers where two notes at the same beat
+// can have different accidentals (e.g. C minor chord = C natural, Eb, G natural).
+// expectedAccForBeat() can't represent that since it only stores one value per beat.
 int GridController::expectedAccForBeatRow(int beat, int row) const {
     if (beat < 0 || beat >= StaffLineGrid::columns) return 0;
     if (row  < 0 || row  >= StaffLineGrid::rows)    return 0;
@@ -581,6 +586,10 @@ void GridController::clearStaff() {
     for (int b = 0; b < StaffLineGrid::columns; ++b) emit beatChanged(b);
 }
 
+// Free Staff mode = a runtime gate, not a question reload. It bypasses CSV
+// length/start-column rules and forces the stacking placement path on, while
+// leaving m_allowStacking untouched so Normal Mode grading still respects the
+// loaded question's CSV settings.
 void GridController::setFreeStaffMode(bool enabled) {
     m_freeStaffMode = enabled;
 }
@@ -662,7 +671,9 @@ void GridController::loadQuestion(int questionNum) {
     for (auto& rowArr : userAccidental) rowArr.fill(0);
     userLength.fill(0);
 
-    // Reset expected answers to empty
+    // Reset expected answers to empty.
+    // expectedLength must also be reset — otherwise stale lengths from the previous
+    // question can leak into the new one and corrupt Show Answer for chord beats.
     expectedRow.fill(-1);
     expectedAccidental.fill(0);
     expectedLength.fill(0);

@@ -62,6 +62,8 @@ Rectangle {
         answerScale.xScale = flipScale
         answerScale.yScale = flipScale
 
+        // Per-row (not per-beat) — chord answers can have different accidentals on
+        // different rows at the same beat (e.g. C minor: C natural + Eb + G natural).
         var expectedAcc = gridController.expectedAccForBeatRow(beat, row)
         if (expectedAcc === 1) {
             answerAccidentalText.text = "♯"

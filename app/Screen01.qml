@@ -19,6 +19,8 @@ Rectangle {
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
     property bool showAnswer: false
+    // Three top-level modes: Quiz (default, both flags false), Ear Training, Free Staff.
+    // Mutual exclusion is enforced inside the onXxxChanged handlers below.
     property bool earTraining: false
     property bool earAnswerSelected: false
     property bool earAnswerCorrect: false
@@ -173,6 +175,8 @@ Rectangle {
         anchors.top: staffLines2.bottom
         anchors.topMargin: -20
         Text {
+            // In Ear Training the real question text would reveal the answer ("Write a F major scale"),
+            // so we hide it behind a neutral label. Free Staff has no question, so we show a mode label too.
             text: rectangle.freeStaff   ? "Free Staff"
                 : rectangle.earTraining ? "Ear Training: Identify the Sound"
                 : gridController.currentQuestionText
