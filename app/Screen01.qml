@@ -19,16 +19,59 @@ Rectangle {
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
     property bool showAnswer: false
+    property bool earTraining: false
+    property bool earAnswerSelected: false
+    property bool earAnswerCorrect: false
     onCurrentAccChanged: console.log("currentAcc now", currentAcc)
+
+    // Reset Ear Training and answer state when toggling the mode
+    onEarTrainingChanged: {
+        showAnswer        = false
+        earAnswerSelected = false
+        earAnswerCorrect  = false
+        gridController.stopPlayback()
+    }
 
     // Reset local score state whenever the controller loads a new question
     Connections {
         target: gridController
         function onQuestionChanged() {
-            currentScore = 0
-            wrongBeats   = []
-            gradeCount   = 0
-            showAnswer   = false
+            currentScore      = 0
+            wrongBeats        = []
+            gradeCount        = 0
+            showAnswer        = false
+            earAnswerSelected = false
+            earAnswerCorrect  = false
+            gridController.stopPlayback()
+        }
+    }
+
+    // Top-level mode toggle
+    Row {
+        id: modeToggle
+        x: 30
+        y: 20
+        spacing: 30
+
+        Text {
+            text: "Normal Mode"
+            font.pixelSize: 22
+            font.bold: !rectangle.earTraining
+            color: !rectangle.earTraining ? "#1565C0" : "#888888"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.earTraining = false
+            }
+        }
+        Text {
+            text: "Ear Training"
+            font.pixelSize: 22
+            font.bold: rectangle.earTraining
+            color: rectangle.earTraining ? "#1565C0" : "#888888"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.earTraining = true
+            }
         }
     }
 
@@ -54,6 +97,7 @@ Rectangle {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
                 showAnswer: rectangle.showAnswer
+                earTraining: rectangle.earTraining
                 x: 276 + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: index % 8
@@ -69,6 +113,7 @@ Rectangle {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
                 showAnswer: rectangle.showAnswer
+                earTraining: rectangle.earTraining
                 x: 276 + (648 + 125) + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
@@ -108,11 +153,78 @@ Rectangle {
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
         }
+
+        // ── Ear Training controls (visible only in Ear Training mode) ────────
+        Column {
+            spacing: 16
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: rectangle.earTraining
+
+            Text {
+                text: "🔊 Hear Question"
+                font.pixelSize: 24
+                color: hearArea.containsPress ? "#888888" : "#1565C0"
+                anchors.horizontalCenter: parent.horizontalCenter
+                MouseArea {
+                    id: hearArea
+                    anchors.fill: parent
+                    onClicked: gridController.playExpectedAnswer()
+                }
+            }
+
+            Row {
+                spacing: 40
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                Text {
+                    text: "Choice A"
+                    font.pixelSize: 24
+                    color: choiceAArea.containsPress ? "#888888" : "black"
+                    opacity: rectangle.earAnswerSelected ? 0.5 : 1.0
+                    MouseArea {
+                        id: choiceAArea
+                        anchors.fill: parent
+                        enabled: !rectangle.earAnswerSelected
+                        onClicked: {
+                            rectangle.earAnswerSelected = true
+                            rectangle.earAnswerCorrect  = true
+                            rectangle.showAnswer        = true
+                        }
+                    }
+                }
+                Text {
+                    text: "Choice B"
+                    font.pixelSize: 24
+                    color: choiceBArea.containsPress ? "#888888" : "black"
+                    opacity: rectangle.earAnswerSelected ? 0.5 : 1.0
+                    MouseArea {
+                        id: choiceBArea
+                        anchors.fill: parent
+                        enabled: !rectangle.earAnswerSelected
+                        onClicked: {
+                            rectangle.earAnswerSelected = true
+                            rectangle.earAnswerCorrect  = false
+                            rectangle.showAnswer        = true
+                        }
+                    }
+                }
+            }
+
+            Text {
+                visible: rectangle.earAnswerSelected
+                text: rectangle.earAnswerCorrect ? "Correct!" : "Incorrect"
+                font.pixelSize: 28
+                color: rectangle.earAnswerCorrect ? "#2E7D32" : "#C62828"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+
         Image {
             source: "images/gradebutton.png"
             fillMode: Image.PreserveAspectFit
             height: 40
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
             opacity: gradeArea.pressed ? 0.6 : 1.0
             MouseArea {
                 id: gradeArea
@@ -129,6 +241,7 @@ Rectangle {
             font.pixelSize: 20
             color: showAnswerArea.containsPress ? "#888888" : "#1565C0"
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
             MouseArea {
                 id: showAnswerArea
                 anchors.fill: parent
@@ -138,6 +251,7 @@ Rectangle {
         Row {
             spacing: 10
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
 
             Image {
                 source: "images/flatbutton.png"
@@ -173,6 +287,7 @@ Rectangle {
         Row {
             spacing: 10
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
             Image {
                 source: "images/eighthbutton.png"
                 fillMode: Image.PreserveAspectFit
@@ -220,6 +335,7 @@ Rectangle {
         Row {
             spacing: 30
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
 
             Text {
                 text: "▶ Play"

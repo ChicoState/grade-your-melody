@@ -57,6 +57,9 @@ public:
     // Play the first occupied beat as a chord using the loaded SoundFont
     Q_INVOKABLE void playCurrentNotes();
 
+    // Play the correct answer for the current question (Ear Training mode)
+    Q_INVOKABLE void playExpectedAnswer();
+
     // Stop any currently playing audio immediately
     Q_INVOKABLE void stopPlayback();
 

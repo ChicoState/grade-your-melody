@@ -15,11 +15,10 @@ Rectangle {
     property var wrongBeats: []
     property int gradeCount: 0
     property bool showAnswer: false
+    property bool earTraining: false
     property bool flipped: row >= 6   // above B4 middle line → stem down
     property int noteLen: 1           // tracks placed note type for transform
 
-<<<<<<< HEAD
-=======
     function updateAnswerNote() {
         if (!gridController) return;
 
@@ -76,7 +75,6 @@ Rectangle {
         }
     }
     
->>>>>>> fix/show-answer-visibility
     Image {
         id: hovernote
         x: 4
@@ -172,7 +170,7 @@ Rectangle {
         source: "images/redx.gif"
         width: 27
         height: 27
-        visible: gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer
+        visible: gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer && !root.earTraining
         playing: visible
         cache: false
         speed: 2
@@ -194,6 +192,7 @@ Rectangle {
         }
         onExited: if (root.state != "clicked") root.state = ""
         onPressed: {
+            if (root.earTraining) return
             if(!gridController) return
             if (selected) {
                 gridController.clearBeat(beat)
@@ -254,10 +253,10 @@ Rectangle {
                     // transform, so it is always upright regardless of stem direction.
                     if (acc === 1) {
                         accidentalText.text = "♯"
-                        accidentalText.visible = !root.showAnswer
+                        accidentalText.visible = !root.showAnswer && !root.earTraining
                     } else if (acc === -1) {
                         accidentalText.text = "♭"
-                        accidentalText.visible = !root.showAnswer
+                        accidentalText.visible = !root.showAnswer && !root.earTraining
                     } else {
                         accidentalText.text = ""
                         accidentalText.visible = false
@@ -284,7 +283,7 @@ Rectangle {
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
     onGradeCountChanged: {
         wrongMark.currentFrame = 0
-        wrongMark.playing = (gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer)
+        wrongMark.playing = (gradeCount > 0 && selected && gridController.isNoteIncorrect(beat, row) && !root.showAnswer && !root.earTraining)
     }
 
     onShowAnswerChanged: {
@@ -292,7 +291,15 @@ Rectangle {
         // Re-sync user accidental text when toggling answer mode
         if (selected) {
             var acc = gridController.accidentalForBeatRow(beat, row)
-            accidentalText.visible = !root.showAnswer && (acc !== 0)
+            accidentalText.visible = !root.showAnswer && !root.earTraining && (acc !== 0)
+        }
+    }
+
+    onEarTrainingChanged: {
+        // Re-sync user accidental text when toggling Ear Training mode
+        if (selected) {
+            var acc = gridController.accidentalForBeatRow(beat, row)
+            accidentalText.visible = !root.showAnswer && !root.earTraining && (acc !== 0)
         }
     }
 
@@ -303,7 +310,7 @@ Rectangle {
         },
         State {
             name: "clicked"
-            PropertyChanges { target: placenote; visible: !root.showAnswer; opacity: 1 }
+            PropertyChanges { target: placenote; visible: !root.showAnswer && !root.earTraining; opacity: 1 }
         }
     ]
 }

@@ -507,6 +507,26 @@ void GridController::playCurrentNotes() {
     m_audioEngine.playSequence(notes, static_cast<double>(m_tempoBpm));
 }
 
+void GridController::playExpectedAnswer() {
+    if (m_expectedNotes.empty()) return;
+
+    // Stop any existing playback before starting the expected answer
+    m_audioEngine.stop();
+
+    QList<QVariantMap> notes;
+    notes.reserve(static_cast<int>(m_expectedNotes.size()));
+    for (const NoteInfo& note : m_expectedNotes) {
+        QVariantMap m;
+        m["beat"]   = note.beat;
+        m["row"]    = note.row;
+        m["acc"]    = note.accent;
+        m["length"] = expectedNoteLengthAt(note.beat, note.row);
+        notes.append(m);
+    }
+
+    m_audioEngine.playSequence(notes, static_cast<double>(m_tempoBpm));
+}
+
 int GridController::currentQuestionNum() const {
     return m_currentQuestionNum;
 }
