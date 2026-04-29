@@ -13,6 +13,9 @@ class GridController : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentQuestionText READ currentQuestionText NOTIFY questionChanged)
     Q_PROPERTY(int currentQuestionNum READ currentQuestionNum NOTIFY questionChanged)
+    Q_PROPERTY(QString currentChoiceA READ currentChoiceA NOTIFY questionChanged)
+    Q_PROPERTY(QString currentChoiceB READ currentChoiceB NOTIFY questionChanged)
+    Q_PROPERTY(QString currentCorrectChoice READ currentCorrectChoice NOTIFY questionChanged)
     Q_PROPERTY(int tempoBpm READ tempoBpm WRITE setTempoBpm NOTIFY tempoChanged)
     Q_PROPERTY(int currentPlaybackBeat READ currentPlaybackBeat NOTIFY playbackBeatChanged)
 public:
@@ -31,6 +34,7 @@ public:
     Q_INVOKABLE int  expectedRowForBeat(int beat) const;      // get expected row at this beat (-1 if empty)
     Q_INVOKABLE int  expectedLengthForBeat(int beat) const;   // get expected length at this beat
     Q_INVOKABLE int  expectedAccForBeat(int beat) const;      // get expected accidental at this beat
+    Q_INVOKABLE int  expectedAccForBeatRow(int beat, int row) const; // per-note accidental (chord-aware)
     Q_INVOKABLE bool hasExpectedNote(int beat, int row) const; // check if (beat, row) is expected (for stacking)
     Q_INVOKABLE int  expectedNoteLengthAt(int beat, int row) const; // get expected length at (beat, row)
     Q_INVOKABLE bool isBeatCorrect(int beat) const;
@@ -73,6 +77,11 @@ public:
     Q_INVOKABLE void increaseTempo();  // increases by 5, clamped
 
     int currentPlaybackBeat() const;   // -1 = none, 0..15 = active beat
+
+    // Ear Training answer-choice data (sourced from CSV per question)
+    QString currentChoiceA() const;
+    QString currentChoiceB() const;
+    QString currentCorrectChoice() const;
 signals:
     void beatChanged(int beat);     // beat changed, QML should refresh visuals
     void expectedChanged(int beat); // expected answer changed (optional)
@@ -105,6 +114,9 @@ private:
     AudioEngine m_audioEngine;
 
     QString m_currentQuestionText;
+    QString m_currentChoiceA;
+    QString m_currentChoiceB;
+    QString m_currentCorrectChoice = "A";
     int m_currentQuestionNum = 0;
     int m_tempoBpm           = 100; // clamped to [40, 200]
     int m_currentPlaybackBeat = -1; // -1 = idle, 0..15 = active beat

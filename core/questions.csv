@@ -1,4 +1,6 @@
-Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled
-Write a C major scale,"(0-C4 2-D4 4-E4 6-F4 8-G4 10-A4 12-B4 14-C5)","2","0 2 4 6 8 10 12 14",false,true
-Write a F major scale,"(0-F4 2-G4 4-A4 6-Bb4 8-C5 10-D5 12-E5 14-F5)","2","0 2 4 6 8 10 12 14",false,true
-Write a C major chord,"(0-C4 0-E4 0-G4)","4","0",true,false
+Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled,ChoiceA,ChoiceB,CorrectChoice
+Write a C major scale,"(0-C4 2-D4 4-E4 6-F4 8-G4 10-A4 12-B4 14-C5)","2","0 2 4 6 8 10 12 14",false,true,Major scale,Minor scale,A
+Write a F minor scale,"(0-F4 2-G4 4-Ab4 6-Bb4 8-C5 10-Db5 12-Eb5 14-F5)","2","0 2 4 6 8 10 12 14",false,true,Major scale,Minor scale,B
+Write a C major chord,"(0-C4 0-E4 0-G4)","4","0",true,false,Major chord,Minor chord,A
+Write a C minor chord,"(0-C4 0-Eb4 0-G4)","4","0",true,false,Major chord,Minor chord,B
+

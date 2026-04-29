@@ -62,7 +62,7 @@ Rectangle {
         answerScale.xScale = flipScale
         answerScale.yScale = flipScale
 
-        var expectedAcc = gridController.expectedAccForBeat(beat)
+        var expectedAcc = gridController.expectedAccForBeatRow(beat, row)
         if (expectedAcc === 1) {
             answerAccidentalText.text = "♯"
             answerAccidentalText.visible = true

@@ -88,3 +88,42 @@ TEST(QuestionHandlerTest, PitchNameParsing) {
 
     filesystem::remove(filename);
 }
+
+TEST(QuestionHandlerTest, ChordWithFlatsParsesDistinctly) {
+    // Regression: C minor chord (with Eb4) must NOT parse the same as C major chord.
+    // Each stacked note's accidental must survive into m_expectedNotes.
+    const string filename = "questions.csv";
+    const string data =
+        "Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled,ChoiceA,ChoiceB,CorrectChoice\n"
+        "C major chord,\"(0-C4 0-E4 0-G4)\",4,0,true,false,Major chord,Minor chord,A\n"
+        "C minor chord,\"(0-C4 0-Eb4 0-G4)\",4,0,true,false,Major chord,Minor chord,B\n";
+
+    {
+        ofstream out(filename);
+        ASSERT_TRUE(out.is_open()) << "Unable to create temporary CSV file: " << filename;
+        out << data;
+    }
+
+    QuestionHandler handler;
+    vector<Question> questions = handler.GetQuestions();
+
+    ASSERT_EQ(questions.size(), 2u);
+
+    // C major chord: C E G — all naturals
+    ASSERT_EQ(questions[0].notes.size(), 3u);
+    EXPECT_EQ(questions[0].notes[1].row,    2);  // E4
+    EXPECT_EQ(questions[0].notes[1].accent, 0);  // natural
+    EXPECT_EQ(questions[0].correctChoice,  "A");
+
+    // C minor chord: C Eb G — middle note is flat
+    ASSERT_EQ(questions[1].notes.size(), 3u);
+    EXPECT_EQ(questions[1].notes[0].row,    0);  // C4
+    EXPECT_EQ(questions[1].notes[0].accent, 0);
+    EXPECT_EQ(questions[1].notes[1].row,    2);  // Eb4 → row of E
+    EXPECT_EQ(questions[1].notes[1].accent, -1); // ← flat
+    EXPECT_EQ(questions[1].notes[2].row,    4);  // G4
+    EXPECT_EQ(questions[1].notes[2].accent, 0);
+    EXPECT_EQ(questions[1].correctChoice,  "B");
+
+    filesystem::remove(filename);
+}

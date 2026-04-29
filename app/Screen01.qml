@@ -173,7 +173,9 @@ Rectangle {
         anchors.top: staffLines2.bottom
         anchors.topMargin: -20
         Text {
-            text: rectangle.freeStaff ? "Free Staff" : gridController.currentQuestionText
+            text: rectangle.freeStaff   ? "Free Staff"
+                : rectangle.earTraining ? "Ear Training: Identify the Sound"
+                : gridController.currentQuestionText
             font.pixelSize: 28
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
@@ -216,7 +218,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Text {
-                    text: "Choice A"
+                    text: gridController.currentChoiceA
                     font.pixelSize: 24
                     color: choiceAArea.containsPress ? "#888888" : "black"
                     opacity: rectangle.earAnswerSelected ? 0.5 : 1.0
@@ -226,13 +228,13 @@ Rectangle {
                         enabled: !rectangle.earAnswerSelected
                         onClicked: {
                             rectangle.earAnswerSelected = true
-                            rectangle.earAnswerCorrect  = true
+                            rectangle.earAnswerCorrect  = (gridController.currentCorrectChoice === "A")
                             rectangle.showAnswer        = true
                         }
                     }
                 }
                 Text {
-                    text: "Choice B"
+                    text: gridController.currentChoiceB
                     font.pixelSize: 24
                     color: choiceBArea.containsPress ? "#888888" : "black"
                     opacity: rectangle.earAnswerSelected ? 0.5 : 1.0
@@ -242,7 +244,7 @@ Rectangle {
                         enabled: !rectangle.earAnswerSelected
                         onClicked: {
                             rectangle.earAnswerSelected = true
-                            rectangle.earAnswerCorrect  = false
+                            rectangle.earAnswerCorrect  = (gridController.currentCorrectChoice === "B")
                             rectangle.showAnswer        = true
                         }
                     }

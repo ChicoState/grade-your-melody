@@ -34,6 +34,11 @@ struct Question {
     vector<int> allowedStartColumns;
     bool allowStacking = false;
     bool requireAllFilled = false;
+
+    // Ear Training answer choices (CSV columns 7–9, optional)
+    string choiceA;
+    string choiceB;
+    string correctChoice = "A";
 };
 
 class QuestionHandler {

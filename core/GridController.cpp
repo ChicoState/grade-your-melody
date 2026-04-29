@@ -34,6 +34,10 @@ QString GridController::currentQuestionText() const {
     return m_currentQuestionText;
 }
 
+QString GridController::currentChoiceA() const       { return m_currentChoiceA; }
+QString GridController::currentChoiceB() const       { return m_currentChoiceB; }
+QString GridController::currentCorrectChoice() const { return m_currentCorrectChoice; }
+
 //Helper: is note length allowed
 bool GridController::isLengthAllowed(int length) const {
     if (m_allowedLengths.empty()) return true;
@@ -312,6 +316,22 @@ int GridController::expectedLengthForBeat(int beat) const {
 int GridController::expectedAccForBeat(int beat) const {
     if (beat < 0 || beat >= StaffLineGrid::columns) return 0;
     return expectedAccidental[beat];
+}
+
+int GridController::expectedAccForBeatRow(int beat, int row) const {
+    if (beat < 0 || beat >= StaffLineGrid::columns) return 0;
+    if (row  < 0 || row  >= StaffLineGrid::rows)    return 0;
+
+    if (!m_allowStacking) {
+        // Non-stacking: per-beat accidental applies only when this row matches the expected row
+        return (expectedRow[beat] == row) ? expectedAccidental[beat] : 0;
+    }
+
+    // Stacking: each chord note carries its own accidental in m_expectedNotes
+    for (const NoteInfo& note : m_expectedNotes) {
+        if (note.beat == beat && note.row == row) return note.accent;
+    }
+    return 0;
 }
 bool GridController::hasExpectedNote(int beat, int row) const {
     if (beat < 0 || beat >= StaffLineGrid::columns) return false;
@@ -645,6 +665,7 @@ void GridController::loadQuestion(int questionNum) {
     // Reset expected answers to empty
     expectedRow.fill(-1);
     expectedAccidental.fill(0);
+    expectedLength.fill(0);
     m_expectedNotes.clear();
 
     Question q = questionHandler.GetQuestion(questionNum);
@@ -663,6 +684,11 @@ void GridController::loadQuestion(int questionNum) {
     m_allowedStartColumns = q.allowedStartColumns;
     m_allowStacking = q.allowStacking;
     m_requireAllFilled = q.requireAllFilled;
+
+    // Ear Training answer choices
+    m_currentChoiceA       = QString::fromStdString(q.choiceA);
+    m_currentChoiceB       = QString::fromStdString(q.choiceB);
+    m_currentCorrectChoice = QString::fromStdString(q.correctChoice);
 
     emit questionChanged();
 
