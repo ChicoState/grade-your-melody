@@ -22,6 +22,7 @@ Rectangle {
     property bool earTraining: false
     property bool earAnswerSelected: false
     property bool earAnswerCorrect: false
+    property bool freeStaff: false
     onCurrentAccChanged: console.log("currentAcc now", currentAcc)
 
     // Reset Ear Training and answer state when toggling the mode
@@ -30,6 +31,17 @@ Rectangle {
         earAnswerSelected = false
         earAnswerCorrect  = false
         gridController.stopPlayback()
+        if (earTraining) freeStaff = false   // mutual exclusion
+    }
+
+    // Toggle Free Staff mode in the controller and reset overlapping state
+    onFreeStaffChanged: {
+        showAnswer        = false
+        earAnswerSelected = false
+        earAnswerCorrect  = false
+        gridController.stopPlayback()
+        gridController.setFreeStaffMode(freeStaff)
+        if (freeStaff) earTraining = false   // mutual exclusion
     }
 
     // Reset local score state whenever the controller loads a new question
@@ -54,13 +66,16 @@ Rectangle {
         spacing: 30
 
         Text {
-            text: "Normal Mode"
+            text: "Quiz Mode"
             font.pixelSize: 22
-            font.bold: !rectangle.earTraining
-            color: !rectangle.earTraining ? "#1565C0" : "#888888"
+            font.bold: !rectangle.earTraining && !rectangle.freeStaff
+            color: (!rectangle.earTraining && !rectangle.freeStaff) ? "#1565C0" : "#888888"
             MouseArea {
                 anchors.fill: parent
-                onClicked: rectangle.earTraining = false
+                onClicked: {
+                    rectangle.earTraining = false
+                    rectangle.freeStaff   = false
+                }
             }
         }
         Text {
@@ -71,6 +86,16 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: rectangle.earTraining = true
+            }
+        }
+        Text {
+            text: "Free Staff"
+            font.pixelSize: 22
+            font.bold: rectangle.freeStaff
+            color: rectangle.freeStaff ? "#1565C0" : "#888888"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.freeStaff = true
             }
         }
     }
@@ -148,10 +173,24 @@ Rectangle {
         anchors.top: staffLines2.bottom
         anchors.topMargin: -20
         Text {
-            text: gridController.currentQuestionText
+            text: rectangle.freeStaff ? "Free Staff" : gridController.currentQuestionText
             font.pixelSize: 28
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        // ── Free Staff: Clear Staff button (visible only in Free Staff mode) ─
+        Text {
+            text: "Clear Staff"
+            font.pixelSize: 22
+            color: clearStaffArea.containsPress ? "#888888" : "#C62828"
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: rectangle.freeStaff
+            MouseArea {
+                id: clearStaffArea
+                anchors.fill: parent
+                onClicked: gridController.clearStaff()
+            }
         }
 
         // ── Ear Training controls (visible only in Ear Training mode) ────────
@@ -224,7 +263,7 @@ Rectangle {
             fillMode: Image.PreserveAspectFit
             height: 40
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: !rectangle.earTraining
+            visible: !rectangle.earTraining && !rectangle.freeStaff
             opacity: gradeArea.pressed ? 0.6 : 1.0
             MouseArea {
                 id: gradeArea
@@ -241,7 +280,7 @@ Rectangle {
             font.pixelSize: 20
             color: showAnswerArea.containsPress ? "#888888" : "#1565C0"
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: !rectangle.earTraining
+            visible: !rectangle.earTraining && !rectangle.freeStaff
             MouseArea {
                 id: showAnswerArea
                 anchors.fill: parent
@@ -398,6 +437,7 @@ Rectangle {
         Row {
             spacing: 30
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.freeStaff
 
             Text {
                 text: "◀ Back"

@@ -63,6 +63,10 @@ public:
     // Stop any currently playing audio immediately
     Q_INVOKABLE void stopPlayback();
 
+    // Free Staff mode controls
+    Q_INVOKABLE void clearStaff();              // wipes user notes only; keeps expected answer
+    Q_INVOKABLE void setFreeStaffMode(bool enabled); // bypasses CSV question restrictions in setNote
+
     int  tempoBpm() const;
     void setTempoBpm(int bpm);         // clamped to [40, 200]
     Q_INVOKABLE void decreaseTempo();  // decreases by 5, clamped
@@ -93,6 +97,10 @@ private:
     std::vector<NoteInfo> m_expectedNotes;
 
     void clearBeatInternal(int beat);
+    // Clears any existing user note whose occupied range [start, start+len-1] overlaps
+    // [newBeat, newBeat+newLength-1], EXCEPT chord members that share the new note's
+    // exact start and length (those stay so chords can be built across rows).
+    void clearOverlappingNotes(int newBeat, int newLength);
 
     AudioEngine m_audioEngine;
 
@@ -104,4 +112,5 @@ private:
     std::vector<int> m_allowedStartColumns;
     bool m_allowStacking = false;
     bool m_requireAllFilled = false;
+    bool m_freeStaffMode = false;   // when true, setNote() bypasses CSV question restrictions
 };

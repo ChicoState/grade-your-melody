@@ -77,6 +77,66 @@ void GridController::clearBeatInternal(int beat) {
     }
 }
 
+// Removes any existing note whose occupied range overlaps [newBeat, newBeat+newLength-1].
+// Chord-preservation rule: notes with the same start AND same length as the new note
+// are kept so users can stack multiple rows at the same beat.
+void GridController::clearOverlappingNotes(int newBeat, int newLength) {
+    if (newLength <= 0) return;
+
+    // Pass 1 — collect (start, row) pairs to remove
+    // Use small flat arrays since the grid is bounded by columns x rows.
+    bool toRemove[StaffLineGrid::columns][StaffLineGrid::rows] = {};
+    bool startTouched[StaffLineGrid::columns] = {};
+
+    for (int col = newBeat; col < newBeat + newLength && col < StaffLineGrid::columns; ++col) {
+        for (int r = 0; r < StaffLineGrid::rows; ++r) {
+            if (!userGrid.HasNote(col, r)) continue;
+
+            // Walk back to find the existing note's start beat
+            int start = col;
+            while (start > 0 && userGrid.HasNote(start - 1, r))
+                --start;
+
+            int existingLen = userLength[start];
+            if (existingLen <= 0) existingLen = 1;
+
+            // Chord member that exactly matches the new note's footprint — keep it
+            if (start == newBeat && existingLen == newLength) continue;
+
+            toRemove[start][r] = true;
+            startTouched[start] = true;
+        }
+    }
+
+    // Pass 2 — remove marked notes; remember which beats need a UI refresh
+    bool refreshBeat[StaffLineGrid::columns] = {};
+    for (int s = 0; s < StaffLineGrid::columns; ++s) {
+        if (!startTouched[s]) continue;
+        for (int r = 0; r < StaffLineGrid::rows; ++r) {
+            if (!toRemove[s][r]) continue;
+            int len = userLength[s];
+            if (len <= 0) len = 1;
+            userGrid.RemoveNote(s, r);
+            userAccidental[s][r] = 0;
+            for (int k = s; k < s + len && k < StaffLineGrid::columns; ++k)
+                refreshBeat[k] = true;
+        }
+    }
+
+    // Pass 3 — for each touched start, zero userLength only if no chord notes remain
+    for (int s = 0; s < StaffLineGrid::columns; ++s) {
+        if (!startTouched[s]) continue;
+        bool anyRemains = false;
+        for (int r = 0; r < StaffLineGrid::rows; ++r) {
+            if (userGrid.HasNote(s, r)) { anyRemains = true; break; }
+        }
+        if (!anyRemains) userLength[s] = 0;
+    }
+
+    for (int b = 0; b < StaffLineGrid::columns; ++b)
+        if (refreshBeat[b]) emit beatChanged(b);
+}
+
 void GridController::clearBeat(int beat) {
     if (beat < 0 || beat >= StaffLineGrid::columns) return;
     clearBeatInternal(beat);
@@ -91,13 +151,21 @@ void GridController::setNote(int beat, int row, int acc, int length) {
     if (length <= 0) return;
     if (beat + length > StaffLineGrid::columns) return;
 
-    // Question-based restrictions (apply to both paths)
-    if (!isLengthAllowed(length)) return;
-    if (!isStartColumnAllowed(beat)) return;
+    // Question-based restrictions (apply to both paths) — bypassed in Free Staff mode
+    if (!m_freeStaffMode) {
+        if (!isLengthAllowed(length)) return;
+        if (!isStartColumnAllowed(beat)) return;
+    }
 
     // ── Stacking path ────────────────────────────────────────────────────────
     // Only touch the target (beat, row). All other rows at this beat survive.
-    if (m_allowStacking) {
+    // Free Staff mode always allows stacking, regardless of the current question's
+    // m_allowStacking value (which belongs to the CSV question and must stay intact).
+    if (m_allowStacking || m_freeStaffMode) {
+        // Rhythm-collision: clear any existing note whose duration overlaps the new
+        // note's range, keeping same-start/same-length chord members.
+        clearOverlappingNotes(beat, length);
+
         userGrid.RemoveNote(beat, row);       // no-op if the cell was empty
         userAccidental[beat][row] = 0;
 
@@ -167,6 +235,11 @@ void GridController::setNote(int beat, int row, int acc, int length) {
         if (occupied[i]) ++occupiedAfterClear;
 
     if (occupiedAfterClear + length > 8) return;
+
+    // Rhythm-collision: catches notes that started before `beat` but extend into
+    // the new note's range — the local loop below only handles columns within
+    // [beat, beat+length).
+    clearOverlappingNotes(beat, length);
 
     for (int i = 0; i < length; ++i) {
         clearBeatInternal(beat + i);
@@ -478,6 +551,18 @@ void GridController::stopPlayback() {
         m_currentPlaybackBeat = -1;
         emit playbackBeatChanged();
     }
+}
+
+void GridController::clearStaff() {
+    // Clear user-placed notes only. Expected-answer arrays are intentionally untouched.
+    userGrid.ClearGrid();
+    for (auto& rowArr : userAccidental) rowArr.fill(0);
+    userLength.fill(0);
+    for (int b = 0; b < StaffLineGrid::columns; ++b) emit beatChanged(b);
+}
+
+void GridController::setFreeStaffMode(bool enabled) {
+    m_freeStaffMode = enabled;
 }
 
 int GridController::tempoBpm() const {
