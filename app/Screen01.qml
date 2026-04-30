@@ -18,15 +18,87 @@ Rectangle {
     property int currentScore: 0
     property var wrongBeats: []
     property int gradeCount: 0 // increments each time grade is clicked
+    property bool showAnswer: false
+    // Three top-level modes: Quiz (default, both flags false), Ear Training, Free Staff.
+    // Mutual exclusion is enforced inside the onXxxChanged handlers below.
+    property bool earTraining: false
+    property bool earAnswerSelected: false
+    property bool earAnswerCorrect: false
+    property bool freeStaff: false
     onCurrentAccChanged: console.log("currentAcc now", currentAcc)
+
+    // Reset Ear Training and answer state when toggling the mode
+    onEarTrainingChanged: {
+        showAnswer        = false
+        earAnswerSelected = false
+        earAnswerCorrect  = false
+        gridController.stopPlayback()
+        if (earTraining) freeStaff = false   // mutual exclusion
+    }
+
+    // Toggle Free Staff mode in the controller and reset overlapping state
+    onFreeStaffChanged: {
+        showAnswer        = false
+        earAnswerSelected = false
+        earAnswerCorrect  = false
+        gridController.stopPlayback()
+        gridController.setFreeStaffMode(freeStaff)
+        if (freeStaff) earTraining = false   // mutual exclusion
+    }
 
     // Reset local score state whenever the controller loads a new question
     Connections {
         target: gridController
         function onQuestionChanged() {
-            currentScore = 0
-            wrongBeats   = []
-            gradeCount   = 0
+            currentScore      = 0
+            wrongBeats        = []
+            gradeCount        = 0
+            showAnswer        = false
+            earAnswerSelected = false
+            earAnswerCorrect  = false
+            gridController.stopPlayback()
+        }
+    }
+
+    // Top-level mode toggle
+    Row {
+        id: modeToggle
+        x: 30
+        y: 20
+        spacing: 30
+
+        Text {
+            text: "Quiz Mode"
+            font.pixelSize: 22
+            font.bold: !rectangle.earTraining && !rectangle.freeStaff
+            color: (!rectangle.earTraining && !rectangle.freeStaff) ? "#1565C0" : "#888888"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    rectangle.earTraining = false
+                    rectangle.freeStaff   = false
+                }
+            }
+        }
+        Text {
+            text: "Ear Training"
+            font.pixelSize: 22
+            font.bold: rectangle.earTraining
+            color: rectangle.earTraining ? "#1565C0" : "#888888"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.earTraining = true
+            }
+        }
+        Text {
+            text: "Free Staff"
+            font.pixelSize: 22
+            font.bold: rectangle.freeStaff
+            color: rectangle.freeStaff ? "#1565C0" : "#888888"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rectangle.freeStaff = true
+            }
         }
     }
 
@@ -51,6 +123,8 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
+                showAnswer: rectangle.showAnswer
+                earTraining: rectangle.earTraining
                 x: 276 + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: index % 8
@@ -65,6 +139,8 @@ Rectangle {
             NoteSlot {
                 wrongBeats: rectangle.wrongBeats
                 gradeCount: rectangle.gradeCount
+                showAnswer: rectangle.showAnswer
+                earTraining: rectangle.earTraining
                 x: 276 + (648 + 125) + (index % 8) * 90
                 y: 666 - Math.floor(index / 8) * 25
                 beat: 8 + (index % 8)
@@ -99,16 +175,101 @@ Rectangle {
         anchors.top: staffLines2.bottom
         anchors.topMargin: -20
         Text {
-            text: gridController.currentQuestionText
+            // In Ear Training the real question text would reveal the answer ("Write a F major scale"),
+            // so we hide it behind a neutral label. Free Staff has no question, so we show a mode label too.
+            text: rectangle.freeStaff   ? "Free Staff"
+                : rectangle.earTraining ? "Ear Training: Identify the Sound"
+                : gridController.currentQuestionText
             font.pixelSize: 28
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
         }
+
+        // ── Free Staff: Clear Staff button (visible only in Free Staff mode) ─
+        Text {
+            text: "Clear Staff"
+            font.pixelSize: 22
+            color: clearStaffArea.containsPress ? "#888888" : "#C62828"
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: rectangle.freeStaff
+            MouseArea {
+                id: clearStaffArea
+                anchors.fill: parent
+                onClicked: gridController.clearStaff()
+            }
+        }
+
+        // ── Ear Training controls (visible only in Ear Training mode) ────────
+        Column {
+            spacing: 16
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: rectangle.earTraining
+
+            Text {
+                text: "🔊 Hear Question"
+                font.pixelSize: 24
+                color: hearArea.containsPress ? "#888888" : "#1565C0"
+                anchors.horizontalCenter: parent.horizontalCenter
+                MouseArea {
+                    id: hearArea
+                    anchors.fill: parent
+                    onClicked: gridController.playExpectedAnswer()
+                }
+            }
+
+            Row {
+                spacing: 40
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                Text {
+                    text: gridController.currentChoiceA
+                    font.pixelSize: 24
+                    color: choiceAArea.containsPress ? "#888888" : "black"
+                    opacity: rectangle.earAnswerSelected ? 0.5 : 1.0
+                    MouseArea {
+                        id: choiceAArea
+                        anchors.fill: parent
+                        enabled: !rectangle.earAnswerSelected
+                        onClicked: {
+                            rectangle.earAnswerSelected = true
+                            rectangle.earAnswerCorrect  = (gridController.currentCorrectChoice === "A")
+                            rectangle.showAnswer        = true
+                        }
+                    }
+                }
+                Text {
+                    text: gridController.currentChoiceB
+                    font.pixelSize: 24
+                    color: choiceBArea.containsPress ? "#888888" : "black"
+                    opacity: rectangle.earAnswerSelected ? 0.5 : 1.0
+                    MouseArea {
+                        id: choiceBArea
+                        anchors.fill: parent
+                        enabled: !rectangle.earAnswerSelected
+                        onClicked: {
+                            rectangle.earAnswerSelected = true
+                            rectangle.earAnswerCorrect  = (gridController.currentCorrectChoice === "B")
+                            rectangle.showAnswer        = true
+                        }
+                    }
+                }
+            }
+
+            Text {
+                visible: rectangle.earAnswerSelected
+                text: rectangle.earAnswerCorrect ? "Correct!" : "Incorrect"
+                font.pixelSize: 28
+                color: rectangle.earAnswerCorrect ? "#2E7D32" : "#C62828"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+
         Image {
             source: "images/gradebutton.png"
             fillMode: Image.PreserveAspectFit
             height: 40
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining && !rectangle.freeStaff
             opacity: gradeArea.pressed ? 0.6 : 1.0
             MouseArea {
                 id: gradeArea
@@ -120,9 +281,22 @@ Rectangle {
                 }
             }
         }
+        Text {
+            text: rectangle.showAnswer ? "◀ Hide Answer" : "Show Answer ▶"
+            font.pixelSize: 20
+            color: showAnswerArea.containsPress ? "#888888" : "#1565C0"
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining && !rectangle.freeStaff
+            MouseArea {
+                id: showAnswerArea
+                anchors.fill: parent
+                onClicked: rectangle.showAnswer = !rectangle.showAnswer
+            }
+        }
         Row {
             spacing: 10
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
 
             Image {
                 source: "images/flatbutton.png"
@@ -158,6 +332,7 @@ Rectangle {
         Row {
             spacing: 10
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
             Image {
                 source: "images/eighthbutton.png"
                 fillMode: Image.PreserveAspectFit
@@ -201,10 +376,74 @@ Rectangle {
 
         }
 
+        // Audio playback
+        Row {
+            spacing: 30
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.earTraining
+
+            Text {
+                text: "▶ Play"
+                font.pixelSize: 24
+                color: playArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: playArea
+                    anchors.fill: parent
+                    onClicked: gridController.playCurrentNotes()
+                }
+            }
+
+            Text {
+                text: "■ Stop"
+                font.pixelSize: 24
+                color: stopArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: stopArea
+                    anchors.fill: parent
+                    onClicked: gridController.stopPlayback()
+                }
+            }
+        }
+
+        // Tempo control
+        Row {
+            spacing: 16
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Text {
+                text: "−"
+                font.pixelSize: 28
+                color: tempoMinusArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: tempoMinusArea
+                    anchors.fill: parent
+                    onClicked: gridController.decreaseTempo()
+                }
+            }
+
+            Text {
+                text: "Tempo: " + gridController.tempoBpm + " BPM"
+                font.pixelSize: 24
+                color: "black"
+            }
+
+            Text {
+                text: "+"
+                font.pixelSize: 28
+                color: tempoPlusArea.containsPress ? "#888888" : "black"
+                MouseArea {
+                    id: tempoPlusArea
+                    anchors.fill: parent
+                    onClicked: gridController.increaseTempo()
+                }
+            }
+        }
+
         // Question navigation
         Row {
             spacing: 30
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.freeStaff
 
             Text {
                 text: "◀ Back"
@@ -233,6 +472,40 @@ Rectangle {
                     onClicked: gridController.nextQuestion()
                 }
             }
+        }
+    }
+
+    // ── Playback beat cursor ─────────────────────────────────────────────────
+    // Deliberately extreme size/color/z to confirm the signal chain is working.
+    // Dial back once confirmed visible.
+    Rectangle {
+        id: playbackCursor
+        visible: gridController.currentPlaybackBeat >= 0
+        z: 9999
+        opacity: 0.75
+
+        // Column x: Measure 1 beats 0–7, Measure 2 beats 8–15
+        x: {
+            const b = gridController.currentPlaybackBeat
+            if (b < 0) return 0
+            return b < 8 ? 276 + b * 90
+                         : 1049 + (b - 8) * 90
+        }
+        y: 0
+        width: 120
+        height: 900
+
+        color: "red"
+        radius: 0
+    }
+
+    // ── Beat cursor diagnostic ───────────────────────────────────────────────
+    // Logs currentPlaybackBeat to the console so you can confirm it's updating.
+    // Remove once verified working.
+    Connections {
+        target: gridController
+        function onPlaybackBeatChanged() {
+            console.log("[PlaybackCursor] beat →", gridController.currentPlaybackBeat)
         }
     }
 }

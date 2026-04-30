@@ -165,6 +165,11 @@ void QuestionHandler::ReadCSV() {
         q.allowStacking = ParseBool(fields[4]);
         q.requireAllFilled = ParseBool(fields[5]);
 
+        // Optional Ear Training fields — fall back to safe defaults for legacy rows
+        q.choiceA       = (fields.size() > 6) ? fields[6] : q.questionText;
+        q.choiceB       = (fields.size() > 7) ? fields[7] : "";
+        q.correctChoice = (fields.size() > 8) ? fields[8] : "A";
+
         questions.push_back(q);
     }
 

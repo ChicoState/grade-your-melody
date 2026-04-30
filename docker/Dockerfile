@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y \
     qt6-declarative-dev \
     qt6-qmltooling-plugins \
     qt6-wayland \
+    qt6-multimedia-dev \
     libgl1-mesa-dev \
+    libasound2-plugins \
+    pulseaudio-utils \
     qml6-module-qtquick \
     qml6-module-qtqml \
     qml6-module-qtquick-controls \
@@ -20,7 +23,7 @@ RUN apt-get update && apt-get install -y \
     qml6-module-qtquick-layouts \
     qml6-module-qtqml-workerscript \
     && rm -rf /var/lib/apt/lists/*
-
+    
 WORKDIR /app
 COPY . /app
 

@@ -7,11 +7,17 @@
 #include <vector>
 #include "staffLineGrid.h"
 #include "questionHandler.h"
+#include "AudioEngine.h"
 
 class GridController : public QObject {
     Q_OBJECT
     Q_PROPERTY(QString currentQuestionText READ currentQuestionText NOTIFY questionChanged)
     Q_PROPERTY(int currentQuestionNum READ currentQuestionNum NOTIFY questionChanged)
+    Q_PROPERTY(QString currentChoiceA READ currentChoiceA NOTIFY questionChanged)
+    Q_PROPERTY(QString currentChoiceB READ currentChoiceB NOTIFY questionChanged)
+    Q_PROPERTY(QString currentCorrectChoice READ currentCorrectChoice NOTIFY questionChanged)
+    Q_PROPERTY(int tempoBpm READ tempoBpm WRITE setTempoBpm NOTIFY tempoChanged)
+    Q_PROPERTY(int currentPlaybackBeat READ currentPlaybackBeat NOTIFY playbackBeatChanged)
 public:
     explicit GridController(QObject *parent = nullptr);
 
@@ -25,6 +31,12 @@ public:
     Q_INVOKABLE int noteLengthForBeat(int beat) const;
     // grading
     Q_INVOKABLE void setExpectedRow(int beat, int row, int acc, int length = 1); // row -1 means "should be empty"
+    Q_INVOKABLE int  expectedRowForBeat(int beat) const;      // get expected row at this beat (-1 if empty)
+    Q_INVOKABLE int  expectedLengthForBeat(int beat) const;   // get expected length at this beat
+    Q_INVOKABLE int  expectedAccForBeat(int beat) const;      // get expected accidental at this beat
+    Q_INVOKABLE int  expectedAccForBeatRow(int beat, int row) const; // per-note accidental (chord-aware)
+    Q_INVOKABLE bool hasExpectedNote(int beat, int row) const; // check if (beat, row) is expected (for stacking)
+    Q_INVOKABLE int  expectedNoteLengthAt(int beat, int row) const; // get expected length at (beat, row)
     Q_INVOKABLE bool isBeatCorrect(int beat) const;
     Q_INVOKABLE bool isNoteIncorrect(int beat, int row) const;
     Q_INVOKABLE int  score() const;
@@ -42,11 +54,41 @@ public:
     Q_INVOKABLE bool isLengthAllowed(int length) const;
     Q_INVOKABLE bool isStartColumnAllowed(int beat) const;
     Q_INVOKABLE bool canGrade() const;
+
+    // Audio preparation: returns all currently placed note starts with pitch data
+    Q_INVOKABLE QVariantList getCurrentNotes() const;
+
+    // Play the first occupied beat as a chord using the loaded SoundFont
+    Q_INVOKABLE void playCurrentNotes();
+
+    // Play the correct answer for the current question (Ear Training mode)
+    Q_INVOKABLE void playExpectedAnswer();
+
+    // Stop any currently playing audio immediately
+    Q_INVOKABLE void stopPlayback();
+
+    // Free Staff mode controls
+    Q_INVOKABLE void clearStaff();              // wipes user notes only; keeps expected answer
+    Q_INVOKABLE void setFreeStaffMode(bool enabled); // bypasses CSV question restrictions in setNote
+
+    int  tempoBpm() const;
+    void setTempoBpm(int bpm);         // clamped to [40, 200]
+    Q_INVOKABLE void decreaseTempo();  // decreases by 5, clamped
+    Q_INVOKABLE void increaseTempo();  // increases by 5, clamped
+
+    int currentPlaybackBeat() const;   // -1 = none, 0..15 = active beat
+
+    // Ear Training answer-choice data (sourced from CSV per question)
+    QString currentChoiceA() const;
+    QString currentChoiceB() const;
+    QString currentCorrectChoice() const;
 signals:
     void beatChanged(int beat);     // beat changed, QML should refresh visuals
     void expectedChanged(int beat); // expected answer changed (optional)
     void benchmarkFinished(QString result);
     void questionChanged();
+    void tempoChanged();
+    void playbackBeatChanged(); // currentPlaybackBeat changed; -1 = idle
 private:
     StaffLineGrid userGrid;
     QuestionHandler questionHandler;
@@ -64,11 +106,23 @@ private:
     std::vector<NoteInfo> m_expectedNotes;
 
     void clearBeatInternal(int beat);
+    // Clears any existing user note whose occupied range [start, start+len-1] overlaps
+    // [newBeat, newBeat+newLength-1], EXCEPT chord members that share the new note's
+    // exact start and length (those stay so chords can be built across rows).
+    void clearOverlappingNotes(int newBeat, int newLength);
+
+    AudioEngine m_audioEngine;
 
     QString m_currentQuestionText;
+    QString m_currentChoiceA;
+    QString m_currentChoiceB;
+    QString m_currentCorrectChoice = "A";
     int m_currentQuestionNum = 0;
+    int m_tempoBpm           = 100; // clamped to [40, 200]
+    int m_currentPlaybackBeat = -1; // -1 = idle, 0..15 = active beat
     std::vector<int> m_allowedLengths;
     std::vector<int> m_allowedStartColumns;
     bool m_allowStacking = false;
     bool m_requireAllFilled = false;
+    bool m_freeStaffMode = false;   // when true, setNote() bypasses CSV question restrictions
 };
