@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  ".rcc/qmlcache/gym_app_qmlcache_loader.cpp"
   "CMakeFiles/gym_app_autogen"
   "gym_app_autogen/mocs_compilation.cpp"
-  "gym_app_autogen/timestamp"
 )
 
 # Per-language clean rules from dependency scanning.

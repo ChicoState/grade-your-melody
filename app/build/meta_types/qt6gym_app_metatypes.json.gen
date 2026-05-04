@@ -1,2 +1,150 @@
 [
+    {
+        "classes": [
+            {
+                "className": "GridController",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "int"
+                            },
+                            {
+                                "name": "row",
+                                "type": "int"
+                            },
+                            {
+                                "name": "accidental",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "setExpectedRow",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "int"
+                            },
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "setExpectedRow",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "expectedRow",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "expectedAccidental",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "beat",
+                                "type": "int"
+                            },
+                            {
+                                "name": "row",
+                                "type": "int"
+                            },
+                            {
+                                "name": "accidental",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "setNote",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "beat",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "clearBeat",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "beat",
+                                "type": "int"
+                            },
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "hasNote",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "score",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "name": "incorrectBeats",
+                        "returnType": "QVariantList"
+                    },
+                    {
+                        "access": "public",
+                        "name": "totalExpected",
+                        "returnType": "int"
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "GridController",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "beat",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "beatChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "GridController.h",
+        "outputRevision": 68
+    }
 ]

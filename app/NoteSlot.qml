@@ -1,17 +1,19 @@
 import QtQuick
 
-
-
 Rectangle {
     id: root
     width: 45
     height: 35
     color: "#00000000"
+
     property int beat: -1
-    property int row: -1 
+    property int row: -1
     property int currentAcc: 0
+    property int currentNoteLength: 2
+    property var wrongBeats: []
+    property int gradeCount: 0
     property bool selected: false
-    
+
     Image {
         id: hovernote
         x: 4
@@ -32,6 +34,7 @@ Rectangle {
         visible: false
         source: "images/quarternote.png"
         fillMode: Image.PreserveAspectFit
+
         Behavior on opacity {
             NumberAnimation { duration: 150 }
         }
@@ -40,39 +43,46 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
+
         onEntered: {
-            if (root.state != "clicked" && !rectangle.occupiedBeats[beat]) {
+            if (root.state !== "clicked") {
                 root.state = "hovered"
             }
         }
-        onExited: if (root.state != "clicked") root.state = ""
+
+        onExited: {
+            if (root.state !== "clicked")
+                root.state = ""
+        }
+
         onPressed: {
-            if(!gridController) return 
+            if (!gridController)
+                return
+
             if (selected) {
                 gridController.clearBeat(beat)
-            } else  {
-                console.log("clicked beat", beat, "row", row, "acc", currentAcc)
+            } else {
                 gridController.setNote(beat, row, currentAcc)
             }
         }
     }
-    // When any slot changes in this beat, refresh this slot's visuals
+
     Connections {
         target: gridController
+
         function onBeatChanged(changedBeat) {
-            if (changedBeat === beat&&gridController) {
-                // state will also update via selected binding, but we force a clean state
+            if (changedBeat === beat && gridController) {
                 selected = gridController.hasNote(beat, row)
             }
         }
     }
- 
-    // Keep state synced
+
     Component.onCompleted: {
-        if(gridController){
-            selected = gridController.hasNote(beat,row)
+        if (gridController) {
+            selected = gridController.hasNote(beat, row)
         }
-        }
+    }
+
     onSelectedChanged: root.state = root.selected ? "clicked" : ""
 
     states: [

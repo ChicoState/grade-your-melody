@@ -10,7 +10,7 @@ Window {
 
     Screen01 {
         id: mainScreen
-        scale: Math.min(parent.width / Constants.width, parent.height / Constants.height)
+        scale: Math.min(parent.width / 1920, parent.height / 1080)
         anchors.centerIn: parent
     }
 

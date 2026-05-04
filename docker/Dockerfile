@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     qt6-base-dev \
     qt6-declarative-dev \
+    qt6-multimedia-dev \
     qt6-qmltooling-plugins \
     qt6-wayland \
     libgl1-mesa-dev \
@@ -18,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     qml6-module-qtquick-templates \
     qml6-module-qtquick-layouts \
     qml6-module-qtqml-workerscript \
+    qml6-module-qtmultimedia \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

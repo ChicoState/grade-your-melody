@@ -1,8 +1,6 @@
 #include <QtQml/qqmlprivate.h>
 #include <QtCore/qdir.h>
 #include <QtCore/qurl.h>
-#include <QtCore/qhash.h>
-#include <QtCore/qstring.h>
 
 namespace QmlCacheGeneratedCode {
 namespace _qt_qml_GradeYourMelodyUI_App_qml { 
@@ -61,12 +59,12 @@ Q_GLOBAL_STATIC(Registry, unitRegistry)
 
 
 Registry::Registry() {
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/App.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_App_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/NoteSlot.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_NoteSlot_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/Screen01.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_Screen01_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/Constants.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_GradeYourMelodyUI_Constants_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListModel.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_GradeYourMelodyUI_EventListModel_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListSimulator.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_GradeYourMelodyUI_EventListSimulator_qml::unit);
+        resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/App.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_App_qml::unit);
+        resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/NoteSlot.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_NoteSlot_qml::unit);
+        resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/Screen01.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_Screen01_qml::unit);
+        resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/Constants.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_GradeYourMelodyUI_Constants_qml::unit);
+        resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListModel.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_GradeYourMelodyUI_EventListModel_qml::unit);
+        resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/GradeYourMelodyUI/GradeYourMelodyUI/EventListSimulator.qml"), &QmlCacheGeneratedCode::_qt_qml_GradeYourMelodyUI_GradeYourMelodyUI_EventListSimulator_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;
     registration.structVersion = 0;
     registration.lookupCachedQmlUnit = &lookupCachedUnit;

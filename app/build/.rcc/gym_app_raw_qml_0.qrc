@@ -1,0 +1,31 @@
+<RCC>
+  <qresource prefix="/qt/qml/GradeYourMelodyUI/">
+    <file alias="App.qml">/home/ebeverley/grade-your-melody/app/App.qml</file>
+    <file alias="NoteSlot.qml">/home/ebeverley/grade-your-melody/app/NoteSlot.qml</file>
+    <file alias="Screen01.qml">/home/ebeverley/grade-your-melody/app/Screen01.qml</file>
+    <file alias="GradeYourMelodyUI/Constants.qml">/home/ebeverley/grade-your-melody/app/GradeYourMelodyUI/Constants.qml</file>
+    <file alias="GradeYourMelodyUI/EventListModel.qml">/home/ebeverley/grade-your-melody/app/GradeYourMelodyUI/EventListModel.qml</file>
+    <file alias="GradeYourMelodyUI/EventListSimulator.qml">/home/ebeverley/grade-your-melody/app/GradeYourMelodyUI/EventListSimulator.qml</file>
+    <file alias="images/quarternote.png">/home/ebeverley/grade-your-melody/app/images/quarternote.png</file>
+    <file alias="images/note transparent cut.png">/home/ebeverley/grade-your-melody/app/images/note transparent cut.png</file>
+    <file alias="images/staff lines 2.png">/home/ebeverley/grade-your-melody/app/images/staff lines 2.png</file>
+    <file alias="images/title.png">/home/ebeverley/grade-your-melody/app/images/title.png</file>
+    <file alias="images/sheet music.png">/home/ebeverley/grade-your-melody/app/images/sheet music.png</file>
+    <file alias="images/notes.png">/home/ebeverley/grade-your-melody/app/images/notes.png</file>
+    <file alias="images/staff lines with notes.png">/home/ebeverley/grade-your-melody/app/images/staff lines with notes.png</file>
+    <file alias="sounds/Piano_C4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_C4.wav</file>
+    <file alias="sounds/Piano_D4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_D4.wav</file>
+    <file alias="sounds/Piano_E4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_E4.wav</file>
+    <file alias="sounds/Piano_F4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_F4.wav</file>
+    <file alias="sounds/Piano_G4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_G4.wav</file>
+    <file alias="sounds/Piano_A4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_A4.wav</file>
+    <file alias="sounds/Piano_B4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_B4.wav</file>
+    <file alias="sounds/Piano_Cs4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_Cs4.wav</file>
+    <file alias="sounds/Piano_Ds4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_Ds4.wav</file>
+    <file alias="sounds/Piano_Fs4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_Fs4.wav</file>
+    <file alias="sounds/Piano_Gs4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_Gs4.wav</file>
+    <file alias="sounds/Piano_As4.wav">/home/ebeverley/grade-your-melody/app/sounds/Piano_As4.wav</file>
+    <file alias="GradeYourMelodyUI/qmldir">/home/ebeverley/grade-your-melody/app/GradeYourMelodyUI/qmldir</file>
+  </qresource>
+</RCC>
+

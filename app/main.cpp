@@ -1,38 +1,32 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "GridController.h"
-#include <QResource>
+#include "core/GridController.h"
 #include <QFile>
 #include <QDebug>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    Q_INIT_RESOURCE(app_resources);
     QQmlApplicationEngine engine;
 
     GridController controller;
     engine.rootContext()->setContextProperty("gridController", &controller);
 
-    // Example: set the correct answer (you can do this elsewhere too)
-    //controller.setExpectedRow(0, 4);
-    //controller.setExpectedRow(1, 4);
-    //controller.setExpectedRow(2, 5);
-    //controller.setExpectedRow(3, 4);
     for (int i = 0; i < 16; i++) {
-    controller.setExpectedRow(i, 4, -1);
-    
-}
+        controller.setExpectedRow(i, 4, -1);
+    }
 
-    const QUrl url(u"qrc:/app/App.qml"_qs);
+    const QUrl url(u"qrc:/qt/qml/GradeYourMelodyUI/App.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl) QCoreApplication::exit(-1);
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-qDebug() << "exists :/App.qml =" << QFile(":/App.qml").exists();
-qDebug() << "exists :/app/App.qml =" << QFile(":/app/App.qml").exists();
+    qDebug() << "exists :/qt/qml/GradeYourMelodyUI/App.qml ="
+             << QFile(":/qt/qml/GradeYourMelodyUI/App.qml").exists();
+
     engine.load(url);
 
     return app.exec();

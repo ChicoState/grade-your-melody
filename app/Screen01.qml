@@ -10,21 +10,19 @@ Rectangle {
     color: "#EAEAEA"
     clip: true
 
-    //32 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-    property int currentAcc: 0 // -1 flat, +1 sharp
-    property int currentNoteLength: 2 // 1 = eighth note, 2 = quarter note
+    property int currentAcc: 0
+    property int currentNoteLength: 2
     property int currentScore: 0
     property var wrongBeats: []
-    property int gradeCount: 0 // increments each time grade is clicked
+    property int gradeCount: 0
+    property string questionText: ""
 
     SoundEffect {
         id: noteC4
         source: "qrc:/qt/qml/GradeYourMelodyUI/sounds/Piano_C4.wav"
         volume: 0.8
     }
-
-    onCurrentAccChanged: console.log("currentAcc now", currentAcc)
 
     Image {
         id: staffLines2
@@ -42,7 +40,6 @@ Rectangle {
         width: 1920
         height: 1080
 
-        // Measure 1 (8 slots × 9 rows = 72)
         Repeater {
             model: 72
             NoteSlot {
@@ -57,7 +54,6 @@ Rectangle {
             }
         }
 
-        // Measure 2
         Repeater {
             model: 72
             NoteSlot {
@@ -72,7 +68,6 @@ Rectangle {
             }
         }
 
-        // Measure 3
         Repeater {
             model: 72
             NoteSlot {
@@ -87,7 +82,6 @@ Rectangle {
             }
         }
 
-        // Measure 4
         Repeater {
             model: 72
             NoteSlot {
@@ -113,7 +107,6 @@ Rectangle {
         fillMode: Image.PreserveAspectFit
     }
 
-    //Score Text
     Text {
         x: 1650
         y: 380
@@ -122,7 +115,6 @@ Rectangle {
         color: "black"
     }
 
-    // Bottom Buttons
     Column {
         spacing: 20
         anchors.horizontalCenter: parent.horizontalCenter
@@ -136,61 +128,31 @@ Rectangle {
             color: "black"
         }
 
-        Image {
-            source: "images/gradebutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
-            x: 20
-            opacity: gradeArea.pressed ? 0.6 : 1.0
-
-            MouseArea {
-                id: gradeArea
-                anchors.fill: parent
-                onClicked: {
-                    currentScore = gridController.score()
-                    wrongBeats = gridController.incorrectBeats()
-                    gradeCount++
-                }
+        Button {
+            text: "Grade"
+            onClicked: {
+                currentScore = gridController.score()
+                wrongBeats = gridController.incorrectBeats()
+                gradeCount++
             }
         }
 
         Row {
             spacing: 10
 
-            Image {
-                source: "images/flatbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentAcc === -1 ? 0.6 : 1.0
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: rectangle.currentAcc = -1
-                }
+            Button {
+                text: "Flat"
+                onClicked: rectangle.currentAcc = -1
             }
 
-            Image {
-                source: "images/naturalbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentAcc === 0 ? 0.6 : 1.0
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: rectangle.currentAcc = 0
-                }
+            Button {
+                text: "Natural"
+                onClicked: rectangle.currentAcc = 0
             }
 
-            Image {
-                source: "images/sharpbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentAcc === 1 ? 0.6 : 1.0
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: rectangle.currentAcc = 1
-                }
+            Button {
+                text: "Sharp"
+                onClicked: rectangle.currentAcc = 1
             }
         }
 
@@ -198,31 +160,17 @@ Rectangle {
             spacing: 10
             x: 35
 
-            Image {
-                source: "images/quarterbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentNoteLength === 2 ? 0.6 : 1.0
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        rectangle.currentNoteLength = 2
-                        noteC4.play()
-                    }
+            Button {
+                text: "Quarter"
+                onClicked: {
+                    rectangle.currentNoteLength = 2
+                    noteC4.play()
                 }
             }
 
-            Image {
-                source: "images/eighthbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: rectangle.currentNoteLength = 1
-                }
+            Button {
+                text: "Eighth"
+                onClicked: rectangle.currentNoteLength = 1
             }
         }
     }
