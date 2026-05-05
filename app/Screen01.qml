@@ -24,8 +24,16 @@ Rectangle {
     property bool earTraining: false
     property bool earAnswerSelected: false
     property bool earAnswerCorrect: false
-    property bool freeStaff: false
-    onCurrentAccChanged: console.log("currentAcc now", currentAcc)
+property bool freeStaff: false
+
+readonly property color accentBlue: rectangle.accentBlue
+readonly property color mutedGray: rectangle.mutedGray
+readonly property color errorRed: rectangle.errorRed
+readonly property color successGreen: rectangle.successGreen
+readonly property color cardBg: "#F7F7F7"
+readonly property color cardBorder: "#D0D0D0"
+
+onCurrentAccChanged: console.log("currentAcc now", currentAcc)
 
     // Reset Ear Training and answer state when toggling the mode
     onEarTrainingChanged: {
