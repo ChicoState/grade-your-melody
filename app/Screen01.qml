@@ -82,6 +82,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             color: (!rectangle.earTraining && !rectangle.freeStaff) ? "#1565C0" : "#888888"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     rectangle.earTraining = false
                     rectangle.freeStaff   = false
@@ -95,6 +97,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             color: rectangle.earTraining ? "#1565C0" : "#888888"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
                 onClicked: rectangle.earTraining = true
             }
         }
@@ -105,6 +109,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             color: rectangle.freeStaff ? "#1565C0" : "#888888"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
                 onClicked: rectangle.freeStaff = true
             }
         }
@@ -203,6 +209,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             MouseArea {
                 id: clearStaffArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
                 onClicked: gridController.clearStaff()
             }
         }
@@ -221,6 +229,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 MouseArea {
                     id: hearArea
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: gridController.playExpectedAnswer()
                 }
             }
@@ -238,6 +248,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                         id: choiceAArea
                         anchors.fill: parent
                         enabled: !rectangle.earAnswerSelected
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             rectangle.earAnswerSelected = true
                             rectangle.earAnswerCorrect  = (gridController.currentCorrectChoice === "A")
@@ -254,6 +266,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                         id: choiceBArea
                         anchors.fill: parent
                         enabled: !rectangle.earAnswerSelected
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             rectangle.earAnswerSelected = true
                             rectangle.earAnswerCorrect  = (gridController.currentCorrectChoice === "B")
@@ -282,6 +296,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             MouseArea {
                 id: gradeArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     currentScore = gridController.score()
                     wrongBeats = gridController.incorrectBeats()
@@ -298,6 +314,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             MouseArea {
                 id: showAnswerArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
                 onClicked: rectangle.showAnswer = !rectangle.showAnswer
             }
         }
@@ -313,6 +331,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 opacity: rectangle.currentAcc === -1 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: rectangle.currentAcc = -1
                 }
             }
@@ -323,6 +343,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 opacity: rectangle.currentAcc === 0 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: rectangle.currentAcc = 0
                 }
             }
@@ -333,6 +355,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 opacity: rectangle.currentAcc === 1 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: rectangle.currentAcc = 1
                 }
             }
@@ -348,6 +372,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: rectangle.currentNoteLength = 1
                 }
             }
@@ -358,6 +384,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 opacity: rectangle.currentNoteLength === 2 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: rectangle.currentNoteLength = 2
                 }
             }
@@ -368,6 +396,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 opacity: rectangle.currentNoteLength === 3 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: rectangle.currentNoteLength = 3
                 }
             }
@@ -378,6 +408,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 opacity: rectangle.currentNoteLength === 4 ? 0.6 : 1.0
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: rectangle.currentNoteLength = 4
                 }
             }
@@ -397,6 +429,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 MouseArea {
                     id: playArea
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: gridController.playCurrentNotes()
                 }
             }
@@ -408,6 +442,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 MouseArea {
                     id: stopArea
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: gridController.stopPlayback()
                 }
             }
@@ -425,7 +461,9 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 MouseArea {
                     id: tempoMinusArea
                     anchors.fill: parent
-                    onClicked: gridController.decreaseTempo()
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: gridController.decrease
                 }
             }
 
