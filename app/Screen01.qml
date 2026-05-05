@@ -175,12 +175,24 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
         fillMode: Image.PreserveAspectFit
     }
     //Score Text
-    Text {
-        x: 1650
-        y: 380
-        text: gradeCount > 0 ? "Score: " + currentScore + "/" + gridController.totalExpected() : ""
-        font.pixelSize: 28
-        color: "black"
+    Rectangle {
+        anchors.right: parent.right
+        anchors.rightMargin: 60
+        y: 370
+        width: scoreText.implicitWidth + 32
+        height: scoreText.implicitHeight + 18
+        radius: 18
+        color: rectangle.cardBg
+        border.color: rectangle.cardBorder
+        visible: gradeCount > 0
+        
+        Text {
+            id: scoreText
+            anchors.centerIn: parent
+            text: "Score: " + currentScore + "/" + gridController.totalExpected()
+            font.pixelSize: 28
+            color: "black"
+        }
     }
     // Bottom Buttons
     Column {
