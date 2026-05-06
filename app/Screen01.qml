@@ -479,7 +479,7 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             }
         }
 
-        // Tempo control
+         // Tempo control
         Row {
             spacing: 16
             anchors.horizontalCenter: parent.horizontalCenter
@@ -517,36 +517,17 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             }
         }
 
+        // Question progress label
+        Text {
+            text: "Question Progress"
+            font.pixelSize: 18
+            font.bold: true
+            color: "#555555"
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.freeStaff
+        }
+
         // Question progress bar
-Rectangle {
-    width: 420
-    height: 14
-    radius: 7
-    color: "#DADADA"
-    anchors.horizontalCenter: parent.horizontalCenter
-    visible: !rectangle.freeStaff
-
-    Rectangle {
-        height: parent.height
-        radius: 7
-        color: "#1565C0"
-
-        width: {
-            const total = gridController.totalQuestionsAvailable()
-            if (total <= 0) return 0
-            return parent.width * (gridController.currentQuestionNum / total)
-        }
-
-        Behavior on width {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.OutCubic
-            }
-        }
-    }
-}
-
- // Question progress bar
         Rectangle {
             width: 420
             height: 14
@@ -572,6 +553,7 @@ Rectangle {
                 }
             }
         }
+
 
         // Question navigation
         Row {
