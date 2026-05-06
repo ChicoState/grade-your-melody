@@ -517,6 +517,62 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
             }
         }
 
+        // Question progress bar
+Rectangle {
+    width: 420
+    height: 14
+    radius: 7
+    color: "#DADADA"
+    anchors.horizontalCenter: parent.horizontalCenter
+    visible: !rectangle.freeStaff
+
+    Rectangle {
+        height: parent.height
+        radius: 7
+        color: "#1565C0"
+
+        width: {
+            const total = gridController.totalQuestionsAvailable()
+            if (total <= 0) return 0
+            return parent.width * (gridController.currentQuestionNum / total)
+        }
+
+        Behavior on width {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.OutCubic
+            }
+        }
+    }
+}
+
+ // Question progress bar
+        Rectangle {
+            width: 420
+            height: 14
+            radius: 7
+            color: "#DADADA"
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: !rectangle.freeStaff
+
+            Rectangle {
+                height: parent.height
+                radius: 7
+                color: "#1565C0"
+
+                width: gridController.totalQuestionsAvailable() <= 0
+                    ? 0
+                    : parent.width * (gridController.currentQuestionNum / gridController.totalQuestionsAvailable())
+
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.OutCubic
+                    }
+                }
+            }
+        }
+
         // Question navigation
         Row {
             spacing: 30
