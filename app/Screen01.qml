@@ -120,6 +120,20 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
         }
     }
 
+    // Staff background card
+    Rectangle {
+        id: staffCard
+        x: 35
+        y: 365
+        width: 1850
+        height: 340
+        radius: 28
+        color: "#FFFFFF"
+        border.color: "#D6D6D6"
+        border.width: 2
+        opacity: 0.95
+    }
+    
     Image {
         id: staffLines2
         x: 53
