@@ -9,8 +9,12 @@ Rectangle {
     id: rectangle
     width: 1920
     height: 1100
-    color: "#EAEAEA"
     clip: true
+
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "#FDFDFD" }
+        GradientStop { position: 1.0; color: "#E3F2FD" }
+    }
     //32 beats
     property var occupiedBeats: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
     property int currentAcc: 0 // -1 flat, +1 sharp 
