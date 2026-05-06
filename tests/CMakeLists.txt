@@ -26,6 +26,32 @@ target_link_libraries(
     GTest::gtest_main
 )
 
+add_executable(
+    grid_controller_test
+    test_gridcontroller.cpp
+    ${CMAKE_SOURCE_DIR}/core/GridController.cpp
+    ${CMAKE_SOURCE_DIR}/core/staffLineGrid.cpp
+    ${CMAKE_SOURCE_DIR}/core/questionHandler.cpp
+    ${CMAKE_SOURCE_DIR}/core/AudioEngine.cpp
+)
+
+set_target_properties(grid_controller_test PROPERTIES AUTOMOC ON)
+
+target_include_directories(
+    grid_controller_test
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/core
+        ${CMAKE_SOURCE_DIR}/third_party/tsf
+)
+
+target_link_libraries(
+    grid_controller_test
+    GTest::gtest_main
+    Qt6::Core
+    Qt6::Multimedia
+)
+
 include(GoogleTest)
 gtest_discover_tests(hello_test)
 gtest_discover_tests(question_handler_test)
+gtest_discover_tests(grid_controller_test)
