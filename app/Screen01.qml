@@ -28,16 +28,16 @@ Rectangle {
     property bool earTraining: false
     property bool earAnswerSelected: false
     property bool earAnswerCorrect: false
-property bool freeStaff: false
+    property bool freeStaff: false
+    
+    readonly property color accentBlue: "#1565C0"
+    readonly property color mutedGray: "#888888"
+    readonly property color errorRed: "#C62828"
+    readonly property color successGreen: "#2E7D32"
+    readonly property color cardBg: "#F7F7F7"
+    readonly property color cardBorder: "#D0D0D0"
 
-readonly property color accentBlue: rectangle.accentBlue
-readonly property color mutedGray: rectangle.mutedGray
-readonly property color errorRed: rectangle.errorRed
-readonly property color successGreen: rectangle.successGreen
-readonly property color cardBg: "#F7F7F7"
-readonly property color cardBorder: "#D0D0D0"
-
-onCurrentAccChanged: console.log("currentAcc now", currentAcc)
+    onCurrentAccChanged: console.log("currentAcc now", currentAcc)
 
     // Reset Ear Training and answer state when toggling the mode
     onEarTrainingChanged: {
@@ -214,10 +214,10 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
     }
     // Bottom Buttons
     Column {
-        spacing: 20
+        spacing: 14
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: staffLines2.bottom
-        anchors.topMargin: -20
+        anchors.topMargin: 25
         Text {
             // In Ear Training the real question text would reveal the answer ("Write a F major scale"),
             // so we hide it behind a neutral label. Free Staff has no question, so we show a mode label too.
@@ -315,136 +315,190 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
-
-        Image {
-            source: "images/gradebutton.png"
-            fillMode: Image.PreserveAspectFit
-            height: 40
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: !rectangle.earTraining && !rectangle.freeStaff
-            opacity: gradeArea.pressed ? 0.6 : 1.0
-            MouseArea {
-                id: gradeArea
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    currentScore = gridController.score()
-                    wrongBeats = gridController.incorrectBeats()
-                    gradeCount++
-                }
-            }
-        }
-        Text {
-            text: rectangle.showAnswer ? "◀ Hide Answer" : "Show Answer ▶"
-            font.pixelSize: 20
-            color: showAnswerArea.containsPress ? "#888888" : "#1565C0"
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: !rectangle.earTraining && !rectangle.freeStaff
-            MouseArea {
-                id: showAnswerArea
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: rectangle.showAnswer = !rectangle.showAnswer
-            }
-        }
+        
+        // Main tool/action row
         Row {
-            spacing: 10
+            spacing: 45
             anchors.horizontalCenter: parent.horizontalCenter
             visible: !rectangle.earTraining
-
-            Image {
-                source: "images/flatbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentAcc === -1 ? 0.6 : 1.0
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: rectangle.currentAcc = -1
+            
+            // Accidentals
+            
+             Rectangle {
+                width: 210
+                height: 70
+                radius: 18
+                color: "#FFFFFF"
+                border.color: "#D0D0D0"
+                
+                Row {
+                    spacing: 12
+                    anchors.centerIn: parent
+                    
+                    Image {
+                        source: "images/flatbutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 40
+                        opacity: rectangle.currentAcc === -1 ? 0.55 : 1.0
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.currentAcc = -1
+                        }
+                    }
+                    
+                    Image {
+                        source: "images/naturalbutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 40
+                        opacity: rectangle.currentAcc === 0 ? 0.55 : 1.0
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.currentAcc = 0
+                        }
+                    }
+                    
+                    Image {
+                        source: "images/sharpbutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 40
+                        opacity: rectangle.currentAcc === 1 ? 0.55 : 1.0
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.currentAcc = 1
+                        }
+                    }
                 }
             }
-            Image {
-                source: "images/naturalbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentAcc === 0 ? 0.6 : 1.0
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: rectangle.currentAcc = 0
+            
+            // Note lengths
+            Rectangle {
+                width: 280
+                height: 70
+                radius: 18
+                color: "#FFFFFF"
+                border.color: "#D0D0D0"
+                
+                Row {
+                    spacing: 12
+                    anchors.centerIn: parent
+                    
+                    Image {
+                        source: "images/eighthbutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 40
+                        opacity: rectangle.currentNoteLength === 1 ? 0.55 : 1.0
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.currentNoteLength = 1
+                        }
+                    }
+                    
+                    Image {
+                        source: "images/quarterbutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 40
+                        opacity: rectangle.currentNoteLength === 2 ? 0.55 : 1.0
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.currentNoteLength = 2
+                        }
+                    }
+                    
+                    Image {
+                        source: "images/halfbutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 40
+                        opacity: rectangle.currentNoteLength === 3 ? 0.55 : 1.0
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.currentNoteLength = 3
+                        }
+                    }
+                    
+                    Image {
+                        source: "images/wholebutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 40
+                        opacity: rectangle.currentNoteLength === 4 ? 0.55 : 1.0
+                        
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.currentNoteLength = 4
+                        }
+                    }
                 }
             }
-            Image {
-                source: "images/sharpbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentAcc === 1 ? 0.6 : 1.0
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: rectangle.currentAcc = 1
+            
+            // Grade / answer actions
+            Rectangle {
+                width: 250
+                height: 70
+                radius: 18
+                color: "#FFFFFF"
+                border.color: "#D0D0D0"
+                visible: !rectangle.freeStaff
+                
+                Row {
+                    spacing: 18
+                    anchors.centerIn: parent
+                    
+                    Image {
+                        source: "images/gradebutton.png"
+                        fillMode: Image.PreserveAspectFit
+                        height: 38
+                        opacity: gradeArea.pressed ? 0.6 : 1.0
+                        
+                        MouseArea {
+                            id: gradeArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            
+                            onClicked: {
+                                currentScore = gridController.score()
+                                wrongBeats = gridController.incorrectBeats()
+                                gradeCount++
+                            }
+                        }
+                    }
+                    
+                    Text {
+                        text: rectangle.showAnswer ? "Hide" : "Answer"
+                        font.pixelSize: 20
+                        color: showAnswerArea.containsPress ? "#888888" : "#1565C0"
+                        
+                        MouseArea {
+                            id: showAnswerArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: rectangle.showAnswer = !rectangle.showAnswer
+                        }
+                    }
                 }
             }
         }
-        Row {
-            spacing: 10
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: !rectangle.earTraining
-            Image {
-                source: "images/eighthbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentNoteLength === 1 ? 0.6 : 1.0
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: rectangle.currentNoteLength = 1
-                }
-            }
-            Image {
-                source: "images/quarterbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentNoteLength === 2 ? 0.6 : 1.0
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: rectangle.currentNoteLength = 2
-                }
-            }
-            Image {
-                source: "images/halfbutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentNoteLength === 3 ? 0.6 : 1.0
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: rectangle.currentNoteLength = 3
-                }
-            }
-            Image {
-                source: "images/wholebutton.png"
-                fillMode: Image.PreserveAspectFit
-                height: 40
-                opacity: rectangle.currentNoteLength === 4 ? 0.6 : 1.0
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: rectangle.currentNoteLength = 4
-                }
-            }
 
-        }
 
         // Audio playback
         Row {
