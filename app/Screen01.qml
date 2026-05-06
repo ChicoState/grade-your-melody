@@ -475,7 +475,7 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: gridController.decrease
+                    onClicked: gridController.decreaseTempo()
                 }
             }
 
@@ -492,6 +492,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 MouseArea {
                     id: tempoPlusArea
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: gridController.increaseTempo()
                 }
             }
@@ -510,6 +512,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 MouseArea {
                     id: backArea
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: gridController.previousQuestion()
                 }
             }
@@ -527,6 +531,8 @@ onCurrentAccChanged: console.log("currentAcc now", currentAcc)
                 MouseArea {
                     id: nextArea
                     anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: gridController.nextQuestion()
                 }
             }
