@@ -127,3 +127,79 @@ TEST(QuestionHandlerTest, ChordWithFlatsParsesDistinctly) {
 
     filesystem::remove(filename);
 }
+
+TEST(QuestionHandlerTest, EarTrainingChoiceTextRoundTrip) {
+    // Verify that ChoiceA, ChoiceB, and CorrectChoice from a 9-column CSV row
+    // make it into the parsed Question unchanged.
+    const string filename = "questions.csv";
+    const string data =
+        "Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled,ChoiceA,ChoiceB,CorrectChoice\n"
+        "Write a C minor chord,\"(0-C4 0-Eb4 0-G4)\",4,0,true,false,Major chord,Minor chord,B\n";
+
+    {
+        ofstream out(filename);
+        ASSERT_TRUE(out.is_open()) << "Unable to create temporary CSV file: " << filename;
+        out << data;
+    }
+
+    QuestionHandler handler;
+    vector<Question> questions = handler.GetQuestions();
+
+    ASSERT_EQ(questions.size(), 1u);
+    EXPECT_EQ(questions[0].choiceA,       "Major chord");
+    EXPECT_EQ(questions[0].choiceB,       "Minor chord");
+    EXPECT_EQ(questions[0].correctChoice, "B");
+
+    filesystem::remove(filename);
+}
+
+TEST(QuestionHandlerTest, LegacySixColumnDefaultsChoices) {
+    // Backward compatibility: a 6-column CSV (no ChoiceA/ChoiceB/CorrectChoice)
+    // must still parse, and the missing fields must fall back to safe defaults.
+    const string filename = "questions.csv";
+    const string data =
+        "Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled\n"
+        "Legacy question,\"(0-C4)\",2,0,false,false\n";
+
+    {
+        ofstream out(filename);
+        ASSERT_TRUE(out.is_open()) << "Unable to create temporary CSV file: " << filename;
+        out << data;
+    }
+
+    QuestionHandler handler;
+    vector<Question> questions = handler.GetQuestions();
+
+    ASSERT_EQ(questions.size(), 1u);
+    EXPECT_EQ(questions[0].choiceA,       "Legacy question"); // defaults to questionText
+    EXPECT_EQ(questions[0].choiceB,       "");
+    EXPECT_EQ(questions[0].correctChoice, "A");
+
+    filesystem::remove(filename);
+}
+
+TEST(QuestionHandlerTest, MalformedRowsAreSkipped) {
+    // A row with fewer than 6 fields must be skipped without crashing,
+    // and valid rows on either side of it must still parse normally.
+    const string filename = "questions.csv";
+    const string data =
+        "Question,Answer,AllowedLengths,AllowedStartColumns,AllowStacking,RequireAllFilled\n"
+        "First valid question,\"(0-C4)\",2,0,false,false\n"
+        "broken,row,only-three\n"
+        "Second valid question,\"(0-D4)\",2,0,false,false\n";
+
+    {
+        ofstream out(filename);
+        ASSERT_TRUE(out.is_open()) << "Unable to create temporary CSV file: " << filename;
+        out << data;
+    }
+
+    QuestionHandler handler;
+    vector<Question> questions = handler.GetQuestions();
+
+    ASSERT_EQ(questions.size(), 2u);
+    EXPECT_EQ(questions[0].questionText, "First valid question");
+    EXPECT_EQ(questions[1].questionText, "Second valid question");
+
+    filesystem::remove(filename);
+}
