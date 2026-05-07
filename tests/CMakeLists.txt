@@ -32,7 +32,7 @@ target_link_libraries(
 add_executable(
     grid_controller_test
     test_gridcontroller.cpp
-    test_GridController.cpp
+    test_gridcontroller_basic.cpp
     ${CMAKE_SOURCE_DIR}/core/GridController.cpp
     ${CMAKE_SOURCE_DIR}/core/staffLineGrid.cpp
     ${CMAKE_SOURCE_DIR}/core/questionHandler.cpp
