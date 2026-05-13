@@ -40,6 +40,8 @@ void StaffLineGrid::AddNote(const int column, const int row){
 /// @param length Length of the note in beats
 void StaffLineGrid::AddNote(const int column, const int row, int length)
 {
+    if (!ValidPosition(column,row)) return;
+
     if (column + length > columns) return; // Check if the note would go out of bounds
 
     if (locked) return;

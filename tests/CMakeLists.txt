@@ -14,6 +14,22 @@ target_link_libraries(
 )
 
 add_executable(
+    grid_test
+    test_staffLineGrid.cpp
+    ${CMAKE_SOURCE_DIR}/core/staffLineGrid.cpp
+)
+
+target_include_directories(
+    grid_test
+    PRIVATE ${CMAKE_SOURCE_DIR}/core
+)
+
+target_link_libraries(
+    grid_test
+    GTest::gtest_main
+)
+
+add_executable(
     question_handler_test
     test_questionhandler.cpp
     ${CMAKE_SOURCE_DIR}/core/questionHandler.cpp
@@ -58,4 +74,5 @@ target_link_libraries(
 include(GoogleTest)
 gtest_discover_tests(hello_test)
 gtest_discover_tests(question_handler_test)
-gtest_discover_tests(grid_controller_test)
+gtest_discover_tests(grid_test)
+gtest_discover_tests(question_handler_test)
